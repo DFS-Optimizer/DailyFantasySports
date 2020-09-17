@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SelectLineup">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auto Select Optimized Positions:"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="121dp" />
+
+    <Switch
+        android:id="@+id/qbSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QB"
+        tools:layout_editor_absoluteX="21dp"
+        tools:layout_editor_absoluteY="159dp" />
+
+    <Switch
+        android:id="@+id/rbSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RB"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="159dp" />
+
+    <Switch
+        android:id="@+id/wrSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WR"
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <Switch
+        android:id="@+id/wr2Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WR2"
+        tools:layout_editor_absoluteX="107dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <Switch
+        android:id="@+id/rb2Switch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RB2"
+        tools:layout_editor_absoluteX="193dp"
+        tools:layout_editor_absoluteY="159dp" />
+
+    <Switch
+        android:id="@+id/teSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TE"
+        tools:layout_editor_absoluteX="200dp"
+        tools:layout_editor_absoluteY="200dp" />
+
+    <Switch
+        android:id="@+id/d_stSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D/st"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="239dp" />
+
+    <Switch
+        android:id="@+id/pkSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kicker"
+        tools:layout_editor_absoluteX="120dp"
+        tools:layout_editor_absoluteY="240dp" />
+
+    <Switch
+        android:id="@+id/wr_te_rbSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wr/Te/Rb"
+        tools:layout_editor_absoluteX="223dp"
+        tools:layout_editor_absoluteY="239dp" />
+
+    <Button
+        android:id="@+id/generateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate Lineup"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="1143dp" />
+
+    <EditText
+        android:id="@+id/namesTxtBx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:inputType="textPersonName" />
+</LinearLayout>

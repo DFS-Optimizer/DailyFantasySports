@@ -19,10 +19,10 @@ class SqlQuery:
 
     # displays all tables currently in database
     #
-    def show_all_tables(self):
-        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        tables = self.cursor.fetchall()
-        print(tables)
+    # def show_all_tables(self):
+    #     self.cursor.execute("SELECT name FROM dfi-db WHERE type='table';")
+    #     tables = self.cursor.fetchall()
+    #     print(tables)
     #
     # get specific table in database
     # table is name of table   # string
@@ -42,7 +42,7 @@ class SqlQuery:
     def update_row(self, data, table, columns, args):
         self.cursor.execute(f"UPDATE {table} SET {columns}= {data} {args};")
         self.conn.commit()
-    
+
     def update_many(self, data, table, columns="", args=""):
         self.cursor.executemany(f"UPDATE {table} SET {columns} WHERE {args};", data)
         self.conn.commit()
@@ -84,7 +84,7 @@ class SqlQuery:
     #
     @staticmethod
     def data_frame_insert(data, table):
-        engine = create_engine('mysql+mysqlconnector://root:dfi-db.csguqrzjnw8k.us-east-2.rds.amazonaws.com', echo=False)
+        engine = create_engine('mysql+mysqlconnector://guest:password@dfi-db.csguqrzjnw8k.us-east-2.rds.amazonaws.com/sports_db', echo=False)
         data.to_sql(name=table, con=engine, if_exists = 'append', index=False)
 
     #

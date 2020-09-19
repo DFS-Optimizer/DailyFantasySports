@@ -6,12 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class ChooseSite extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_choose_site);
 
         final Button fanDuelBtn = (Button) findViewById(R.id.fanDuelBtn);
         final Button draftKingsBtn = (Button) findViewById(R.id.draftKingsBtn);

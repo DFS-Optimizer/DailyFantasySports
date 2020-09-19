@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,25 +10,48 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="96dp"
-        android:layout_height="30dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="69dp"
         android:text="Select a Sport "
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="68dp" />
+        app:layout_constraintBottom_toTopOf="@+id/nbaSwitch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/nbaSwitch"
         android:layout_width="104dp"
         android:layout_height="51dp"
+        android:layout_marginBottom="7dp"
         android:text="NBA"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="167dp" />
+        app:layout_constraintBottom_toTopOf="@+id/nflSwitch"
+        app:layout_constraintEnd_toEndOf="@+id/nflSwitch"
+        app:layout_constraintStart_toStartOf="@+id/nflSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Switch
+        android:id="@+id/nflSwitch"
+        android:layout_width="104dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="81dp"
+        android:text="NFL"
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nbaSwitch" />
 
     <Button
         android:id="@+id/continueBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="326dp"
         android:text="Continue"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="357dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nflSwitch"
+        app:layout_constraintTop_toBottomOf="@+id/nflSwitch" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

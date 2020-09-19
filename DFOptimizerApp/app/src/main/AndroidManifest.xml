@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SelectLineup"></activity>
+        <activity android:name=".SelectLineup_NBA"></activity>
         <activity android:name=".ChooseSport" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ChooseSite">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

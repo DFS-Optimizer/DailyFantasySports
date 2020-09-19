@@ -16,12 +16,18 @@ public class ChooseSport extends AppCompatActivity {
 
 
         final Switch nbaSwitch = (Switch) findViewById(R.id.nbaSwitch);
+        final Switch nflSwitch = (Switch) findViewById(R.id.nflSwitch);
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
 
         continueBtn.setOnClickListener((v) -> {
             if(nbaSwitch.isChecked()) {
-                Intent selectLineup = new Intent(v.getContext(), SelectLineup.class);
-                startActivity(selectLineup);
+                Intent selectNBALineup = new Intent(v.getContext(), SelectLineup_NBA.class);
+                startActivity(selectNBALineup);
+            }
+            else if(nflSwitch.isChecked()){
+                //add functionality later
+                //Intent selectNFLLineup = new Intent(v.getContext(), SelectLineup_NFL.class);
+                //startActivity(selectNFLLineup);
             }
         });
     }

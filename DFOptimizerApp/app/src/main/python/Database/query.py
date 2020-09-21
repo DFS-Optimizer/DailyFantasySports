@@ -65,11 +65,11 @@ class SqlQuery:
     # insert many rows into table accepted data types --- pandas Dataframe or list of tuples
     # data is data to insert   # can be passed as dataframe or list of tuples
     # dataframe is true if dataframe is passed in
-    def insert_many(self, data, table="", columns="", dataframe = True):
+    def insert_many(self, data, table="", columns="", dataframe=True):
 
         # if user passes in dataframe object
         if isinstance(data, pd.DataFrame):
-            self.data_frame_insert(data, table)   # calls static dataframe method
+            self.data_frame_insert(data, table)  # calls static dataframe method
             return
         # if tuple is passed in
         q_mark = ', '.join(['%s'] * len(data[0]))

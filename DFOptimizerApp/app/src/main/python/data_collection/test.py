@@ -4,6 +4,11 @@ from nba_api.stats import endpoints
 import pandas as pd
 from Database import query as sql_query
 
-with sql_query.SqlQuery() as query:
-    df = pd.DataFrame(players.get_players())
-    query.insert_many(df, 'player')
+from NBAstats_Functions import nba_seasons
+from NBAstats_Functions import nba_teams
+from NBAstats_Functions import league_game_logs
+
+#nba_players()
+#nba_seasons()
+#nba_teams()
+league_game_logs()

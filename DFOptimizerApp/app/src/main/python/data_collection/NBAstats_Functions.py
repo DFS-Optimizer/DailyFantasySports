@@ -43,7 +43,6 @@ def nba_players():
 def league_game_logs():
     with sql_query.SqlQuery() as query:
         for season in range(1995, 2020):    # loop through seasons we want
-            constant.progress(season, 2020, "working on " + str(season))  # loop progress bar
 
             season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()['LeagueGameLog']
 

@@ -10,12 +10,12 @@ import com.chaquo.python.Python;
 import com.chaquo.python.android.AndroidPlatform;
 
 
-public class SelectLineup_NBA extends AppCompatActivity {
+public class FD_SelectLineup_NBA extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_lineup_nba);
+        setContentView(R.layout.activity_fd_select_lineup_nba);
 
         final Button generateBtn = (Button) findViewById(R.id.generateBtn);
         final EditText namesTxtBx = (EditText) findViewById(R.id.namesTxtBx);

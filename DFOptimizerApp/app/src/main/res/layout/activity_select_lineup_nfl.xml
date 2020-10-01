@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SelectLineup_NBA">
+    tools:context=".FD_SelectLineup_NBA">
 
     <TextView
         android:id="@+id/textView"

@@ -12,6 +12,10 @@ UPPER_RANGE = '30000'
 LOWER_RANGE = '20000'
 CONNECTION_TIMEOUT = 30
 
+
+#
+# a list of al the season years sense 1970
+#
 def nba_seasons():
     season = 1970  # start season
     tuple_list = []  # list of tuples holds season data
@@ -23,6 +27,9 @@ def nba_seasons():
         query.insert_many(tuple_list, table='season')
 
 
+#
+# all the nba teams without the year found or nickname
+#
 def nba_teams():
     teams = pd.DataFrame(teams_nba.get_teams())
     teams = teams.drop(columns='year_founded', axis=0)
@@ -31,6 +38,9 @@ def nba_teams():
         query.insert_many(teams, 'team', True)
 
 
+#
+# all the players from the nba website
+#
 def nba_players():
     with sql_query.SqlQuery() as query:
         df = pd.DataFrame(players.get_players())
@@ -42,16 +52,42 @@ def nba_players():
 #
 def league_game_logs():
     with sql_query.SqlQuery() as query:
-        for season in range(1995, 2020):    # loop through seasons we want
+        for season in range(1995, 2020):  # loop through seasons we want
+            season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()[
+                'LeagueGameLog']
 
-            season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()['LeagueGameLog']
-
-            season_game_data = []     # list of tuples representing a season, each tuple object representing a game in the season
+            season_game_data = []  # list of tuples representing a season, each tuple object representing a game in the season
             for x in range(0, len(season_games), 2):
                 game = season_games[x]
-
                 season_id = int(game['SEASON_ID']) + 190000
-
                 season_game_data.append((game['GAME_ID'], game['GAME_DATE'], season_id))
 
             query.insert_many(season_game_data, table='event')
+
+
+#
+# gets the game log for each team
+#
+def team_game_log():
+    with sql_query.SqlQuery() as query:
+        for season in range(1995, 2020):
+            season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()[
+                'LeagueGameLog']
+
+            game_data = []  # array of tuples to hold teams season games
+            for game in season_games:  # iterate over teams games played in a season
+                home = False
+                win = False
+
+                opponent_id = constant.team_abbr[re.split(r'\W\s', game['MATCHUP'])[1]]
+
+                if not re.findall('@', game['MATCHUP']):  # if not away team set home team to true
+                    home = True
+
+                if game['WL'] is 'W':  # if team won set win to true
+                    win = True
+
+                game_data.append([game['GAME_ID'], game['TEAM_ID'], home, opponent_id, win])
+
+            query.insert_many(game_data, 'team_event')
+            time.sleep(random.randint(4, 7))

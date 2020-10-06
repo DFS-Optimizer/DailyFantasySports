@@ -16,5 +16,5 @@ from NBAstats_Functions import active_player_seasons
 #nba_seasons()
 #nba_teams()
 #league_game_logs()
-team_game_log()
-#active_player_seasons()
+#team_game_log()
+active_player_seasons()

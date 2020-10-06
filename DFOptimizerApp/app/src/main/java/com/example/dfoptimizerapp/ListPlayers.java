@@ -4,8 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Switch;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ListPlayers extends AppCompatActivity {
 
@@ -16,6 +22,11 @@ public class ListPlayers extends AppCompatActivity {
         final Button fanDuelBtn = (Button) findViewById(R.id.fanDuelBtn);
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
         final int site = getIntent().getIntExtra("siteChoice",1);
+//        final ListView playerListView = (ListView) findViewById(R.id.playerListView);
+////        String[] names = new String[]{"Lebron James", "James Harden","Kevin Durant","Steph Curry"};
+////        final List<String> players = new ArrayList<>(Arrays.asList(names));
+////        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_list_players, players);
+////        playerListView.setAdapter(adapter);
 
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen

@@ -8,6 +8,7 @@ import re
 import time
 import random
 
+# use these values to filter out preseason and postseason data
 UPPER_RANGE = '30000'
 LOWER_RANGE = '20000'
 CONNECTION_TIMEOUT = 30
@@ -53,16 +54,15 @@ def nba_players():
 def league_game_logs():
     with sql_query.SqlQuery() as query:
         for season in range(1995, 2020):  # loop through seasons we want
-            season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()[
-                'LeagueGameLog']
+            season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()['LeagueGameLog']
 
             season_game_data = []  # list of tuples representing a season, each tuple object representing a game in the season
             for x in range(0, len(season_games), 2):
                 game = season_games[x]
                 season_id = int(game['SEASON_ID']) + 190000
-                season_game_data.append((game['GAME_ID'], game['GAME_DATE'], season_id))
+                season_game_data.append((game['GAME_ID'], game['GAME_DATE'], season_id, 21))
 
-            query.insert_many(season_game_data, table='event')
+            query.insert_many(season_game_data, table='event',)
 
 
 #
@@ -91,3 +91,39 @@ def team_game_log():
 
             query.insert_many(game_data, 'team_event')
             time.sleep(random.randint(4, 7))
+
+
+def active_player_seasons():
+    upper = UPPER_RANGE
+    lower = LOWER_RANGE
+
+    with sql_query.SqlQuery() as query:
+        active_players = query.get_table('player', '*','WHERE is_active = 1 ', dataframe=False)
+        a = 0
+        for x in range(0, len(active_players)):
+            a = a+1
+            if a > 313:
+
+                player_id = active_players[x][0]  # current player_id
+                season_logs = endpoints.CommonPlayerInfo(player_id, headers=constant.headers)
+                team_id = season_logs.get_normalized_dict()['CommonPlayerInfo'][0]['TEAM_ID']
+
+                seasons = season_logs.get_data_frames()[2]  # available seasons for player
+                seasons = seasons[(seasons['SEASON_ID'] > lower) & (seasons['SEASON_ID'] < upper)]  # filtering out preseason and playoffs
+                seasons = seasons.astype(int)
+
+                seasons['player_id'] = player_id
+                seasons = seasons[['player_id', 'SEASON_ID']]
+                seasons.columns = ['player_id', 'season_id']
+
+                seasons['season_id'] += 190000
+
+                arg = f"WHERE id={player_id}"
+
+                query.insert_many(seasons, 'player_season')
+                print(a)
+
+                if team_id != 0:
+                    query.update_row(team_id, 'player', 'team_id', arg)
+
+                time.sleep(random.randint(2, 4))

@@ -9,9 +9,12 @@ from NBAstats_Functions import nba_seasons
 from NBAstats_Functions import nba_teams
 from NBAstats_Functions import league_game_logs
 from NBAstats_Functions import team_game_log
+from NBAstats_Functions import active_player_seasons
+
 
 #nba_players()
 #nba_seasons()
 #nba_teams()
 #league_game_logs()
-#team_game_log()
+team_game_log()
+#active_player_seasons()

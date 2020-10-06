@@ -5,10 +5,10 @@ from sqlalchemy import create_engine
 
 class SqlQuery:
 
-    def __init__(self, database="sports_db"):
+    def __init__(self, database="dfs_db"):
         self.conn = connection.MySQLConnection(
-            host="dfi-db.csguqrzjnw8k.us-east-2.rds.amazonaws.com",
-            user="guest",
+            host="dfs.csguqrzjnw8k.us-east-2.rds.amazonaws.com",
+            user="admin",
             password="password",
             database=database,
         )
@@ -28,7 +28,7 @@ class SqlQuery:
     # table is name of table   # string
     # args are arguments  #string     # example    "WHERE x > 5"
     #
-    def get_table(self, table, select = '*', args = '', dataframe=False):
+    def get_table(self, table, select, args='', dataframe=False):
         self.cursor.execute(f"SELECT {select} FROM {table} {args};")
         fetched_table = self.cursor.fetchall()
         if dataframe:
@@ -36,11 +36,12 @@ class SqlQuery:
             return pd.DataFrame(fetched_table, columns=field_names)
 
         return fetched_table
+
     # #
     # # update existing row
     # #
     def update_row(self, data, table, columns, args):
-        self.cursor.execute(f"UPDATE {table} SET {columns}= {data} {args};")
+        self.cursor.execute(f"UPDATE {table} SET {columns} = {data} {args};")
         self.conn.commit()
 
     def update_many(self, data, table, columns="", args=""):
@@ -54,7 +55,7 @@ class SqlQuery:
 
         # if dataframe object is passed in
         if isinstance(data, pd.DataFrame):
-            self.data_frame_insert(data, table)   # calls static dataframe method
+            self.data_frame_insert(data, table)  # calls static dataframe method
             return
         # if tuple is passed in
         q_marks = ', '.join(['%s'] * len(data))
@@ -84,8 +85,10 @@ class SqlQuery:
     #
     @staticmethod
     def data_frame_insert(data, table):
-        engine = create_engine('mysql+mysqlconnector://guest:password@dfi-db.csguqrzjnw8k.us-east-2.rds.amazonaws.com/sports_db', echo=False)
-        data.to_sql(name=table, con=engine, if_exists = 'append', index=False)
+        engine = create_engine(
+            'mysql+mysqlconnector://admin:password@dfs.csguqrzjnw8k.us-east-2.rds.amazonaws.com/dfs_db',
+            echo=False)
+        data.to_sql(name=table, con=engine, if_exists='append', index=False)
 
     #
     # calls my sql procedure

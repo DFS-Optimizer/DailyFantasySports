@@ -17,13 +17,15 @@ public class ChooseSite extends AppCompatActivity {
         final Button draftKingsBtn = (Button) findViewById(R.id.draftKingsBtn);
 
         fanDuelBtn.setOnClickListener((v) -> {
-            Intent selectFDLineup = new Intent(v.getContext(), FD_SelectLineup_NBA.class);
-            startActivity(selectFDLineup);
+            Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
+            listPlayers.putExtra("siteChoice", 1); //value 1 to indicate fanduel site choice
+            startActivity(listPlayers);
         });
 
         draftKingsBtn.setOnClickListener((v) -> {
-            //Intent chooseSport = new Intent(v.getContext(), DK_SelectLineup_NBA.class);
-           // startActivity(chooseSport);
+            Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
+            listPlayers.putExtra("siteChoice", 2); //value 2 to indicate draftkings site choice
+            startActivity(listPlayers);
         });
 
 

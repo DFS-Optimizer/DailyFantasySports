@@ -32,9 +32,6 @@ public class ChooseSport extends AppCompatActivity {
                 startActivity(chooseSite);
             }
             else if(nflSwitch.isChecked()){
-                if(nbaSwitch.isChecked()) {
-                    nbaSwitch.setChecked(false);
-                }
                 //add functionality later
                 //Intent selectNFLLineup = new Intent(v.getContext(), SelectLineup_NFL.class);
                 //startActivity(selectNFLLineup);

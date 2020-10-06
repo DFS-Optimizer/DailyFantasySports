@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".FD_SelectLineup_NBA"></activity>
-        <activity android:name=".ChooseSport" />
-        <activity android:name=".ChooseSite">
+        <activity android:name=".ChooseSite" />
+        <activity android:name=".ChooseSport">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

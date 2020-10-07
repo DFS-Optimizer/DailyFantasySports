@@ -1,4 +1,4 @@
 # Daily-Fantasy-Sports
 
 
-Website URl : https://dfs-optimizer.github.io/DailyFantasySports/
+Website URL : https://dfs-optimizer.github.io/DailyFantasySports/

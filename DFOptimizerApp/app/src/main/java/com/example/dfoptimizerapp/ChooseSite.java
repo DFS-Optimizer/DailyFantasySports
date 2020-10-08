@@ -17,9 +17,9 @@ public class ChooseSite extends AppCompatActivity {
         final Button draftKingsBtn = (Button) findViewById(R.id.draftKingsBtn);
 
         fanDuelBtn.setOnClickListener((v) -> {
-            Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
-            listPlayers.putExtra("siteChoice", 1); //value 1 to indicate fanduel site choice
-            startActivity(listPlayers);
+            Intent chooseSport = new Intent(v.getContext(), ChooseSport.class);
+            chooseSport.putExtra("siteChoice", 1); //value 1 to indicate fanduel site choice
+            startActivity(chooseSport);
         });
 
         draftKingsBtn.setOnClickListener((v) -> {

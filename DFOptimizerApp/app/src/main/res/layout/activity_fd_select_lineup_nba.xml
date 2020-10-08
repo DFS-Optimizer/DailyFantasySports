@@ -14,125 +14,25 @@
         android:layout_marginStart="104dp"
         android:layout_marginLeft="104dp"
         android:layout_marginTop="34dp"
-        android:text="Auto Select Optimized Positions:"
+        android:text="Preview of Selected Players:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Switch
-        android:id="@+id/pg1Switch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
-        android:text="PG 1"
-        app:layout_constraintBaseline_toBaselineOf="@+id/pg2Switch"
-        app:layout_constraintEnd_toStartOf="@+id/pg2Switch"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/pg2Switch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginRight="216dp"
-        android:text="PG 2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/pg1Switch"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <Switch
-        android:id="@+id/sg1Switch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginRight="3dp"
-        android:text="SG 1"
-        app:layout_constraintBaseline_toBaselineOf="@+id/sg2Switch"
-        app:layout_constraintEnd_toStartOf="@+id/sg2Switch"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/sg2Switch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="216dp"
-        android:layout_marginRight="216dp"
-        android:text="SG 2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sg1Switch"
-        app:layout_constraintTop_toBottomOf="@+id/pg2Switch" />
-
-    <Switch
-        android:id="@+id/sf1Switch"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginLeft="216dp"
-        android:layout_marginBottom="16dp"
-        android:text="SF 1"
-        app:layout_constraintBottom_toTopOf="@+id/pf1Switch"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/sf2Switch"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="SF 2"
-        app:layout_constraintBaseline_toBaselineOf="@+id/sf1Switch"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Switch
-        android:id="@+id/pf1Switch"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="216dp"
-        android:layout_marginLeft="216dp"
-        android:layout_marginBottom="11dp"
-        android:text="PF 1"
-        app:layout_constraintBottom_toTopOf="@+id/centerSwitch"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Switch
-        android:id="@+id/pf2Switch"
-        android:layout_width="88dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:text="PF 2"
-        app:layout_constraintBaseline_toBaselineOf="@+id/pf1Switch"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Switch
-        android:id="@+id/centerSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        android:text="Center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sg2Switch" />
 
     <Button
         android:id="@+id/generateBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="151dp"
+        android:layout_marginBottom="91dp"
         android:text="Generate Lineup"
+        app:layout_constraintBottom_toTopOf="@+id/namesTxtBx"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/centerSwitch" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
         android:id="@+id/namesTxtBx"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:editable="false"
         android:ems="10"

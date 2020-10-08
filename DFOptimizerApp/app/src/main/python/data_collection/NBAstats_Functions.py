@@ -56,7 +56,7 @@ def nba_players():
 #
 def league_game_logs():
     with sql_query.SqlQuery() as query:
-        for season in range(1995, 2020):  # loop through seasons we want
+        for season in range(1995, 2021):  # loop through seasons we want
             season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()[
                 'LeagueGameLog']
 
@@ -65,8 +65,9 @@ def league_game_logs():
                 game = season_games[x]
                 season_id = int(game['SEASON_ID']) + 190000
                 season_game_data.append((game['GAME_ID'], game['GAME_DATE'], season_id, 21))
-
-            query.insert_many(season_game_data, table='event', )
+            print(season_game_data)
+            if len(season_game_data) > 0:
+                query.insert_many(season_game_data, table='event')
 
 
 #
@@ -74,7 +75,7 @@ def league_game_logs():
 #
 def team_game_log():
     with sql_query.SqlQuery() as query:
-        for season in range(1995, 2020):
+        for season in range(1995, 2021):
             season_games = endpoints.LeagueGameLog(season=season, headers=constant.headers).get_normalized_dict()[
                 'LeagueGameLog']
 
@@ -93,7 +94,7 @@ def team_game_log():
 
                 game_data.append([game['GAME_ID'], game['TEAM_ID'], home, opponent_id, win])
 
-            query.insert_many(game_data, 'team_event')
+            query.insert_many(game_data, 'team_event', )
             time.sleep(random.randint(4, 7))
 
 
@@ -109,7 +110,7 @@ def active_player_seasons():
         a = 0
         for x in range(0, len(active_players)):
             a = a + 1
-            if a > 439:
+            if a > 513:
                 player_id = active_players[x][0]  # current player_id
                 season_logs = endpoints.CommonPlayerInfo(player_id, headers=constant.headers)
                 team_id = season_logs.get_normalized_dict()['CommonPlayerInfo'][0]['TEAM_ID']
@@ -173,3 +174,37 @@ def player_game_log():
             query.insert_many(player_basic_stats, "basketball_player_game_basic")
             a = a+1
             print(a)
+
+
+def team_game_event():
+    with sql_query.SqlQuery() as query:
+        team_seasons = query.get_table('team', dataframe=False)  # gets avaliable seasons for every active player from sql database
+
+        len_team_seasons = len(team_seasons)
+
+        for x in range(0, len_team_seasons):  # for each team season in seasons starting with first active
+            time.sleep(2)
+
+            team_season_games = endpoints.TeamGameLog(team_id=team_seasons[x][0], season=2019,   #just did it season by season
+                                    headers=constant.headers).get_normalized_dict()['TeamGameLog']
+
+            # player game event data
+            game_frame = pd.DataFrame(team_season_games)  # holds season of games for player
+            game_frame = game_frame.rename(
+                columns={'Team_ID': 'team_id', 'Game_ID': 'event_id',
+                         'GAME_DATE': 'game_date', 'MIN': 'min', 'FGM': 'fgm', 'FGA': 'fga',
+                         'FG_PCT': 'fg_pct', 'FG3M': 'fg3m', 'FG3A': 'fg3a', 'FG3_PCT': 'fg3_pct',
+                         'FTM': 'ftm', 'FTA': 'fta', 'FT_PCT': 'ft_pct', 'OREB': 'oreb', 'DREB': 'dreb',
+                         'REB': 'reb', 'AST': 'ast', 'STL': 'stl', 'BLK': 'blk', 'TOV': 'tov', 'PF': 'pf',
+                         'PTS': 'pts'})
+            if len(game_frame) > 0:
+                game_frame['team_id'] = game_frame['MATCHUP'].str.extract(r'(^\w{3})') #get first team initiasls
+                game_frame['opponent_id'] = game_frame['MATCHUP'].str.extract(r'\W\s(\w{3})') #get second team initials
+                game_frame['team_id'] = game_frame['team_id'].map(constant.team_id) #map first team to our team id
+                game_frame['opponent_id'] = game_frame['opponent_id'].map(constant.team_id) #map second team to team id
+
+                team_basic_stats = game_frame.iloc[:, [1, 0, 27] + list(range(8, 27))]
+                #print(player_basic_stats)
+
+                query.insert_many(team_basic_stats, "basketball_team_game_basic")
+                print(x)

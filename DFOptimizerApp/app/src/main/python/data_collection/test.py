@@ -11,6 +11,7 @@ from main.python.data_collection.NBAstats_Functions import league_game_logs
 from main.python.data_collection.NBAstats_Functions import team_game_log
 from main.python.data_collection.NBAstats_Functions import active_player_seasons
 from main.python.data_collection.NBAstats_Functions import player_game_log
+from main.python.data_collection.NBAstats_Functions import team_game_event
 
 
 #nba_players()
@@ -20,3 +21,4 @@ from main.python.data_collection.NBAstats_Functions import player_game_log
 #team_game_log()
 #active_player_seasons()
 #player_game_log()
+team_game_event()

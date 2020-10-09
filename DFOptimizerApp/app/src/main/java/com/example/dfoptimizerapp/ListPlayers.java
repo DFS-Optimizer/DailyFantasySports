@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Switch;
 
 import java.util.ArrayList;
@@ -19,9 +20,13 @@ public class ListPlayers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_players);
-        final Button fanDuelBtn = (Button) findViewById(R.id.fanDuelBtn);
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
+        final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
         final int site = getIntent().getIntExtra("siteChoice",1);
+        String[] positions = new String[] {"All Positions","PG", "SF", "SG", "PF", "C"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, positions);
+//set the spinners adapter to the previously created one.
+        positionFilter.setAdapter(adapter);
 //        final ListView playerListView = (ListView) findViewById(R.id.playerListView);
 ////        String[] names = new String[]{"Lebron James", "James Harden","Kevin Durant","Steph Curry"};
 ////        final List<String> players = new ArrayList<>(Arrays.asList(names));

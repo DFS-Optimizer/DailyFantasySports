@@ -2,14 +2,16 @@ from nba_api.stats.static import players
 from nba_api.stats.static import teams as teams_nba
 from nba_api.stats import endpoints
 import pandas as pd
-from Database import query as sql_query
+from main.python.Database import query as sql_query
 
-from NBAstats_Functions import nba_players
-from NBAstats_Functions import nba_seasons
-from NBAstats_Functions import nba_teams
-from NBAstats_Functions import league_game_logs
-from NBAstats_Functions import team_game_log
-from NBAstats_Functions import active_player_seasons
+from main.python.data_collection.NBAstats_Functions import nba_players
+from main.python.data_collection.NBAstats_Functions import nba_seasons
+from main.python.data_collection.NBAstats_Functions import nba_teams
+from main.python.data_collection.NBAstats_Functions import league_game_logs
+from main.python.data_collection.NBAstats_Functions import team_game_log
+from main.python.data_collection.NBAstats_Functions import active_player_seasons
+from main.python.data_collection.NBAstats_Functions import player_game_log
+from main.python.data_collection.NBAstats_Functions import team_game_event
 
 
 #nba_players()
@@ -17,4 +19,6 @@ from NBAstats_Functions import active_player_seasons
 #nba_teams()
 #league_game_logs()
 #team_game_log()
-active_player_seasons()
+#active_player_seasons()
+#player_game_log()
+team_game_event()

@@ -28,7 +28,7 @@ class SqlQuery:
     # table is name of table   # string
     # args are arguments  #string     # example    "WHERE x > 5"
     #
-    def get_table(self, table, select, args='', dataframe=False):
+    def get_table(self, table, select = '*', args='', dataframe=False):
         self.cursor.execute(f"SELECT {select} FROM {table} {args};")
         fetched_table = self.cursor.fetchall()
         if dataframe:

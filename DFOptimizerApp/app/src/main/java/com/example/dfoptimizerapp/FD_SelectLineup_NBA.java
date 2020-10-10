@@ -21,8 +21,11 @@ public class FD_SelectLineup_NBA extends AppCompatActivity {
         final EditText namesTxtBx = (EditText) findViewById(R.id.namesTxtBx);
 
         generateBtn.setOnClickListener((v) -> {
+
+            //ADD CODE FOR GIT REQUEST HERE!
+
             //check to see if an instance of Python has already started
-            if(! Python.isStarted())
+            /*if(! Python.isStarted())
             {
                 Python.start(new AndroidPlatform(v.getContext()));
             }
@@ -45,7 +48,7 @@ public class FD_SelectLineup_NBA extends AppCompatActivity {
                     nameString += ", ";
                 }
             }
-            namesTxtBx.setText(nameString);
+            namesTxtBx.setText(nameString);*/
         });
     }
 }

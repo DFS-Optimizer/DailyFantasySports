@@ -25,13 +25,8 @@ public class ListPlayers extends AppCompatActivity {
         final int site = getIntent().getIntExtra("siteChoice",1);
         String[] positions = new String[] {"All Positions","PG", "SF", "SG", "PF", "C"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, positions);
-//set the spinners adapter to the previously created one.
         positionFilter.setAdapter(adapter);
-//        final ListView playerListView = (ListView) findViewById(R.id.playerListView);
-////        String[] names = new String[]{"Lebron James", "James Harden","Kevin Durant","Steph Curry"};
-////        final List<String> players = new ArrayList<>(Arrays.asList(names));
-////        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.activity_list_players, players);
-////        playerListView.setAdapter(adapter);
+
 
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
@@ -40,8 +35,8 @@ public class ListPlayers extends AppCompatActivity {
                 startActivity(fd_selectNBALineup);
             }
             else{
-                //Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);
-                //startActivity(dk_selectNBALineup);
+                Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);
+                startActivity(dk_selectNBALineup);
             }
         });
 

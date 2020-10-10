@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1379903988/DF_Optimizer_App.iml" filepath="$PROJECT_DIR$/.idea/modules/-1379903988/DF_Optimizer_App.iml" group="DF_Optimizer_App" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="DF Optimizer App/app" />
+    </modules>
+  </component>
+</project>

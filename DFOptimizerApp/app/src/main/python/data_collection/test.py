@@ -21,4 +21,4 @@ from main.python.data_collection.NBAstats_Functions import team_game_event
 #team_game_log()
 #active_player_seasons()
 #player_game_log()
-team_game_event()
+#team_game_event()

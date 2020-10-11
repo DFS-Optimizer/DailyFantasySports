@@ -37,6 +37,7 @@
         android:layout_height="51dp"
         android:layout_marginBottom="81dp"
         android:text="NFL"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -110,7 +110,7 @@ public class HttpConnect extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.i(TAG, "Response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
-                ParseString(response.toString());
+                //ParseString(response.toString());
 
             }
         }, new Response.ErrorListener() {
@@ -124,7 +124,7 @@ public class HttpConnect extends AppCompatActivity {
     }
 
 
-    public void ParseString(String line) {
+    /*public void ParseString(String line) {
         //using String split function
         String[] words = line.split(" ");
         System.out.println(Arrays.toString(words));
@@ -133,7 +133,7 @@ public class HttpConnect extends AppCompatActivity {
         //words = pattern.split(line);
         //System.out.println(Arrays.toString(words));
     }
-
+*/
 
 }
 

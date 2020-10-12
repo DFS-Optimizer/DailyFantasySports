@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import java.io.Reader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,24 +71,35 @@ public class ListPlayers extends AppCompatActivity {
                 line = slateReader.readLine();
                 line = slateReader.readLine();
                 List<String> players = new ArrayList<String>();
-                /*List<String> names = new ArrayList<String>();
+                List<String> names = new ArrayList<String>();
                 List<String> salaries = new ArrayList<String>();
                 List<String> positions = new ArrayList<String>();
                 List<String> teams = new ArrayList<String>();
                 List<String> opponents = new ArrayList<String>();
-                List<String> projections = new ArrayList<String>();*/
+                List<String> projections = new ArrayList<String>();
                 while (line != null) {
-                    //String[] playerInfo = line.split(",");
-                    /*names.add(playerInfo[0]);
+                    String[] playerInfo = line.split(",");
+                    names.add(playerInfo[0]);
                     salaries.add(playerInfo[1]);
                     positions.add(playerInfo[2]);
                     teams.add(playerInfo[3]);
                     opponents.add(playerInfo[4]);
-                    projections.add(playerInfo[5]);*/
-                    players.add(line);
+                    projections.add(playerInfo[5]);
                     line = slateReader.readLine();
 
                 }
+                for(int i = 0; i < names.size();i++)
+                {
+                    DecimalFormat projFormat = new DecimalFormat("#.##");
+                    double proj  = Double.parseDouble(projections.get(i));
+
+                    String formattedLine = names.get(i) + "(" + positions.get(i) + ", " +teams.get(i) + ") -- Proj. FP: " +
+                                           projFormat.format(proj)  + "\n$" + salaries.get(i) +
+                                           ", Opponent: " + opponents.get(i);
+
+                    players.add(formattedLine);
+                }
+                playerListView.setMinimumWidth(50);
                 ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
                 playerListView.setAdapter(adapter2);
 
@@ -106,20 +119,24 @@ public class ListPlayers extends AppCompatActivity {
                 CheckedTextView v = (CheckedTextView) view;
                 boolean isChecked = v.isChecked();
                 String player = (String) playerListView.getItemAtPosition(i);
-                String[] splitInfo = player.split(",");
-                String name = splitInfo[0];
-                int salary = Integer.parseInt(splitInfo[1]);
-                if (selectedPlayers.size() > 4)
+                int index = player.indexOf("(");
+
+                String name = player.substring(0, index);
+                int startIndex = player.indexOf("\n$") + 2;
+                int endIndex = player.indexOf(", Opponent");
+                int salary = Integer.parseInt(player.substring(startIndex, endIndex));
+                if (selectedPlayers.size() >= 4 && isChecked)
                 {
                     v.setChecked(false);
                     Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
-                } else if ((remainingSalary[0] - salary) < 0)
+
+                }
+                else if ((remainingSalary[0] - salary) < 0)
                 {
                     v.setChecked(false);
                     Toast.makeText(getApplicationContext(), "This player's salary is more than your remaining salary", Toast.LENGTH_SHORT).show();
                 }
-                else
-                    {
+                else {
                     if (isChecked) {
                         selectedPlayers.add(name);
                         remainingSalary[0] -= salary;

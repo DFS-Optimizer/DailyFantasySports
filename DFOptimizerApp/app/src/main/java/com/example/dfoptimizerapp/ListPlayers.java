@@ -96,13 +96,15 @@ public class ListPlayers extends AppCompatActivity {
                 CheckedTextView v = (CheckedTextView) view;
                 boolean isChecked = v.isChecked();
                 String player = (String) playerListView.getItemAtPosition(i);
+                String[] splitInfo = player.split(",");
+                String name = splitInfo[0];
                 if(isChecked)
                 {
-                    selectedPlayers.add(player);
+                    selectedPlayers.add(name);
                 }
                 else
                 {
-                    selectedPlayers.remove(player);
+                    selectedPlayers.remove(name);
                 }
             }
         });

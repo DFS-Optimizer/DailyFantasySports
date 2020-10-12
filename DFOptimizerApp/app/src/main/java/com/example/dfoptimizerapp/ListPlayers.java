@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
@@ -16,6 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -49,11 +54,10 @@ public class ListPlayers extends AppCompatActivity {
             if (slate != null) {
                 slateReader = new BufferedReader(new InputStreamReader(slate, "UTF8"));
             }
-            if(slateReader != null)
-            {
+            if(slateReader != null) {
                 String line = "";
                 line = slateReader.readLine();
-                line=slateReader.readLine();
+                line = slateReader.readLine();
                 List<String> players = new ArrayList<String>();
                 /*List<String> names = new ArrayList<String>();
                 List<String> salaries = new ArrayList<String>();
@@ -61,8 +65,7 @@ public class ListPlayers extends AppCompatActivity {
                 List<String> teams = new ArrayList<String>();
                 List<String> opponents = new ArrayList<String>();
                 List<String> projections = new ArrayList<String>();*/
-                while(line != null)
-                {
+                while (line != null) {
                     //String[] playerInfo = line.split(",");
                     /*names.add(playerInfo[0]);
                     salaries.add(playerInfo[1]);
@@ -85,17 +88,35 @@ public class ListPlayers extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
+        playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        List<String> selectedPlayers = new ArrayList<String>();
+        playerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CheckedTextView v = (CheckedTextView) view;
+                boolean isChecked = v.isChecked();
+                String player = (String) playerListView.getItemAtPosition(i);
+                if(isChecked)
+                {
+                    selectedPlayers.add(player);
+                }
+                else
+                {
+                    selectedPlayers.remove(player);
+                }
+            }
+        });
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
             if (site == 1) {
-                Intent fd_selectNBALineup = new Intent(v.getContext(), FD_SelectLineup_NBA.class);
-                startActivity(fd_selectNBALineup);
+
+                Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
+                startActivity(httpConnect);
+                httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
             }
             else{
-                Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);
-                startActivity(dk_selectNBALineup);
+                //Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);
+                //startActivity(dk_selectNBALineup);
             }
         });
 

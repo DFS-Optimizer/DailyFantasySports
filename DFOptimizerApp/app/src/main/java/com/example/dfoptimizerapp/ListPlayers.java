@@ -113,8 +113,9 @@ public class ListPlayers extends AppCompatActivity {
             if (site == 1) {
 
                 Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
-                startActivity(httpConnect);
                 httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
+                startActivity(httpConnect);
+
             }
             else{
                 //Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);

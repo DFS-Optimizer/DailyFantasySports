@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import android.app.DownloadManager;
 import java.util.regex.Pattern;
@@ -24,7 +26,8 @@ public class HttpConnect extends AppCompatActivity {
     private static final String TAG= HttpConnect.class.getName();
     private RequestQueue mRequestQueue;
     private StringRequest stringRequest;
-    private String url= "http://73.82.159.9:5000";
+    //private String url="http://73.82.159.9:5000/";
+    //ArrayList<String> myList = (ArrayList<String>) getIntent().getSerializableExtra("selectedPlayers");
 //private String url= "https://run.mocky.io/v3/9c07d6d8-1ca2-4ca9-a2d2-fe104731e71c";
 
 
@@ -48,25 +51,78 @@ public class HttpConnect extends AppCompatActivity {
 
 
     }
-    private void SendRequestAndPrintResponse(){
+    private void SendRequestAndPrintResponse() {
+
+        int i;
+        int j;
+        ArrayList<String> myList = (ArrayList<String>) getIntent().getSerializableExtra("selectedPlayers");
+        //ArrayList<String> myList = new ArrayList<String>();
+        //myList.add("Lebron James");
+        //myList.add("Kawhi Leonard");
+        ArrayList<String> newList = new ArrayList<String>();
+        String word;
+        String newWord = "";
+
+        System.out.println("Input: " + myList);
+
+        for(i = 0; i < myList.size(); i++){
+            word = myList.get(i);
+            for(j = 0; j < word.length(); j++){
+                //append each letter until a space
+                if(word.charAt(j) == ' '){
+                    //append %20
+                    newWord = newWord + "%20";
+                }
+                else{
+                    newWord = newWord + word.charAt(j);
+                }
+            }
+            newList.add(newWord);
+            newWord = "";
+        }
+        System.out.println(newList);
+
+
+        String url = "http://73.82.159.9:5000/selectplayer/";
+        int k;
+        String finalURL = url;
+        for(k = 0; k < newList.size(); k++){
+
+            finalURL = finalURL + newList.get(k);
+
+            finalURL = finalURL + "/";
+
+        }
+
+        System.out.println(finalURL);
+
+
+
+
+
+
+
+
         mRequestQueue = Volley.newRequestQueue(this);
-        stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+
+        stringRequest = new StringRequest(Request.Method.GET, finalURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.i(TAG, "Response: "+ response.toString());
+                Log.i(TAG, "Response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
                 ParseString(response.toString());
 
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error){
+            public void onErrorResponse(VolleyError error) {
                 Log.i(TAG, "Response: " + error.toString());
             }
 
         });
         mRequestQueue.add(stringRequest);
     }
+
 
     public void ParseString(String line) {
         //using String split function
@@ -80,3 +136,6 @@ public class HttpConnect extends AppCompatActivity {
 
 
 }
+
+
+

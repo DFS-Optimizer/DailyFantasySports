@@ -81,16 +81,21 @@ public class HttpConnect extends AppCompatActivity {
             newWord = "";
         }
         System.out.println(newList);
-
-
-        String url = "http://73.82.159.9:5000/selectplayer/";
+        String url;
+        if(myList.size() != 0) {
+             url = "http://73.82.159.9:5000/selectplayer/";
+        }
+        else{
+             url = "http://73.82.159.9:5000/selectplayer";
+        }
         int k;
         String finalURL = url;
         for(k = 0; k < newList.size(); k++){
 
             finalURL = finalURL + newList.get(k);
-
-            finalURL = finalURL + "/";
+            if(k != newList.size()-1) {
+                finalURL = finalURL + "/";
+            }
 
         }
 

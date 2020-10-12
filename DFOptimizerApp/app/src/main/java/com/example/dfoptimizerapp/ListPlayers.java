@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -29,6 +30,8 @@ import java.util.List;
 
 public class ListPlayers extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +40,14 @@ public class ListPlayers extends AppCompatActivity {
         final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
         final int site = getIntent().getIntExtra("siteChoice",1);
         final ListView playerListView = (ListView) findViewById(R.id.playerListView);
-        final TextView remainingSalary = (TextView) findViewById(R.id.remainingSalaryTxt);
+        TextView remainingSalaryTxt = (TextView) findViewById(R.id.remainingSalaryTxt);
+        //"Rem. Salary: $"
+        String remainingSalaryString = remainingSalaryTxt.getText().toString().substring(0, 14);
+
+        //60000
+        final int[] remainingSalary = {Integer.parseInt(remainingSalaryTxt.getText().toString().substring(14))};
+
+
 
 
         //List of positions that can be used as a filter
@@ -98,13 +108,26 @@ public class ListPlayers extends AppCompatActivity {
                 String player = (String) playerListView.getItemAtPosition(i);
                 String[] splitInfo = player.split(",");
                 String name = splitInfo[0];
-                if(isChecked)
+                int salary = Integer.parseInt(splitInfo[1]);
+                if (selectedPlayers.size() > 4)
                 {
-                    selectedPlayers.add(name);
+                    v.setChecked(false);
+                    Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
+                } else if ((remainingSalary[0] - salary) < 0)
+                {
+                    v.setChecked(false);
+                    Toast.makeText(getApplicationContext(), "This player's salary is more than your remaining salary", Toast.LENGTH_SHORT).show();
                 }
                 else
-                {
-                    selectedPlayers.remove(name);
+                    {
+                    if (isChecked) {
+                        selectedPlayers.add(name);
+                        remainingSalary[0] -= salary;
+                    } else {
+                        remainingSalary[0] += salary;
+                        selectedPlayers.remove(name);
+                    }
+                    remainingSalaryTxt.setText((CharSequence) (remainingSalaryString).concat(Integer.toString(remainingSalary[0])));
                 }
             }
         });

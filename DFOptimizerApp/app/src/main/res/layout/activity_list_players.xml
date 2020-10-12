@@ -11,7 +11,7 @@
         android:layout_height="51dp"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="3dp"
-        android:text="Here are the players who are available today. Choose any that you would like to include in your lineup."
+        android:text="Here are the players who are available today. Choose any four that you would like to include in your lineup."
         app:layout_constraintBottom_toTopOf="@+id/remainingSalaryTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
         android:layout_marginBottom="11dp"
-        android:text="Rem. Salary: $60,000"
+        android:text="Rem. Salary: $60000"
         app:layout_constraintBottom_toTopOf="@+id/positionFilter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchView"

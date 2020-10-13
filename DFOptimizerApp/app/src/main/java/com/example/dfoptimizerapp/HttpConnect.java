@@ -147,15 +147,21 @@ public class HttpConnect extends AppCompatActivity {
 
     public void ParseReceive(String jsonStr) {
 
-        JSONArray jsonarray = new JSONArray(jsonStr);
-        for(int i = 0; i < jsonarray.length(); i++){
+        JSONArray jsonarray = null;
+        try {
+            jsonarray = new JSONArray(jsonStr);
 
-            JSONObject jsonobject = jsonarray.getJSONObject(i);
-            String player = jsonobject.getString("player");
-            String score = jsonobject.getString("score");
-            System.out.println(player);
-            System.out.println(score);
-        }
+            for(int i = 0; i < jsonarray.length(); i++) {
+
+                JSONObject jsonobject = jsonarray.getJSONObject(i);
+                String player = jsonobject.getString("player");
+                String score = jsonobject.getString("score");
+                System.out.println(player);
+                System.out.println(score);
+            }
+        } catch (JSONException e) {
+                e.printStackTrace();
+            }
     }
 
 

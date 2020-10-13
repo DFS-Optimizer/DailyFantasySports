@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,6 +20,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONException;
+
+
+
+
 
 
 public class HttpConnect extends AppCompatActivity {
@@ -39,7 +48,6 @@ public class HttpConnect extends AppCompatActivity {
 
         //Connect button
         Button btn = (Button) findViewById(R.id.httpBut);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +56,10 @@ public class HttpConnect extends AppCompatActivity {
                 SendRequestAndPrintResponse();
             }
         });
+
+
+
+
 
 
     }
@@ -107,6 +119,8 @@ public class HttpConnect extends AppCompatActivity {
 
 
 
+    //Textview to Display optimized lineup
+        TextView txtView = (TextView) findViewById(R.id.textView3);
 
         mRequestQueue = Volley.newRequestQueue(this);
 
@@ -115,7 +129,9 @@ public class HttpConnect extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.i(TAG, "Response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "Response: " + response.toString(), Toast.LENGTH_SHORT).show();
-                //ParseString(response.toString());
+                txtView.setText(response.toString());
+                //String testResponse = "{output: [{players: Lebron James}, {score: 42}]}";
+                ParseReceive(response.toString());
 
             }
         }, new Response.ErrorListener() {
@@ -129,18 +145,79 @@ public class HttpConnect extends AppCompatActivity {
     }
 
 
-    /*public void ParseString(String line) {
-        //using String split function
-        String[] words = line.split(" ");
-        System.out.println(Arrays.toString(words));
-        //using java.util.regex Pattern
-        //Pattern pattern = Pattern.compile(" ");
-        //words = pattern.split(line);
-        //System.out.println(Arrays.toString(words));
+    public void ParseReceive(String jsonStr) {
+
+        JSONArray jsonarray = null;
+        try {
+            jsonarray = new JSONArray(jsonStr);
+
+            for(int i = 0; i < jsonarray.length(); i++) {
+
+                JSONObject jsonobject = jsonarray.getJSONObject(i);
+                String player = jsonobject.getString("player");
+                String score = jsonobject.getString("score");
+                System.out.println(player);
+                System.out.println(score);
+            }
+        } catch (JSONException e) {
+                e.printStackTrace();
+            }
     }
-*/
+
 
 }
 
 
 
+
+
+
+
+// In other words : print("{output : [{players:" + player(0) + ", score:" + player(1) + "}]}")
+    /*
+        String input = "{output : [{players:LebronJames, score:20}]}";
+    String input2 = "{output : [{players:LebronJames, score:20}]}";
+
+try {
+    JSONObject obj = new JSONObject(input);
+
+    ArrayList<String> list = new ArrayList<String>();
+    ArrayList<String> scoreList = new ArrayList<String>();
+    JSONArray array = obj.getJSONArray("output");
+    for (int i = 0; i < array.length(); i++) {
+        list.add(array.getJSONObject(i).getString("players"));
+        scoreList.add(array.getJSONObject(i).getString("score"));
+
+    }
+for(int j = 0; j < array.length(); j++){
+    System.out.println(list.get(j) + " " + scoreList.get(j));
+}
+
+}
+catch(JSONException e) {
+    Log.e(TAG, "unexpected JSON exception", e);
+    // Do something to recover ... or kill the app.
+
+        }
+
+*/
+
+    /*
+        try {
+            JSONObject obj = new JSONObject(received);
+            String playerName = obj.getJSONObject("output").getString("players");
+            System.out.println(playerName);
+            //JSONArray arr = obj.getJSONArray("posts");
+            /*for (int i = 0; i < arr.length(); i++)
+            {
+                String post_id = arr.getJSONObject(i).getString("post_id");
+
+            }
+            */
+
+/*
+        } catch (JSONException e) {
+            Log.e(TAG, "unexpected JSON exception", e);
+            // Do something to recover ... or kill the app.
+        }
+*/

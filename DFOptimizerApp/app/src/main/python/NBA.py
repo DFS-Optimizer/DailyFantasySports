@@ -83,7 +83,8 @@ def run_fanduel(*players):
         for item in sublist:
             final.append(item)
 
-    total = final.pop()
+    e = players.__len__() * 100
+    total = final.pop() - e
 
     df = pd.read_csv(const_path)
     result = "["

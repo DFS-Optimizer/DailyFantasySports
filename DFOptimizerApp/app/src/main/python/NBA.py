@@ -95,11 +95,12 @@ def run_fanduel(*players):
             result += ","
         result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result += '{"Total":"' + str(total) + '"}]'
-    #print(result)
+    print(result)
 
     return result
 
 
-run_fanduel('Miye Oni', 'Sindarius Thornwell')
+#run_fanduel('Miye Oni', 'Sindarius Thornwell')
+#run_fanduel()
 
 #str(players.get(player, 0))

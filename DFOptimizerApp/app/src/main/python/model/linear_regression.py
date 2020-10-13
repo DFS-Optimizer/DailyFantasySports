@@ -102,14 +102,14 @@ def elbow_curve(dataframe):
 #
 
 
-# with SqlQuery() as query:
-#     df = query.get_table("model_trained6", args="WHERE role = 4",  dataframe=True)
-# one = df.iloc[:, 2:4]
-# two = df.iloc[:, 6:21]
-# training = pd.concat([one,two], axis = 1)
-# model = LinearModel(training, 1)
-# model.get_prediction()
-# model.get_results()
+with SqlQuery() as query:
+    df = query.get_table("model_trained6", args="WHERE role = 4",  dataframe=True)
+one = df.iloc[:, 2:4]
+two = df.iloc[:, 6:21]
+training = pd.concat([one,two], axis = 1)
+model = LinearModel(training, 1)
+model.get_prediction()
+model.get_results()
 #
 
 

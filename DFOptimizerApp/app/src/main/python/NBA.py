@@ -54,30 +54,52 @@ def optimize(num):
     filled_lineups = optimizer.fill_lineups(lineups)
     # save the lineups
     # optimizer.save_file(optimizer.header, filled_lineups)
-    optimizer.save_file(optimizer.header, filled_lineups, show_proj=True)
+    #optimizer.save_file(optimizer.header, filled_lineups, show_proj=True)
+    return filled_lineups
 
-def run_fanduel(num, player1):
+
+
+def run_fanduel(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "slate.csv")
+    print(const_path)
+    out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     df = pd.read_csv(const_path)
-    df.loc[df['playerName'] == player1, 'proj'] = df['proj']+100
-    df.to_csv(const_path)
+    for player in players:
+        df.loc[df['playerName'] == player, 'proj'] = df['proj']+100
+    df.to_csv(const_path, index= False)
 
-    optimize(num)
+    lineup = optimize(1)
+
+    df = pd.read_csv(const_path)
+    for player in players:
+        df.loc[df['playerName'] == player, 'proj'] = df['proj'] - 100
+    df.to_csv(const_path,index= False)
+
+    final = []
+    for sublist in lineup:
+        for item in sublist:
+            final.append(item)
+
+    e = players.__len__() * 100
+    total = final.pop() - e
+
+    df = pd.read_csv(const_path)
+    result = "["
+    for player in final:
+        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+        temp =round(temp, 2)
+        if not result == "[":
+            result += ","
+        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result += '{"Total":"' + str(total) + '"}]'
+    #print(result)
+
+    return result
 
 
+run_fanduel('Miye Oni', 'Sindarius Thornwell')
 
-run_fanduel(5, 'Miye Oni')
-
-
-
-
-
-
-
-
-
-
-
+#str(players.get(player, 0))

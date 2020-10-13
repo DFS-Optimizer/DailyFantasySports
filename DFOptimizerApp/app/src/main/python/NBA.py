@@ -85,6 +85,7 @@ def run_fanduel(*players):
 
     e = players.__len__() * 100
     total = final.pop() - e
+    total = round(total, 2)
 
     df = pd.read_csv(const_path)
     result = "["

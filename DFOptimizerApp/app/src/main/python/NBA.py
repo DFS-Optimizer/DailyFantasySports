@@ -93,7 +93,7 @@ def run_fanduel(*players):
         temp =round(temp, 2)
         if not result == "[":
             result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+        result += '{"player":"' + player + '","score":"' + str(temp) + '"},'
     result += '{"Total":"' + str(total) + '"}]'
     print(result)
 

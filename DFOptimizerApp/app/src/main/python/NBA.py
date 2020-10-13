@@ -5,7 +5,40 @@ import functools
 import pandas as pd
 import sys
 import csv
-from python.Optimization.Fanduel_optimize import Fanduel as NBAFanduel
+from Optimization.Fanduel_optimize import Fanduel as NBAFanduel
+from flask import Flask
+
+app = Flask(__name__)
+app.config["DEBUG"] = True
+
+@app.route("/")
+def hello_world():
+    return "Hello Flask"
+
+@app.route("/selectplayer")
+def user_choice0():
+   lineup = run_fanduel()
+   return lineup
+
+@app.route("/selectplayer/<player1>")
+def user_choice1(player1):
+   lineup = run_fanduel(player1)
+   return lineup
+
+@app.route("/selectplayer/<player1>/<player2>")
+def user_choice2(player1, player2):
+   lineup = run_fanduel(player1, player2)
+   return lineup
+
+@app.route("/selectplayer/<player1>/<player2>/<player3>")
+def user_choice3(player1, player2, player3):
+   lineup = run_fanduel(player1, player2, player3)
+   return lineup
+    
+@app.route("/selectplayer/<player1>/<player2>/<player3>/<player4>")
+def user_choice4(player1, player2, player3, player4):
+   lineup = run_fanduel(player1, player2, player3, player4)
+   return lineup
 
 
 def get_my_path():
@@ -91,17 +124,19 @@ def run_fanduel(*players):
     result = "["
     for player in final:
         temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
+        temp =round(temp, 2)
         if not result == "[":
             result += ","
         result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result += ',{"Total":"' + str(total) + '"}]'
-    print(result)
+    #print(result)
 
     return result
 
 
-#run_fanduel('Miye Oni', 'Sindarius Thornwell')
-#run_fanduel()
+# run_fanduel('Miye Oni', 'Sindarius Thornwell')
+
+app.run(host='0.0.0.0')
+# run_fanduel('Miye Oni', 'Sindarius Thornwell')
 
 #str(players.get(player, 0))

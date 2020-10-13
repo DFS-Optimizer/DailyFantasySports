@@ -90,11 +90,11 @@ def run_fanduel(*players):
     result = "["
     for player in final:
         temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp =round(temp, 2)
+        temp = round(temp, 2)
         if not result == "[":
             result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"},'
-    result += '{"Total":"' + str(total) + '"}]'
+        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result += ',{"Total":"' + str(total) + '"}]'
     print(result)
 
     return result

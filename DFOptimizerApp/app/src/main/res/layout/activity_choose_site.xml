@@ -27,4 +27,16 @@
         app:layout_constraintBottom_toTopOf="@+id/draftKingsBtn"
         app:layout_constraintStart_toStartOf="@+id/draftKingsBtn" />
 
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginBottom="152dp"
+        android:onClick="logout"
+        android:text="Logout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/draftKingsBtn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

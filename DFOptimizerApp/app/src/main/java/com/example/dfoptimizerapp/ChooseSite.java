@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ChooseSite extends AppCompatActivity {
 
@@ -15,6 +18,7 @@ public class ChooseSite extends AppCompatActivity {
 
         final Button fanDuelBtn = (Button) findViewById(R.id.fanDuelBtn);
         final Button draftKingsBtn = (Button) findViewById(R.id.draftKingsBtn);
+        final Button logoutBtn = (Button) findViewById(R.id.logout);
 
         fanDuelBtn.setOnClickListener((v) -> {
             Intent chooseSport = new Intent(v.getContext(), ChooseSport.class);
@@ -28,8 +32,11 @@ public class ChooseSite extends AppCompatActivity {
             startActivity(listPlayers);
         });
 
-
-
+      logoutBtn.setOnClickListener((v)-> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(),Login.class));
+            finish();
+        });
 
     }
 }

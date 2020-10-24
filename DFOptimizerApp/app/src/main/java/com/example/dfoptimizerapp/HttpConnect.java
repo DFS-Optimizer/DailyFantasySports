@@ -138,14 +138,26 @@ public class HttpConnect extends AppCompatActivity {
             jsonarray = new JSONArray(jsonStr);
 
             for(int i = 0; i < jsonarray.length(); i++) {
+                System.out.println(jsonarray.length());
+                System.out.println("Current:" + i);
+                if(i == jsonarray.length()-1){
+                    JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
+                    String total = jsonObjectTotal.getString("Total");
+                    System.out.println("Total: "  + total);
+                    txtView.append("Total: " + total);
+                }
+                else {
+                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                    String player = jsonobject.getString("player");
+                    String score = jsonobject.getString("score");
+                    System.out.println(player + " " + score);
+                    txtView.append(player + " " + score);
+                    txtView.append("\n");
+                }
 
-                JSONObject jsonobject = jsonarray.getJSONObject(i);
-                String player = jsonobject.getString("player");
-                String score = jsonobject.getString("score");
-                System.out.println(player + " " + score);
-                txtView.append(player + " " + score);
-                txtView.append("\n");
+
             }
+
         } catch (JSONException e) {
                 e.printStackTrace();
             }

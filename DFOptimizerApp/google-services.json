@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "152286265036",
+    "firebase_url": "https://df-optimizer-app.firebaseio.com",
+    "project_id": "df-optimizer-app",
+    "storage_bucket": "df-optimizer-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152286265036:android:68f39ed410e34069d24c69",
+        "android_client_info": {
+          "package_name": "com.example.dfoptimizerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152286265036-r5u5e9enncmpbbc4alpgg4f4fnsgtg4d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dfoptimizerapp",
+            "certificate_hash": "53a94edd7e59bf25ebaec15203d101cd42567ee9"
+          }
+        },
+        {
+          "client_id": "152286265036-ipmtus6tm5nletfs4i1smqbh4m61qkt9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK1dCYqKp_tX1ugz4XbVlmbJaG584g79I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152286265036-ipmtus6tm5nletfs4i1smqbh4m61qkt9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

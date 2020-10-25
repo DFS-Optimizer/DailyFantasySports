@@ -1,5 +1,5 @@
 import pulp
-from python.Optimization.Optimizer import Optimizer
+from Optimization.Optimizer import Optimizer
 
 
 class Fanduel(Optimizer):

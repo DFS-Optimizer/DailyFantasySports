@@ -136,7 +136,8 @@ def run_fanduel(*players):
 
 # run_fanduel('Miye Oni', 'Sindarius Thornwell')
 
-app.run(host='0.0.0.0')
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
 # run_fanduel('Miye Oni', 'Sindarius Thornwell')
 
 #str(players.get(player, 0))

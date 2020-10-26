@@ -59,7 +59,7 @@
     <TextView
         android:id="@+id/newUser"
         android:layout_width="177dp"
-        android:layout_height="0dp"
+        android:layout_height="30dp"
         android:layout_marginBottom="36dp"
         android:text="New Here? Create Account"
         app:layout_constraintBottom_toTopOf="@+id/progressBar"
@@ -70,8 +70,8 @@
     <TextView
         android:id="@+id/textView4"
         android:layout_width="192dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="33dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="67dp"
         android:text="User Login"
         android:textSize="24sp"

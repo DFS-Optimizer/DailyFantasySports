@@ -20,11 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
 
-
-    EditText mEmail, mPassword;
-    Button mLoginBtn;
     TextView mCreateBtn;
-    ProgressBar progressBar;
     FirebaseAuth fAuth;
 
     @Override
@@ -32,15 +28,15 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mEmail = findViewById(R.id.email);
-        mPassword = findViewById(R.id.password);
-        progressBar = findViewById(R.id.progressBar);
+        final EditText mEmail = findViewById(R.id.email);
+        final EditText mPassword = findViewById(R.id.password);
+        final ProgressBar progressBar = findViewById(R.id.progressBar);
         fAuth = FirebaseAuth.getInstance();
-        mLoginBtn = findViewById(R.id.login);
+        final Button mLoginBtn = findViewById(R.id.login);
         mCreateBtn = findViewById(R.id.newUser);
-        mLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        mLoginBtn.setOnClickListener((v) -> {
+
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
 
@@ -71,7 +67,6 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
-            }
         });
 
         mCreateBtn.setOnClickListener(new View.OnClickListener() {

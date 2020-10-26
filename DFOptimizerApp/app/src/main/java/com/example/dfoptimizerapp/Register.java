@@ -19,8 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
-FirebaseAuth fAuth;
-ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +31,8 @@ ProgressBar progressBar;
    final Button mRegisterBtn = findViewById(R.id.registerBtn);
    final TextView mLoginBtn = findViewById(R.id.existingUser);
 
-   fAuth = FirebaseAuth.getInstance();
-   progressBar = findViewById(R.id.progressBar);
+   final FirebaseAuth fAuth = FirebaseAuth.getInstance();
+   final ProgressBar progressBar = findViewById(R.id.progressBar);
 
    if(fAuth.getCurrentUser() != null){
        startActivity(new Intent(getApplicationContext(), ChooseSite.class));

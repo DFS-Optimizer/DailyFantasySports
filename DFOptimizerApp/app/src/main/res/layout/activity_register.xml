@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:text="Password"
         app:layout_constraintStart_toStartOf="@+id/email_register"
         app:layout_constraintTop_toBottomOf="@+id/email_register" />
@@ -59,7 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="9dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:text="Confirm Password"
         app:layout_constraintStart_toStartOf="@+id/password_register"
         app:layout_constraintTop_toBottomOf="@+id/password_register" />

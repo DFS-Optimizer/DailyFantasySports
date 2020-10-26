@@ -16,9 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
 
-    TextView mCreateBtn;
-    FirebaseAuth fAuth;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +24,9 @@ public class Login extends AppCompatActivity {
         final EditText mEmail = findViewById(R.id.email_login);
         final EditText mPassword = findViewById(R.id.password_login);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
-        fAuth = FirebaseAuth.getInstance();
+        final FirebaseAuth fAuth = FirebaseAuth.getInstance();
         final Button mLoginBtn = findViewById(R.id.login);
-        mCreateBtn = findViewById(R.id.newUser);
+        final TextView mCreateBtn = findViewById(R.id.newUser);
 
         mLoginBtn.setOnClickListener((v) -> {
 

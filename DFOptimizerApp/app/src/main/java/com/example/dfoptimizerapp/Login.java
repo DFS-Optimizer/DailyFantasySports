@@ -1,6 +1,5 @@
 package com.example.dfoptimizerapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,9 +12,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
@@ -28,8 +24,8 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        final EditText mEmail = findViewById(R.id.email);
-        final EditText mPassword = findViewById(R.id.password);
+        final EditText mEmail = findViewById(R.id.email_login);
+        final EditText mPassword = findViewById(R.id.password_login);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
         fAuth = FirebaseAuth.getInstance();
         final Button mLoginBtn = findViewById(R.id.login);
@@ -66,11 +62,8 @@ public class Login extends AppCompatActivity {
                 });
         });
 
-        mCreateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Register.class));
-            }
+        mCreateBtn.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), Register.class));
         });
 
     }

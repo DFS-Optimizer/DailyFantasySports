@@ -32,7 +32,7 @@ public class Register extends AppCompatActivity {
    final TextView mLoginBtn = findViewById(R.id.existingUser);
 
    final FirebaseAuth fAuth = FirebaseAuth.getInstance();
-   final ProgressBar progressBar = findViewById(R.id.progressBar);
+  //final ProgressBar progressBar = findViewById(R.id.progressBar);
 
    if(fAuth.getCurrentUser() != null){
        startActivity(new Intent(getApplicationContext(), ChooseSite.class));
@@ -54,7 +54,7 @@ public class Register extends AppCompatActivity {
             mPassword.setError("Password must be greater than or equal to 6 characters");
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
 
 
         //register the user to the firebase
@@ -65,7 +65,7 @@ public class Register extends AppCompatActivity {
 
             } else {
                 Toast.makeText(Register.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                progressBar.setVisibility(View.GONE);
+                //progressBar.setVisibility(View.GONE);
             }
         });
     });

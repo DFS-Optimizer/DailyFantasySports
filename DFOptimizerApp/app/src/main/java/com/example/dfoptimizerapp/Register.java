@@ -1,21 +1,17 @@
 package com.example.dfoptimizerapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
@@ -28,8 +24,15 @@ public class Register extends AppCompatActivity {
    final EditText mFullName = findViewById(R.id.fullName_register);
    final EditText mEmail = findViewById(R.id.email_register);
    final EditText mPassword = findViewById(R.id.password_register);
+   final EditText mConfirmPassword = findViewById(R.id.confirmPass_register);
    final Button mRegisterBtn = findViewById(R.id.registerBtn);
    final TextView mLoginBtn = findViewById(R.id.existingUser);
+
+   //Labels for name,email,password,and confirm password fields.
+   final TextView fullNameLabel = findViewById(R.id.fullNameText);
+   final TextView emailLabel = findViewById(R.id.emailAddressTextView);
+   final TextView passwordLabel = findViewById(R.id.passwordTextView);
+   final TextView confirmPasswordLabel = findViewById(R.id.confirmPasswordTextView);
 
    final FirebaseAuth fAuth = FirebaseAuth.getInstance();
   //final ProgressBar progressBar = findViewById(R.id.progressBar);
@@ -38,21 +41,94 @@ public class Register extends AppCompatActivity {
        startActivity(new Intent(getApplicationContext(), ChooseSite.class));
        finish();
    }
+
+   //OnKeyListeners for fields. if a field is not empty, its label is set to invisible
+   mFullName.setOnKeyListener((v, keyCode, event) -> {
+       String name = mFullName.getText().toString();
+       if(!name.isEmpty()) {
+           fullNameLabel.setVisibility(View.INVISIBLE);
+       }
+       else
+       {
+           fullNameLabel.setVisibility(View.VISIBLE);
+       }
+       return false;
+   });
+
+   mEmail.setOnKeyListener((v, keyCode, event) -> {
+      String email = mEmail.getText().toString();
+      if(!email.isEmpty()) {
+          emailLabel.setVisibility(View.INVISIBLE);
+      }
+      else
+      {
+          emailLabel.setVisibility(View.VISIBLE);
+      }
+      return false;
+   });
+
+        mPassword.setOnKeyListener((v, keyCode, event) -> {
+            String password = mPassword.getText().toString();
+            if(!password.isEmpty()) {
+                passwordLabel.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                passwordLabel.setVisibility(View.VISIBLE);
+            }
+            return false;
+        });
+
+        mConfirmPassword.setOnKeyListener((v, keyCode, event) -> {
+            String confirmedPassword = mConfirmPassword.getText().toString();
+            if(!confirmedPassword.isEmpty()) {
+                confirmPasswordLabel.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                confirmPasswordLabel.setVisibility(View.VISIBLE);
+            }
+            return false;
+        });
+
+        //OnClickListener for Register Button
     mRegisterBtn.setOnClickListener(v -> {
+        String name = mFullName.getText().toString().trim();
         String email = mEmail.getText().toString().trim();
         String password = mPassword.getText().toString().trim();
+        String confirmedPassword = mConfirmPassword.getText().toString().trim();
 
+        //Check Name:
+        if(TextUtils.isEmpty(name))
+        {
+            mFullName.setError("Enter your name");
+        }
+
+        //Check Email:
         if (TextUtils.isEmpty(email)) {
             mEmail.setError("Email is required.");
             return;
         }
+
+        //Check Password:
         if (TextUtils.isEmpty(password)) {
-            mPassword.setError("Password is Required.");
+            mPassword.setError("Password is required.");
             return;
         }
         if (password.length() < 6) {
             mPassword.setError("Password must be greater than or equal to 6 characters");
             return;
+        }
+
+        //Check Confirm Password
+        if(TextUtils.isEmpty(confirmedPassword))
+        {
+            mConfirmPassword.setError("Confirm your password.");
+        }
+
+        if(!password.equals(confirmedPassword))
+        {
+            mConfirmPassword.setError("Does not match password entered above.");
         }
         //progressBar.setVisibility(View.VISIBLE);
 

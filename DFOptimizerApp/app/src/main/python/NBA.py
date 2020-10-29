@@ -5,7 +5,7 @@ import functools
 import pandas as pd
 import sys
 import csv
-from Optimization.Fanduel_optimize import Fanduel as NBAFanduel
+from Optimization.NBAFanduel import Fanduel as NBAFanduel
 from flask import Flask
 
 app = Flask(__name__)
@@ -134,7 +134,7 @@ def run_fanduel(*players):
     return result
 
 
-# run_fanduel('Miye Oni', 'Sindarius Thornwell')
+#run_fanduel('Miye Oni', 'Sindarius Thornwell')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')

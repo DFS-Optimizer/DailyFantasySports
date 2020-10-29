@@ -87,10 +87,10 @@ public class HttpConnect extends AppCompatActivity {
         System.out.println(newList);
         String url;
         if(myList.size() != 0) {
-             url = "http://73.82.159.9:5000/selectplayer/";
+             url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/selectplayer/";
         }
         else{
-             url = "http://73.82.159.9:5000/selectplayer";
+             url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/selectplayer";
         }
         int k;
         String finalURL = url;

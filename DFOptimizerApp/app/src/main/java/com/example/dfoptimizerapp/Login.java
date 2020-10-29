@@ -28,6 +28,36 @@ public class Login extends AppCompatActivity {
         final Button mLoginBtn = findViewById(R.id.login);
         final TextView mCreateBtn = findViewById(R.id.newUser);
 
+        //Labels for fields
+        final TextView emailLabel = findViewById(R.id.loginEmailLabel);
+        final TextView passwordLabel = findViewById(R.id.loginPasswordLabel);
+
+        //OnKeyListeners for fields. If length > 0, the field's label is set to invisible
+        mEmail.setOnKeyListener((v, keyCode, event) -> {
+            String email = mEmail.getText().toString();
+            if(!email.isEmpty()) {
+                emailLabel.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                emailLabel.setVisibility(View.VISIBLE);
+            }
+            return false;
+        });
+
+        mPassword.setOnKeyListener((v, keyCode, event) -> {
+            String password = mPassword.getText().toString();
+            if(!password.isEmpty()) {
+                passwordLabel.setVisibility(View.INVISIBLE);
+            }
+            else
+            {
+                passwordLabel.setVisibility(View.VISIBLE);
+            }
+            return false;
+        });
+
+        //OnClickListener for Login Button
         mLoginBtn.setOnClickListener((v) -> {
 
                 String email = mEmail.getText().toString().trim();

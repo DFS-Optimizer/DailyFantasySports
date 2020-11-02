@@ -22,33 +22,7 @@ public class FD_SelectLineup_NBA extends AppCompatActivity {
 
         generateBtn.setOnClickListener((v) -> {
 
-            //ADD CODE FOR GIT REQUEST HERE!
 
-            //check to see if an instance of Python has already started
-            /*if(! Python.isStarted())
-            {
-                Python.start(new AndroidPlatform(v.getContext()));
-            }
-
-            Python py = Python.getInstance();
-            //open the file (test.py)
-            PyObject file = py.getModule("test");
-            //creating a java string array and casting it to a python object so it can be passed as
-            //an argument
-            PyObject array = PyObject.fromJava(new String[] {"Charity", "Andy", "Elizabeth", "Gage"});
-
-            //call the python function (testFunction) which returns a string array
-            String[] names = file.callAttr("testFunction", array).toJava(String[].class);
-            String nameString = "";
-            for(int i = 0; i < names.length; i++)
-            {
-                nameString += names[i];
-                if(i != names.length - 1)
-                {
-                    nameString += ", ";
-                }
-            }
-            namesTxtBx.setText(nameString);*/
         });
     }
 }

@@ -35,11 +35,14 @@ public class Login extends AppCompatActivity {
         //OnKeyListeners for fields. If length > 0, the field's label is set to invisible
         mEmail.setOnKeyListener((v, keyCode, event) -> {
             String email = mEmail.getText().toString();
-            if(!email.isEmpty()) {
-                emailLabel.setVisibility(View.INVISIBLE);
-            }
-            else
+            String password = mPassword.getText().toString();
+            if(password.length() == 0)
             {
+                passwordLabel.setVisibility(View.VISIBLE);
+            }
+            if (!email.isEmpty()) {
+                emailLabel.setVisibility(View.INVISIBLE);
+            } else {
                 emailLabel.setVisibility(View.VISIBLE);
             }
             return false;
@@ -47,11 +50,14 @@ public class Login extends AppCompatActivity {
 
         mPassword.setOnKeyListener((v, keyCode, event) -> {
             String password = mPassword.getText().toString();
-            if(!password.isEmpty()) {
-                passwordLabel.setVisibility(View.INVISIBLE);
-            }
-            else
+            String email = mPassword.getText().toString();
+            if(email.length() == 0)
             {
+                emailLabel.setVisibility(View.VISIBLE);
+            }
+            if (!password.isEmpty()) {
+                passwordLabel.setVisibility(View.INVISIBLE);
+            } else {
                 passwordLabel.setVisibility(View.VISIBLE);
             }
             return false;
@@ -60,33 +66,33 @@ public class Login extends AppCompatActivity {
         //OnClickListener for Login Button
         mLoginBtn.setOnClickListener((v) -> {
 
-                String email = mEmail.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
+            String email = mEmail.getText().toString().trim();
+            String password = mPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    mEmail.setError("Email is required.");
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    mPassword.setError("Password is Required.");
-                    return;
-                }
-                if (password.length() < 6) {
-                    mPassword.setError("Password must be greater than or equal to 6 characters");
-                    return;
-                }
-                progressBar.setVisibility(View.VISIBLE);
+            if (TextUtils.isEmpty(email)) {
+                mEmail.setError("Email is required.");
+                return;
+            }
+            if (TextUtils.isEmpty(password)) {
+                mPassword.setError("Password is Required.");
+                return;
+            }
+            if (password.length() < 6) {
+                mPassword.setError("Password must be greater than or equal to 6 characters");
+                return;
+            }
+            progressBar.setVisibility(View.VISIBLE);
 
-                //authenticate the user
-                fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), ChooseSite.class));
-                    } else {
-                        Toast.makeText(Login.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });
+            //authenticate the user
+            fAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    Toast.makeText(Login.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), ChooseSite.class));
+                } else {
+                    Toast.makeText(Login.this, "Error !" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                }
+            });
         });
 
         mCreateBtn.setOnClickListener(v -> {

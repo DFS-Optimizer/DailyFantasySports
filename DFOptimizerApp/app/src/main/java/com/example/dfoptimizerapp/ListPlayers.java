@@ -4,16 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,16 +16,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class ListPlayers_NBA extends AppCompatActivity {
+public class ListPlayers extends AppCompatActivity {
 
 
 
@@ -41,6 +33,7 @@ public class ListPlayers_NBA extends AppCompatActivity {
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
         final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
         final int site = getIntent().getIntExtra("siteChoice",1);
+        final int sport = getIntent().getIntExtra("sportChoice", 1);
         final ListView playerListView = (ListView) findViewById(R.id.playerListView);
         TextView remainingSalaryTxt = (TextView) findViewById(R.id.remainingSalaryTxt);
         //"Rem. Salary: $"
@@ -50,7 +43,13 @@ public class ListPlayers_NBA extends AppCompatActivity {
         final int[] remainingSalary = {Integer.parseInt(remainingSalaryTxt.getText().toString().substring(14))};
 
         //List of positions that can be used as a filter
-        String[] pos = new String[] {"All Positions","PG", "SF", "SG", "PF", "C"};
+        String[] pos;
+        if(sport == 1) {
+            pos = new String[]{"All Positions", "PG", "SF", "SG", "PF", "C"};
+        }
+        else{
+            pos = new String[]{"All Positions","QB","WR","RB","TE","DF","K"};
+        }
         ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(adapter1);
 

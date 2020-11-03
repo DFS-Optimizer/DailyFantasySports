@@ -26,7 +26,7 @@ public class ChooseSite extends AppCompatActivity {
         });
 
         draftKingsBtn.setOnClickListener((v) -> {
-            Intent listPlayers = new Intent(v.getContext(), ListPlayers_NBA.class);
+            Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
             listPlayers.putExtra("siteChoice", 2); //value 2 to indicate draftkings site choice
             startActivity(listPlayers);
         });

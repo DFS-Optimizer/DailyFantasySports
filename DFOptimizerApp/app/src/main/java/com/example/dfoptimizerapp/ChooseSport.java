@@ -29,15 +29,19 @@ public class ChooseSport extends AppCompatActivity {
         });
         continueBtn.setOnClickListener((v) -> {
             if(nbaSwitch.isChecked()) {
-                Intent listPlayers = new Intent(v.getContext(), ListPlayers_NBA.class);
-                listPlayers.putExtra("siteChoice", site);
-                startActivity(listPlayers);
+                Intent listPlayers_nba = new Intent(v.getContext(), ListPlayers.class);
+                listPlayers_nba.putExtra("siteChoice", site);
+                listPlayers_nba.putExtra("sportChoice", 1);
+                startActivity(listPlayers_nba);
             }
             else if(nflSwitch.isChecked()){
                 //add functionality later
-                //Intent selectNFLLineup = new Intent(v.getContext(), SelectLineup_NFL.class);
-                //startActivity(selectNFLLineup);
+                Intent listPlayers_nfl = new Intent(v.getContext(), ListPlayers.class);
+                listPlayers_nfl.putExtra("siteChoice", site);
+                listPlayers_nfl.putExtra("sportChoice",2);
+                startActivity(listPlayers_nfl);
             }
+
         });
     }
 

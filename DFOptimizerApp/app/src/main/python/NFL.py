@@ -5,7 +5,7 @@ import functools
 import pandas as pd
 import sys
 import csv
-from Optimization.NBAFanduel import Fanduel as NBAFanduel
+from Optimization.NBADraftKings import Draftkings as NBADraftKings
 from flask import Flask
 
 
@@ -17,7 +17,7 @@ def get_my_path():
     return os.path.realpath(filename)
 
 
-def optimize(num):
+def optimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
@@ -41,7 +41,7 @@ def optimize(num):
 
     # set the optimizer based on the user input for the site
     # enter the parameters
-    optimizer = NBAFanduel(num_lineups=int(num),
+    optimizer = NBADraftKings(num_lineups=int(num),
                            overlap=4,
                            solver=pulp.CPLEX_PY(msg=0),
                            players_filepath=const_path,
@@ -59,7 +59,7 @@ def optimize(num):
     return filled_lineups
 
 
-def run_fanduel(*players):
+def run_draftkings(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "slate.csv")
@@ -71,7 +71,7 @@ def run_fanduel(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = optimize(1)
+    lineup = optimizeDK(1)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -82,10 +82,11 @@ def run_fanduel(*players):
     for sublist in lineup:
         for item in sublist:
             final.append(item)
-
     e = players.__len__() * 100
     total = final.pop() - e
     total = round(total, 2)
+    print(final)
+
 
     df = pd.read_csv(const_path)
     result = "["
@@ -96,15 +97,12 @@ def run_fanduel(*players):
             result += ","
         result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result += ',{"Total":"' + str(total) + '"}]'
-    # print(result)
+    print(result)
 
     return result
 
 
-# run_fanduel('Miye Oni', 'Sindarius Thornwell')
+run_draftkings('Miye Oni')
+#run_draftkings()
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0')
-# run_fanduel('Miye Oni', 'Sindarius Thornwell')
 
-# str(players.get(player, 0))

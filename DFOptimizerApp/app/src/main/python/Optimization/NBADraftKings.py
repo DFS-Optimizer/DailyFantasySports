@@ -2,7 +2,7 @@ import pulp
 from Optimization.Optimizer import Optimizer
 
 
-class Fanduel(Optimizer):
+class Draftkings(Optimizer):
     """
     draftkings Optimizer Settings
     draftkings will inherit from the super class Optimizer
@@ -11,7 +11,7 @@ class Fanduel(Optimizer):
     def __init__(self, num_lineups, overlap, solver, players_filepath, output_filepath):
         super().__init__(num_lineups, overlap, solver, players_filepath, output_filepath)
         self.salary_cap = 55000
-        self.header = ['PG', 'PG', 'SG', 'SG', 'SF', 'SF', 'PF', 'PF', 'C']
+        self.header = ['PG', 'SG', 'SF', 'PF', 'C', 'G', 'F', 'UTIL']
 
     def type_1(self, lineups):
         """
@@ -82,7 +82,7 @@ class Fanduel(Optimizer):
         """
         filled_lineups = []
         for lineup in lineups:
-            a_lineup = ["", "", "", "", "", "", "", "", ""]
+            a_lineup = ["", "", "", "", "", "", "", ""]
             players_lineup = lineup[:self.num_players]
             total_proj = 0
             if self.actuals:
@@ -92,27 +92,38 @@ class Fanduel(Optimizer):
                     if self.positions['PG'][num] == 1:
                         if a_lineup[0] == "":
                             a_lineup[0] = self.players_df.loc[num, 'playerName']
-                        elif a_lineup[1] == "":
-                            a_lineup[1] = self.players_df.loc[num, 'playerName']
-                    elif self.positions['SG'][num] == 1:
-                        if a_lineup[2] == "":
-                            a_lineup[2] = self.players_df.loc[num, 'playerName']
-                        elif a_lineup[3] == "":
-                            a_lineup[3] = self.players_df.loc[num, 'playerName']
-                    elif self.positions['SF'][num] == 1:
-                        if a_lineup[4] == "":
-                            a_lineup[4] = self.players_df.loc[num, 'playerName']
                         elif a_lineup[5] == "":
                             a_lineup[5] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[7] == "":
+                            a_lineup[7] = self.players_df.loc[num, 'playerName']
+                    elif self.positions['SG'][num] == 1:
+                        if a_lineup[1] == "":
+                            a_lineup[1] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[5] == "":
+                            a_lineup[5] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[7] == "":
+                            a_lineup[7] = self.players_df.loc[num, 'playerName']
+                    elif self.positions['SF'][num] == 1:
+                        if a_lineup[2] == "":
+                            a_lineup[2] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[6] == "":
+                            a_lineup[6] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[7] == "":
+                            a_lineup[7] = self.players_df.loc[num, 'playerName']
                     elif self.positions['PF'][num] == 1:
-                        if a_lineup[6] == "":
+                        if a_lineup[3] == "":
+                            a_lineup[3] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[6] == "":
                             a_lineup[6] = self.players_df.loc[num, 'playerName']
                         elif a_lineup[7] == "":
                             a_lineup[7] = self.players_df.loc[num, 'playerName']
                     elif self.positions['C'][num] == 1:
-                        if a_lineup[8] == "":
-                            a_lineup[8] = self.players_df.loc[num, 'playerName']
+                        if a_lineup[4] == "":
+                            a_lineup[4] = self.players_df.loc[num, 'playerName']
+                        elif a_lineup[7] == "":
+                            a_lineup[7] = self.players_df.loc[num, 'playerName']
                     total_proj += self.players_df.loc[num, 'proj']
             a_lineup.append(round(total_proj, 2))
+            print(a_lineup)
             filled_lineups.append(a_lineup)
         return filled_lineups

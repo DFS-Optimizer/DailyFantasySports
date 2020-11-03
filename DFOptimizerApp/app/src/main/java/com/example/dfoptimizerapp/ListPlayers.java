@@ -50,8 +50,8 @@ public class ListPlayers extends AppCompatActivity {
         else{
             pos = new String[]{"All Positions","QB","WR","RB","TE","DF","K"};
         }
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
-        positionFilter.setAdapter(adapter1);
+        ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
+        positionFilter.setAdapter(dropdownAdapter);
 
         //Get list of players from the slate
         InputStream slate = null;
@@ -97,8 +97,8 @@ public class ListPlayers extends AppCompatActivity {
                 }
                 playerListView.setSaveEnabled(false);
                 playerListView.setMinimumWidth(50);
-                ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
-                playerListView.setAdapter(adapter2);
+                ArrayAdapter<String> playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
+                playerListView.setAdapter(playerListAdapter);
 
 
             }
@@ -108,6 +108,7 @@ public class ListPlayers extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
         final int[] id = {0};
         playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         playerListView.setSaveEnabled(false);

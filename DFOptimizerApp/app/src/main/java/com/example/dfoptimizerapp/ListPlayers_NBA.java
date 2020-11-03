@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ListPlayers extends AppCompatActivity {
+public class ListPlayers_NBA extends AppCompatActivity {
 
 
 

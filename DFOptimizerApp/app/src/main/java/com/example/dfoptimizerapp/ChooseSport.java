@@ -4,13 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
-
-import com.google.firebase.auth.FirebaseAuth;
-
-import java.util.List;
 
 public class ChooseSport extends AppCompatActivity {
 
@@ -34,7 +29,7 @@ public class ChooseSport extends AppCompatActivity {
         });
         continueBtn.setOnClickListener((v) -> {
             if(nbaSwitch.isChecked()) {
-                Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
+                Intent listPlayers = new Intent(v.getContext(), ListPlayers_NBA.class);
                 listPlayers.putExtra("siteChoice", site);
                 startActivity(listPlayers);
             }

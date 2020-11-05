@@ -18,31 +18,125 @@ def hello_world():
     return "Hello Flask"
 
 
-@app.route("/selectplayer")
+# url routes for draftkings nfl lineups
+
+
+@app.route("/dk/nfl")
+def nflchoice0():
+    lineup = "run nfl draftkings function"
+    return lineup
+
+@app.route("/dk/nfl/<player1")
+def nflchoice1():
+    lineup = "run nfl draftkings function"
+    return lineup
+
+@app.route("/dk/nfl/<player1>/<player2>")
+def nflchoice2():
+    lineup = "run nfl draftkings function here"
+    return lineup
+
+@app.route("/dk/nfl/<player1>/<player2>/<player3>")
+def nflchoice3():
+    lineup = "run nfl draftkings function here"
+    return lineup
+
+@app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>")
+def nflchoice4():
+    lineup = "run nfl draftkings function here"
+    return lineup
+
+
+# url routes for fanduel nfl lineups
+
+
+@app.route("/fd/nfl")
+def nflchoice0():
+    lineup = "run nfl fanduel function"
+    return lineup
+
+@app.route("/fd/nfl/<player1")
+def nflchoice1():
+    lineup = "run nfl fanduel function"
+    return lineup
+
+@app.route("/fd/nfl/<player1>/<player2>")
+def nflchoice2():
+    lineup = "run nfl fanduel function here"
+    return lineup
+
+@app.route("/fd/nfl/<player1>/<player2>/<player3>")
+def nflchoice3():
+    lineup = "run nfl fanduel function here"
+    return lineup
+
+@app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>")
+def nflchoice4():
+    lineup = "run nfl fanduel function here"
+    return lineup
+
+
+# url routes for nba draftkings lineups
+
+
+@app.route("/dk/nba")
+def user_choice0():
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>")
+def user_choice1(player1):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>/<player2>")
+def user_choice2(player1, player2):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>/<player2>/<player3>")
+def user_choice3(player1, player2, player3):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>")
+def user_choice4(player1, player2, player3, player4):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+# url routes for fanduel nba lineups
+
+
+@app.route("/fd/nba")
 def user_choice0():
     lineup = run_fanduel()
     return lineup
 
 
-@app.route("/selectplayer/<player1>")
+@app.route("/fd/nba/<player1>")
 def user_choice1(player1):
     lineup = run_fanduel(player1)
     return lineup
 
 
-@app.route("/selectplayer/<player1>/<player2>")
+@app.route("/fd/nba/<player1>/<player2>")
 def user_choice2(player1, player2):
     lineup = run_fanduel(player1, player2)
     return lineup
 
 
-@app.route("/selectplayer/<player1>/<player2>/<player3>")
+@app.route("/fd/nba/<player1>/<player2>/<player3>")
 def user_choice3(player1, player2, player3):
     lineup = run_fanduel(player1, player2, player3)
     return lineup
 
 
-@app.route("/selectplayer/<player1>/<player2>/<player3>/<player4>")
+@app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>")
 def user_choice4(player1, player2, player3, player4):
     lineup = run_fanduel(player1, player2, player3, player4)
     return lineup

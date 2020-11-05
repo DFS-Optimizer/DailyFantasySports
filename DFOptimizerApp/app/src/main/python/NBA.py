@@ -26,7 +26,7 @@ def nflchoice0():
     lineup = "run nfl draftkings function"
     return lineup
 
-@app.route("/dk/nfl/<player1")
+@app.route("/dk/nfl/<player1>")
 def nflchoice1():
     lineup = "run nfl draftkings function"
     return lineup

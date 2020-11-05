@@ -1,3 +1,4 @@
+import datetime
 import pulp
 import inspect
 import os
@@ -10,9 +11,18 @@ from Optimization.NBADraftKings import Draftkings as NBADraftKings
 from Optimization.NFLFanduel import Fanduel as NFLFanduel
 from Optimization.NFLDraftKings import Draftkings as NFLDraftKings
 from flask import Flask
+from flask_apscheduler import APScheduler
+
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+
+
+# test function for job done every day at same time
+def job(text):
+    print(text, str(datetime.datetime.now()))
+
 
 
 @app.route("/")
@@ -20,31 +30,125 @@ def hello_world():
     return "Hello Flask"
 
 
-@app.route("/selectplayer")
+# url routes for draftkings nfl lineups
+
+
+@app.route("/dk/nfl")
+def nflchoice0():
+    lineup = "run nfl draftkings function"
+    return lineup
+
+@app.route("/dk/nfl/<player1>")
+def nflchoice1():
+    lineup = "run nfl draftkings function"
+    return lineup
+
+@app.route("/dk/nfl/<player1>/<player2>")
+def nflchoice2():
+    lineup = "run nfl draftkings function here"
+    return lineup
+
+@app.route("/dk/nfl/<player1>/<player2>/<player3>")
+def nflchoice3():
+    lineup = "run nfl draftkings function here"
+    return lineup
+
+@app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>")
+def nflchoice4():
+    lineup = "run nfl draftkings function here"
+    return lineup
+
+
+# url routes for fanduel nfl lineups
+
+
+@app.route("/fd/nfl")
+def fdnflchoice0():
+    lineup = "run nfl fanduel function"
+    return lineup
+
+@app.route("/fd/nfl/<player1>")
+def fdnflchoice1():
+    lineup = "run nfl fanduel function"
+    return lineup
+
+@app.route("/fd/nfl/<player1>/<player2>")
+def fdnflchoice2():
+    lineup = "run nfl fanduel function here"
+    return lineup
+
+@app.route("/fd/nfl/<player1>/<player2>/<player3>")
+def fdnflchoice3():
+    lineup = "run nfl fanduel function here"
+    return lineup
+
+@app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>")
+def fdnflchoice4():
+    lineup = "run nfl fanduel function here"
+    return lineup
+
+
+# url routes for nba draftkings lineups
+
+
+@app.route("/dk/nba")
+def dkuser_choice0():
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>")
+def dkuser_choice1(player1):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>/<player2>")
+def dkuser_choice2(player1, player2):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>/<player2>/<player3>")
+def dkuser_choice3(player1, player2, player3):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+@app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>")
+def dkuser_choice4(player1, player2, player3, player4):
+    lineup = "run nba draftkings lineups"
+    return lineup
+
+
+# url routes for fanduel nba lineups
+
+
+@app.route("/fd/nba")
 def user_choice0():
     lineup = nbarun_fanduel()
     return lineup
 
 
-@app.route("/selectplayer/<player1>")
+@app.route("/fd/nba/<player1>")
 def user_choice1(player1):
     lineup = nbarun_fanduel(player1)
     return lineup
 
 
-@app.route("/selectplayer/<player1>/<player2>")
+@app.route("/fd/nba/<player1>/<player2>")
 def user_choice2(player1, player2):
     lineup = nbarun_fanduel(player1, player2)
     return lineup
 
 
-@app.route("/selectplayer/<player1>/<player2>/<player3>")
+@app.route("/fd/nba/<player1>/<player2>/<player3>")
 def user_choice3(player1, player2, player3):
     lineup = nbarun_fanduel(player1, player2, player3)
     return lineup
 
 
-@app.route("/selectplayer/<player1>/<player2>/<player3>/<player4>")
+@app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>")
 def user_choice4(player1, player2, player3, player4):
     lineup = nbarun_fanduel(player1, player2, player3, player4)
     return lineup
@@ -233,6 +337,10 @@ def nbarun_draftkings(*players):
 
 
 if __name__ == '__main__':
+    scheduler = APScheduler()
+    scheduler.add_job(func=job, args=['job running at'], trigger='interval', id='job', minutes=1)
+    scheduler.start()
     app.run(host='0.0.0.0')
+
 
 # str(players.get(player, 0))

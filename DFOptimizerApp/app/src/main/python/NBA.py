@@ -1,3 +1,4 @@
+import datetime
 import pulp
 import inspect
 import os
@@ -8,9 +9,18 @@ import csv
 from Optimization.NBAFanduel import Fanduel as NBAFanduel
 from Optimization.NBADraftKings import Draftkings as NBADraftKings
 from flask import Flask
+from flask_apscheduler import APScheduler
+
+
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
+
+
+# test function for job done every day at same time
+def job(text):
+    print(text, str(datetime.datetime.now()))
+
 
 
 @app.route("/")
@@ -318,6 +328,10 @@ def run_draftkings(*players):
 
 
 if __name__ == '__main__':
+    scheduler = APScheduler()
+    scheduler.add_job(func=job, args=['job running at'], trigger='interval', id='job', minutes=1)
+    scheduler.start()
     app.run(host='0.0.0.0')
+
 
 # str(players.get(player, 0))

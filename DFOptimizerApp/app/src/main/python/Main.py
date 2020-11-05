@@ -7,6 +7,8 @@ import sys
 import csv
 from Optimization.NBAFanduel import Fanduel as NBAFanduel
 from Optimization.NBADraftKings import Draftkings as NBADraftKings
+from Optimization.NFLFanduel import Fanduel as NFLFanduel
+from Optimization.NFLDraftKings import Draftkings as NFLDraftKings
 from flask import Flask
 
 app = Flask(__name__)
@@ -20,31 +22,31 @@ def hello_world():
 
 @app.route("/selectplayer")
 def user_choice0():
-    lineup = run_fanduel()
+    lineup = nbarun_fanduel()
     return lineup
 
 
 @app.route("/selectplayer/<player1>")
 def user_choice1(player1):
-    lineup = run_fanduel(player1)
+    lineup = nbarun_fanduel(player1)
     return lineup
 
 
 @app.route("/selectplayer/<player1>/<player2>")
 def user_choice2(player1, player2):
-    lineup = run_fanduel(player1, player2)
+    lineup = nbarun_fanduel(player1, player2)
     return lineup
 
 
 @app.route("/selectplayer/<player1>/<player2>/<player3>")
 def user_choice3(player1, player2, player3):
-    lineup = run_fanduel(player1, player2, player3)
+    lineup = nbarun_fanduel(player1, player2, player3)
     return lineup
 
 
 @app.route("/selectplayer/<player1>/<player2>/<player3>/<player4>")
 def user_choice4(player1, player2, player3, player4):
-    lineup = run_fanduel(player1, player2, player3, player4)
+    lineup = nbarun_fanduel(player1, player2, player3, player4)
     return lineup
 
 
@@ -56,11 +58,11 @@ def get_my_path():
     return os.path.realpath(filename)
 
 
-def optimizeFD(num):
+def nbaoptimizeFD(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "slate.csv")
+    const_path = os.path.join(path, "slates", "NBAslateFD.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -98,10 +100,10 @@ def optimizeFD(num):
     return filled_lineups
 
 
-def run_fanduel(*players):
+def nbarun_fanduel(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "slate.csv")
+    const_path = os.path.join(path, "slates", "NBAslateFD.csv")
     print(const_path)
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -110,7 +112,7 @@ def run_fanduel(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = optimizeFD(1)
+    lineup = nbaoptimizeFD(1)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -139,11 +141,11 @@ def run_fanduel(*players):
     return result
 
 
-def optimizeDK(num):
+def nbaoptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "slate.csv")
+    const_path = os.path.join(path, "slates", "NBAslateFD.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -181,10 +183,10 @@ def optimizeDK(num):
     return filled_lineups
 
 
-def run_draftkings(*players):
+def nbarun_draftkings(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "slate.csv")
+    const_path = os.path.join(path, "slates", "NBAslateFD.csv")
     print(const_path)
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -193,7 +195,7 @@ def run_draftkings(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = optimizeDK(1)
+    lineup = nbaoptimizeDK(1)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -221,6 +223,13 @@ def run_draftkings(*players):
     print(result)
 
     return result
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

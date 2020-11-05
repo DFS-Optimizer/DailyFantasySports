@@ -1,5 +1,5 @@
 import pulp
-from Optimization.Optimizer import Optimizer
+from Optimization.NBAOptimizer import Optimizer
 
 
 class Fanduel(Optimizer):

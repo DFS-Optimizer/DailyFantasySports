@@ -1,17 +1,17 @@
 import pulp
-from Optimization.Optimizer import Optimizer
+from Optimization.NFLOptimizer import Optimizer
 
 
-class Fanduel(Optimizer):
+class Draftkings(Optimizer):
     """
-    draftkings Optimizer Settings
-    draftkings will inherit from the super class Optimizer
+    DK Optimizer Settings
+    DK will inherit from the super class Optimizer
     """
 
     def __init__(self, num_lineups, overlap, solver, players_filepath, output_filepath):
         super().__init__(num_lineups, overlap, solver, players_filepath, output_filepath)
-        self.salary_cap = 55000
-        self.header = ['PG', 'PG', 'SG', 'SG', 'SF', 'SF', 'PF', 'PF', 'C']
+        self.salary_cap = 50000
+        self.header = ['QB', 'RB', 'RB', 'WR', 'WR', 'WR', 'TE', 'FLEX', 'D']
 
     def type_1(self, lineups):
         """
@@ -20,25 +20,23 @@ class Fanduel(Optimizer):
         Returns a single lineup (i.e all of the players either set to 0 or 1) indicating if a player was included in a lineup or not.
         """
         # define the pulp object problem
-        prob = pulp.LpProblem('NBA', pulp.LpMaximize)
+        prob = pulp.LpProblem('NFL', pulp.LpMaximize)
 
         # define the player variables
         players_lineup = [pulp.LpVariable("player_{}".format(i + 1), cat="Binary") for i in range(self.num_players)]
 
         # add the max player constraints
-        prob += (pulp.lpSum(players_lineup[i] for i in range(self.num_players)) == 8)
+        prob += (pulp.lpSum(players_lineup[i] for i in range(self.num_players)) == 9)
 
         # add the positional constraints
-        prob += (1 <= pulp.lpSum(self.positions['PG'][i] * players_lineup[i] for i in range(self.num_players)))
-        prob += (pulp.lpSum(self.positions['PG'][i] * players_lineup[i] for i in range(self.num_players)) <= 3)
-        prob += (1 <= pulp.lpSum(self.positions['SG'][i] * players_lineup[i] for i in range(self.num_players)))
-        prob += (pulp.lpSum(self.positions['SG'][i] * players_lineup[i] for i in range(self.num_players)) <= 3)
-        prob += (1 <= pulp.lpSum(self.positions['SF'][i] * players_lineup[i] for i in range(self.num_players)))
-        prob += (pulp.lpSum(self.positions['SF'][i] * players_lineup[i] for i in range(self.num_players)) <= 3)
-        prob += (1 <= pulp.lpSum(self.positions['PF'][i] * players_lineup[i] for i in range(self.num_players)))
-        prob += (pulp.lpSum(self.positions['PF'][i] * players_lineup[i] for i in range(self.num_players)) <= 3)
-        prob += (1 <= pulp.lpSum(self.positions['C'][i] * players_lineup[i] for i in range(self.num_players)))
-        prob += (pulp.lpSum(self.positions['C'][i] * players_lineup[i] for i in range(self.num_players)) <= 2)
+        prob += (pulp.lpSum(self.positions['QB'][i] * players_lineup[i] for i in range(self.num_players)) == 1)
+        prob += (2 <= pulp.lpSum(self.positions['RB'][i] * players_lineup[i] for i in range(self.num_players)))
+        prob += (pulp.lpSum(self.positions['RB'][i] * players_lineup[i] for i in range(self.num_players)) <= 3)
+        prob += (2 <= pulp.lpSum(self.positions['WR'][i] * players_lineup[i] for i in range(self.num_players)))
+        prob += (pulp.lpSum(self.positions['WR'][i] * players_lineup[i] for i in range(self.num_players)) <= 3)
+        prob += (1 <= pulp.lpSum(self.positions['TE'][i] * players_lineup[i] for i in range(self.num_players)))
+        prob += (pulp.lpSum(self.positions['TE'][i] * players_lineup[i] for i in range(self.num_players)) <= 2)
+        prob += (pulp.lpSum(self.positions['D'][i] * players_lineup[i] for i in range(self.num_players)) == 1)
 
         # add the salary constraint
         prob += ((pulp.lpSum(self.players_df.loc[i, 'sal'] * players_lineup[i] for i in range(self.num_players))) <= self.salary_cap)
@@ -89,30 +87,35 @@ class Fanduel(Optimizer):
                 total_actual = 0
             for num, player in enumerate(players_lineup):
                 if 0.9 < player < 1.1:
-                    if self.positions['PG'][num] == 1:
+                    if self.positions['QB'][num] == 1:
                         if a_lineup[0] == "":
                             a_lineup[0] = self.players_df.loc[num, 'playerName']
-                        elif a_lineup[1] == "":
+                    elif self.positions['RB'][num] == 1:
+                        if a_lineup[1] == "":
                             a_lineup[1] = self.players_df.loc[num, 'playerName']
-                    elif self.positions['SG'][num] == 1:
-                        if a_lineup[2] == "":
+                        elif a_lineup[2] == "":
                             a_lineup[2] = self.players_df.loc[num, 'playerName']
-                        elif a_lineup[3] == "":
+                        elif a_lineup[7] == "":
+                            a_lineup[7] = self.players_df.loc[num, 'playerName']
+                    elif self.positions['WR'][num] == 1:
+                        if a_lineup[3] == "":
                             a_lineup[3] = self.players_df.loc[num, 'playerName']
-                    elif self.positions['SF'][num] == 1:
-                        if a_lineup[4] == "":
+                        elif a_lineup[4] == "":
                             a_lineup[4] = self.players_df.loc[num, 'playerName']
                         elif a_lineup[5] == "":
                             a_lineup[5] = self.players_df.loc[num, 'playerName']
-                    elif self.positions['PF'][num] == 1:
+                        elif a_lineup[7] == "":
+                            a_lineup[7] = self.players_df.loc[num, 'playerName']
+                    elif self.positions['TE'][num] == 1:
                         if a_lineup[6] == "":
                             a_lineup[6] = self.players_df.loc[num, 'playerName']
                         elif a_lineup[7] == "":
                             a_lineup[7] = self.players_df.loc[num, 'playerName']
-                    elif self.positions['C'][num] == 1:
+                    elif self.positions['D'][num] == 1:
                         if a_lineup[8] == "":
                             a_lineup[8] = self.players_df.loc[num, 'playerName']
                     total_proj += self.players_df.loc[num, 'proj']
             a_lineup.append(round(total_proj, 2))
             filled_lineups.append(a_lineup)
+            print(filled_lineups)
         return filled_lineups

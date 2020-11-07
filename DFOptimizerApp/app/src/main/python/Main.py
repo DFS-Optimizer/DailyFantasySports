@@ -21,8 +21,8 @@ app.config["DEBUG"] = True
 
 
 # test function for job done every day at same time
-def job():
-    slates.dk.updatenflDKslate()
+# def job():
+#     slates.dk.updatenflDKslate()
 
 
 
@@ -153,6 +153,13 @@ def user_choice3(player1, player2, player3):
 def user_choice4(player1, player2, player3, player4):
     lineup = nbarun_fanduel(player1, player2, player3, player4)
     return lineup
+
+
+
+# url routes for grabbing updated slates when front end picks the sports
+@app.route("dk/nfl/getslate")
+def get_slate_nfl_dk():
+    slates.dk.updatenflDKslate()
 
 
 def get_my_path():
@@ -503,9 +510,9 @@ def nflrun_fanduel(*players):
 
 
 if __name__ == '__main__':
-    scheduler = APScheduler()
-    scheduler.add_job(func=job, trigger='interval', id='job', hours=1)
-    scheduler.start()
+    # scheduler = APScheduler()
+    # scheduler.add_job(func=job, trigger='interval', id='job', hours=1)
+    # scheduler.start()
     app.run(host='0.0.0.0')
 
 

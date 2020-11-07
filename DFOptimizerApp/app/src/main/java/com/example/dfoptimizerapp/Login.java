@@ -21,6 +21,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //fields
         final EditText mEmail = findViewById(R.id.email_login);
         final EditText mPassword = findViewById(R.id.password_login);
         final ProgressBar progressBar = findViewById(R.id.progressBar);
@@ -94,6 +95,7 @@ public class Login extends AppCompatActivity {
                 }
             });
         });
+
 
         mCreateBtn.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), Register.class));

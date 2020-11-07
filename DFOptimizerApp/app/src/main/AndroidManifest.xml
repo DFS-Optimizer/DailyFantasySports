@@ -12,11 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChooseSite"></activity>
-        <activity android:name=".Register" />
-        <activity android:name=".HttpConnect" />
-        <activity android:name=".ListPlayers" />
-        <activity android:name=".ChooseSport" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,6 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ChooseSite"/>
+        <activity android:name=".Register" />
+        <activity android:name=".HttpConnect" />
+        <activity android:name=".ListPlayers" />
+        <activity android:name=".ChooseSport" />
     </application>
 
 </manifest>

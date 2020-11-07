@@ -74,6 +74,8 @@ public class ListPlayers extends AppCompatActivity {
             if (slate != null) {
                 slateReader = new BufferedReader(new InputStreamReader(slate, "UTF8"));
             }
+
+            //read from slate and put fields into corresponding lists
             if(slateReader != null) {
                 String line = "";
                 line = slateReader.readLine();
@@ -89,6 +91,8 @@ public class ListPlayers extends AppCompatActivity {
                     line = slateReader.readLine();
 
                 }
+
+                //round projection numbers
                 for(int i = 0; i < names.size();i++)
                 {
                     DecimalFormat projFormat = new DecimalFormat("#.##");
@@ -100,6 +104,8 @@ public class ListPlayers extends AppCompatActivity {
 
                     players.add(formattedLine);
                 }
+
+                //populate list view
                 playerListView.setSaveEnabled(false);
                 playerListView.setMinimumWidth(50);
                 ArrayAdapter<String> playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;

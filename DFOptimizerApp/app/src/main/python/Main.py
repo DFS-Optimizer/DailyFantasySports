@@ -6,6 +6,7 @@ import functools
 import pandas as pd
 import sys
 import csv
+import slates.dk
 from Optimization.NBAFanduel import Fanduel as NBAFanduel
 from Optimization.NBADraftKings import Draftkings as NBADraftKings
 from Optimization.NFLFanduel import Fanduel as NFLFanduel
@@ -20,8 +21,8 @@ app.config["DEBUG"] = True
 
 
 # test function for job done every day at same time
-def job(text):
-    print(text, str(datetime.datetime.now()))
+def job():
+    slates.dk.updatenflDKslate()
 
 
 
@@ -503,7 +504,7 @@ def nflrun_fanduel(*players):
 
 if __name__ == '__main__':
     scheduler = APScheduler()
-    scheduler.add_job(func=job, args=['job running at'], trigger='interval', id='job', minutes=1)
+    scheduler.add_job(func=job, trigger='interval', id='job', hours=1)
     scheduler.start()
     app.run(host='0.0.0.0')
 

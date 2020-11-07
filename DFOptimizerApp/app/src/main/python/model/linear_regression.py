@@ -3,7 +3,7 @@ from sklearn.cluster import KMeans
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 import pandas as pd
-from python.Database.query import SqlQuery
+from Database.query import SqlQuery
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pickle
@@ -103,16 +103,12 @@ def elbow_curve(dataframe):
 
 
 with SqlQuery() as query:
-    df = query.get_table("model_trained6", args="WHERE role = 4",  dataframe=True)
+    df = query.get_table("model_past6",  dataframe=True)
 one = df.iloc[:, 2:4]
 two = df.iloc[:, 6:21]
 training = pd.concat([one,two], axis = 1)
+kmeans = KNearest()
+pickle.dump(kmeans, open("save.pkl", "wb"))
 model = LinearModel(training, 1)
 model.get_prediction()
 model.get_results()
-#
-
-
-
-
-

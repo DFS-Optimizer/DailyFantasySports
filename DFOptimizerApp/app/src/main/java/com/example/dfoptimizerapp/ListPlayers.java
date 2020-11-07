@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,10 +18,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ListPlayers extends AppCompatActivity {
 
@@ -44,6 +43,7 @@ public class ListPlayers extends AppCompatActivity {
 
         //60000
         final int[] remainingSalary = {Integer.parseInt(remainingSalaryTxt.getText().toString().substring(14))};
+        final String[] filterText = {"All Positions"};
 
         //List of positions that can be used as a filter
         String[] pos;
@@ -56,8 +56,17 @@ public class ListPlayers extends AppCompatActivity {
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
 
+
         //Get list of players from the slate
         InputStream slate = null;
+
+        List<String> players = new ArrayList<String>();
+        List<String> names = new ArrayList<String>();
+        List<String> salaries = new ArrayList<String>();
+        List<String> positions = new ArrayList<String>();
+        List<String> teams = new ArrayList<String>();
+        List<String> opponents = new ArrayList<String>();
+        List<String> projections = new ArrayList<String>();
         try {
             slate = getResources().openRawResource(getResources().getIdentifier("slate", "raw", getPackageName()));
 
@@ -69,13 +78,6 @@ public class ListPlayers extends AppCompatActivity {
                 String line = "";
                 line = slateReader.readLine();
                 line = slateReader.readLine();
-                List<String> players = new ArrayList<String>();
-                List<String> names = new ArrayList<String>();
-                List<String> salaries = new ArrayList<String>();
-                List<String> positions = new ArrayList<String>();
-                List<String> teams = new ArrayList<String>();
-                List<String> opponents = new ArrayList<String>();
-                List<String> projections = new ArrayList<String>();
                 while (line != null) {
                     String[] playerInfo = line.split(",");
                     names.add(playerInfo[0]);
@@ -100,7 +102,7 @@ public class ListPlayers extends AppCompatActivity {
                 }
                 playerListView.setSaveEnabled(false);
                 playerListView.setMinimumWidth(50);
-                ArrayAdapter<String> playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
+                ArrayAdapter<String> playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
                 playerListView.setAdapter(playerListAdapter);
 
 
@@ -111,6 +113,26 @@ public class ListPlayers extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        /*positionFilter.setOnItemClickListener((adapterView, view, i, l) -> {
+            filterText[0] = (String) positionFilter.getItemAtPosition(i);
+            if(filterText[0] == "All Positions")
+            {
+                playerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
+            }
+            else {
+                List<String> filteredPlayers = new ArrayList<String>();
+                for (int j = 0; j < players.size(); j++) {
+                    String temp = players.get(j);
+                    temp = temp.substring(temp.indexOf("(") + 1, temp.indexOf(","));
+                    if(temp.contains(filterText[0]))
+                    {
+                        filteredPlayers.add(temp);
+                    }
+                }
+                playerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
+            } playerListView.setAdapter(playerListAdapter[0]);
+        });*/
         
         final int[] id = {0};
         playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

@@ -37,7 +37,9 @@ public class Login extends AppCompatActivity {
         mEmail.setOnKeyListener((v, keyCode, event) -> {
             String email = mEmail.getText().toString();
             String password = mPassword.getText().toString();
-            if(password.length() == 0)
+
+            //makes labels visible if they are empty
+            if(password.isEmpty())
             {
                 passwordLabel.setVisibility(View.VISIBLE);
             }
@@ -50,10 +52,10 @@ public class Login extends AppCompatActivity {
         });
 
         mPassword.setOnKeyListener((v, keyCode, event) -> {
+            String email = mEmail.getText().toString();
             String password = mPassword.getText().toString();
-            String email = mPassword.getText().toString();
-            if(email.length() == 0)
-            {
+            //makes  labels visible if they are empty
+            if(email.isEmpty()) {
                 emailLabel.setVisibility(View.VISIBLE);
             }
             if (!password.isEmpty()) {

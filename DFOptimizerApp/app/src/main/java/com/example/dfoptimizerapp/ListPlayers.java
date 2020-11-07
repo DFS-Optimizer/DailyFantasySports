@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,7 @@ public class ListPlayers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_players);
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
+        final Button clearBtn = (Button) findViewById(R.id.clearPlayers);
         final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
@@ -129,6 +132,7 @@ public class ListPlayers extends AppCompatActivity {
             //remaining salary cap
             if (selectedPlayers.size() >= maxChecked && isChecked)
             {
+                //playerListView.clearChoices();
                 v.setChecked(false);
                 Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
                 return;
@@ -165,6 +169,42 @@ public class ListPlayers extends AppCompatActivity {
                 //startActivity(dk_selectNBALineup);
             }
         });
+
+        clearBtn.setOnClickListener((v) -> {
+            //A bit laggy, why?
+            playerListView.clearChoices();
+            Toast.makeText(getApplicationContext(), "All selections cleared", Toast.LENGTH_SHORT).show();
+
+
+
+        });
+
+/*
+//Search Bar Implementation
+
+            SearchView searchView = (SearchView) findViewById(R.id.searchView);
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    ArrayList<String> filteredPlayers = new ArrayList<String>();
+                    for(String grabPlayer: selectedPlayers){
+                        if(grabPlayer.getItemAtPosition().toLowercase().contains(s.toLowercase())){
+                            filteredPlayers.add(grabPlayer);
+                        }
+                    }
+                    ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), 0, filteredPlayers);
+                    playerListView.setAdapter(adapter2);
+
+                    return false;
+                }
+            });
+
+*/
 
     }
 

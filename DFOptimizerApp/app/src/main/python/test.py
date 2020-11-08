@@ -186,5 +186,18 @@ def nflrun_fanduel(*players):
     return result
 
 
-nflrun_draftkings()
-# run_draftkings()
+path = get_my_path()
+path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+const_path = os.path.join(path, "slates", "NFLslateDK.csv")
+df = pd.read_csv(const_path)
+#print(df)
+result = "["
+for index, row in df.iterrows():
+    result += '{"player":"' + str(row['playerName']) +'","Salary":"' + str(row['sal']) + '","Position":"' + str(row['pos']) + '","Team":"' + str(row['team']) + '","Opponent":"' + str(row['opp']) + '","Projection":"' + str(row['proj']) +'"},'
+result = result[:-1]
+result += "]"
+print(result)
+#return result
+# result += '{"player":"' + player['playerName'] + '","Salary":"' + player['sal'] + '","Position":"' + player[
+#     'pos'] + '","Team":"' + player['team'] + '","Opponent":"' + player['opp'] + '","Projection":"' + player[
+#               'proj'] + '"}'

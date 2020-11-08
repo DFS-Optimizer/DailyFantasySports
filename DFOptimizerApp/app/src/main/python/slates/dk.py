@@ -29,7 +29,8 @@ def getdate():
 
 def update_nfl_DK_slate():
 
-
+    if not contesets_nfl["contests"]:
+        return 0
     # contests = contests(sport=Sport.NFL)
     df = pd.DataFrame()
 
@@ -82,7 +83,8 @@ def update_nfl_DK_slate():
 
 def update_nba_DK_slate():
 
-
+    if not contests_nba["contests"]:
+        return 0
     # contests = contests(sport=Sport.NFL)
     df = pd.DataFrame()
 
@@ -135,7 +137,8 @@ def update_nba_DK_slate():
 
 def update_mlb_DK_slate():
 
-
+    if not contests_mlb["contests"]:
+        return 0
     # contests = contests(sport=Sport.NFL)
     df = pd.DataFrame()
 

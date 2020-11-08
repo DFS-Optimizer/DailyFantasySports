@@ -157,9 +157,10 @@ def user_choice4(player1, player2, player3, player4):
 
 
 # url routes for grabbing updated slates when front end picks the sports
-@app.route("dk/nfl/getslate")
+@app.route("/dk/nfl/getslate")
 def get_slate_nfl_dk():
     slates.dk.updatenflDKslate()
+    return "hey"
 
 
 def get_my_path():

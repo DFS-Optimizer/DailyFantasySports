@@ -71,7 +71,8 @@ def updatenflDKslate():
 
     df['proj'] = [0 for _ in range(len(playerName))]
 
-    df.to_csv('slates/NFLslateDK.csv', index=False)
+    df.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
+    
 
 
 

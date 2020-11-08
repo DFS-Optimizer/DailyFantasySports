@@ -7,8 +7,8 @@
 
     <TextView
         android:id="@+id/instructionTxt"
-        android:layout_width="390dp"
-        android:layout_height="0dp"
+        android:layout_width="382dp"
+        android:layout_height="52dp"
         android:layout_marginTop="61dp"
         android:layout_marginBottom="2dp"
         android:text="Here are the players who are available today. Choose any four that you would like to include in your lineup."
@@ -47,8 +47,8 @@
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="250dp"
+        android:layout_height="44dp"
         android:layout_marginTop="7dp"
         android:layout_marginEnd="27dp"
         android:layout_marginRight="27dp"
@@ -61,8 +61,8 @@
 
     <TextView
         android:id="@+id/remainingSalaryTxt"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="88dp"
+        android:layout_height="58dp"
         android:layout_marginEnd="22dp"
         android:layout_marginRight="22dp"
         android:layout_marginBottom="13dp"
@@ -74,8 +74,8 @@
 
     <Spinner
         android:id="@+id/positionFilter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="322dp"
+        android:layout_height="39dp"
         android:layout_marginStart="39dp"
         android:layout_marginLeft="39dp"
         android:layout_marginEnd="39dp"

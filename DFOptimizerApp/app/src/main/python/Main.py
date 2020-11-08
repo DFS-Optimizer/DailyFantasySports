@@ -69,22 +69,22 @@ def fdnflchoice0():
     return lineup
 
 @app.route("/fd/nfl/<player1>")
-def fdnflchoice1():
+def fdnflchoice1(player1):
     lineup = "run nfl fanduel function"
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>")
-def fdnflchoice2():
+def fdnflchoice2(player1, player2):
     lineup = "run nfl fanduel function here"
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<player3>")
-def fdnflchoice3():
+def fdnflchoice3(player1, player2, player3):
     lineup = "run nfl fanduel function here"
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>")
-def fdnflchoice4():
+def fdnflchoice4(player1, player2, player3, player4):
     lineup = "run nfl fanduel function here"
     return lineup
 
@@ -94,31 +94,31 @@ def fdnflchoice4():
 
 @app.route("/dk/nba")
 def dkuser_choice0():
-    lineup = "run nba draftkings lineups"
+    lineup = "nba out of season"
     return lineup
 
 
 @app.route("/dk/nba/<player1>")
 def dkuser_choice1(player1):
-    lineup = "run nba draftkings lineups"
+    lineup = "nba out of season"
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<player2>")
 def dkuser_choice2(player1, player2):
-    lineup = "run nba draftkings lineups"
+    lineup = "nba out of season"
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<player2>/<player3>")
 def dkuser_choice3(player1, player2, player3):
-    lineup = "run nba draftkings lineups"
+    lineup = "nba out of season"
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>")
 def dkuser_choice4(player1, player2, player3, player4):
-    lineup = "run nba draftkings lineups"
+    lineup = "nba out of season"
     return lineup
 
 
@@ -157,11 +157,41 @@ def user_choice4(player1, player2, player3, player4):
 
 
 # url routes for grabbing updated slates when front end picks the sports
+
 @app.route("/dk/nfl/getslate")
 def get_slate_nfl_dk():
-    slates.dk.updatenflDKslate()
-    return "hey"
+    slates.dk.update_nfl_DK_slate()
+    return "slate grabbed"
 
+@app.route("dk/nba/getslate")
+def get_slate_nba_dk():
+    slates.dk.update_nba_DK_slate()
+    return "slates not available, nba out of season"
+
+@app.route("dk/mlb/getslate")
+def get_slate_mlb_dk():
+    slates.dk.update_mlb_DK_slate()
+    return "slates not available, mlb out of season"
+
+@app.route("fd/nfl/getslate")
+def get_slate_nfl_fd():
+    return "fanduel data not yet available"
+
+@app.route("fd/nba/getslate")
+def get_slate_nba_fd():
+    return "fanduel data not yet available"
+
+@app.route("fd/mlb/getslate")
+def get_slate_mlb_fd():
+    return "fanduel data not yet available"
+
+
+
+# Optimization code section
+# 
+# 
+# 
+# 
 
 def get_my_path():
     try:
@@ -342,7 +372,7 @@ def nfloptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:

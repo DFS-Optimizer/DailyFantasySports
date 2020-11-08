@@ -36,27 +36,27 @@ def hello_world():
 
 @app.route("/dk/nfl")
 def nflchoice0():
-    lineup = "run nfl draftkings function"
+    lineup = nflrun_draftkings()
     return lineup
 
 @app.route("/dk/nfl/<player1>")
-def nflchoice1():
-    lineup = "run nfl draftkings function"
+def nflchoice1(player1):
+    lineup = nflrun_draftkings(player1)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<player2>")
-def nflchoice2():
-    lineup = "run nfl draftkings function here"
+def nflchoice2(player1, player2):
+    lineup = nflrun_draftkings(player1, player2)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<player2>/<player3>")
-def nflchoice3():
-    lineup = "run nfl draftkings function here"
+def nflchoice3(player1, player2, player3):
+    lineup = nflrun_draftkings(player1, player2, player3)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>")
-def nflchoice4():
-    lineup = "run nfl draftkings function here"
+def nflchoice4(player1, player2, player3, player4):
+    lineup = nflrun_draftkings(player1, player2, player3, player4)
     return lineup
 
 

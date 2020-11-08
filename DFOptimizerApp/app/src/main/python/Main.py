@@ -163,25 +163,25 @@ def get_slate_nfl_dk():
     slates.dk.update_nfl_DK_slate()
     return "slate grabbed"
 
-@app.route("dk/nba/getslate")
+@app.route("/dk/nba/getslate")
 def get_slate_nba_dk():
-    slates.dk.update_nba_DK_slate()
+    #slates.dk.update_nba_DK_slate()
     return "slates not available, nba out of season"
 
-@app.route("dk/mlb/getslate")
+@app.route("/dk/mlb/getslate")
 def get_slate_mlb_dk():
-    slates.dk.update_mlb_DK_slate()
+    #slates.dk.update_mlb_DK_slate()
     return "slates not available, mlb out of season"
 
-@app.route("fd/nfl/getslate")
+@app.route("/fd/nfl/getslate")
 def get_slate_nfl_fd():
     return "fanduel data not yet available"
 
-@app.route("fd/nba/getslate")
+@app.route("/fd/nba/getslate")
 def get_slate_nba_fd():
     return "fanduel data not yet available"
 
-@app.route("fd/mlb/getslate")
+@app.route("/fd/mlb/getslate")
 def get_slate_mlb_fd():
     return "fanduel data not yet available"
 

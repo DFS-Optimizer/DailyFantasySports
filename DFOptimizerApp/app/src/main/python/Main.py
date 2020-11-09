@@ -429,7 +429,7 @@ def nfloptimizeDK(num):
 def nflrun_draftkings(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKtest.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 

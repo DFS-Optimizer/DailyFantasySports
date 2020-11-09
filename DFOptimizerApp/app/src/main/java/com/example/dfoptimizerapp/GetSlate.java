@@ -43,7 +43,7 @@ public class GetSlate extends AppCompatActivity {
         System.out.println(m_siteChoice);
         System.out.println(m_sportChoice);
         System.out.println(m_view);
-        //SendRequestAndPrintResponse(sportChoice);
+        SendRequestAndPrintResponse(sportChoice);
     }
 
 
@@ -54,7 +54,7 @@ public class GetSlate extends AppCompatActivity {
 
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
-        if (m_sportChoice == 1) {
+        if (m_sportChoice == 2) {
             slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
         }
 
@@ -64,6 +64,8 @@ public class GetSlate extends AppCompatActivity {
         }
         System.out.println(slateURL);
 
+
+
         mRequestQueue = Volley.newRequestQueue(this);
 
         stringRequest = new StringRequest(Request.Method.GET, slateURL, new Response.Listener<String>() {
@@ -71,13 +73,14 @@ public class GetSlate extends AppCompatActivity {
             public void onResponse(String response) {
                 Log.i(TAG, "Response: " + response.toString());
                 Toast.makeText(getApplicationContext(), "Generating New Slate... ", Toast.LENGTH_SHORT).show();
-                List<String> data = ParseReceive(response.toString());
+                /*List<String> data = ParseReceive(response.toString());
 
                 Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
                 listPlayers.putExtra("siteChoice", m_siteChoice);
                 listPlayers.putExtra("sportChoice", m_sportChoice);
                 startActivity(listPlayers);
 
+*/
 
             }
         }, new Response.ErrorListener() {
@@ -132,6 +135,7 @@ public class GetSlate extends AppCompatActivity {
             e.printStackTrace();
         }
         return data;
+
     }
 
 

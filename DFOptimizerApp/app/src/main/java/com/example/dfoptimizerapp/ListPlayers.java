@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static android.R.layout.simple_list_item_multiple_choice;
 
 public class ListPlayers extends AppCompatActivity {
 
@@ -60,7 +63,7 @@ public class ListPlayers extends AppCompatActivity {
         //Get list of players from the slate
         InputStream slate = null;
 
-        List<String> players = new ArrayList<String>();
+        final List<String>[] players = new List[]{new ArrayList<String>()};
         List<String> names = new ArrayList<String>();
         List<String> salaries = new ArrayList<String>();
         List<String> positions = new ArrayList<String>();
@@ -68,7 +71,7 @@ public class ListPlayers extends AppCompatActivity {
         List<String> opponents = new ArrayList<String>();
         List<String> projections = new ArrayList<String>();
 
-        ArrayAdapter<String> playerListAdapter = null;
+        final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
         try {
             slate = getResources().openRawResource(getResources().getIdentifier("slate", "raw", getPackageName()));
 
@@ -104,14 +107,14 @@ public class ListPlayers extends AppCompatActivity {
                                            projFormat.format(proj)  + "\n$" + salaries.get(i) +
                                            ", Opponent: " + opponents.get(i);
 
-                    players.add(formattedLine);
+                    players[0].add(formattedLine);
                 }
 
                 //populate list view
-                playerListView.setSaveEnabled(false);
+                playerListView.setSaveEnabled(true);
                 playerListView.setMinimumWidth(50);
-                playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
-                playerListView.setAdapter(playerListAdapter);
+                playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players[0].toArray(new String[0]));;
+                playerListView.setAdapter(playerListAdapter[0]);
 
 
             }
@@ -162,13 +165,17 @@ public class ListPlayers extends AppCompatActivity {
 
             //user cannot select more than 4 players or a player whose salary is greater than the
             //remaining salary cap
+
+
             if (selectedPlayers.size() >= maxChecked && isChecked)
             {
+
                 //playerListView.clearChoices();
                 v.setChecked(false);
                 Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
 //                for(int j = 0; j < players.size();j++) {
-//                    if()
+//                    if(selectedPlayers.size() >= maxChecked && isChecked){
+
 //
 //                }
 
@@ -182,6 +189,9 @@ public class ListPlayers extends AppCompatActivity {
             else {
                 if (isChecked) {
                     selectedPlayers.add(name);
+
+                    //DEBUG CODE
+                    System.out.println(selectedPlayers.size());
                     remainingSalary[0] -= salary;
                 } else {
                     remainingSalary[0] += salary;
@@ -214,32 +224,33 @@ public class ListPlayers extends AppCompatActivity {
 
         });
 
-/*
+
 //Search Bar Implementation
 
             SearchView searchView = (SearchView) findViewById(R.id.searchView);
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
+
                     return false;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     ArrayList<String> filteredPlayers = new ArrayList<String>();
-                    for(String grabPlayer: selectedPlayers){
-                        if(grabPlayer.getItemAtPosition().toLowercase().contains(s.toLowercase())){
-                            filteredPlayers.add(grabPlayer);
-                        }
-                    }
-                    ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), 0, filteredPlayers);
-                    playerListView.setAdapter(adapter2);
 
-                    return false;
+
+                    playerListAdapter[0].getFilter().filter(newText);
+
+                    playerListAdapter[0].notifyDataSetChanged();
+
+                    return true;
+
+
                 }
             });
 
-*/
+
 
     }
 

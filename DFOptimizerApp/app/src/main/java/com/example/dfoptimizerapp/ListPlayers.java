@@ -164,17 +164,12 @@ public class ListPlayers extends AppCompatActivity {
         });
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
-            if (site == 1) {
 
                 Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
                 httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
+                httpConnect.putExtra("siteChoice", site);
+                httpConnect.putExtra("sportChoice", sport);
                 startActivity(httpConnect);
-
-            }
-            else{
-                //Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);
-                //startActivity(dk_selectNBALineup);
-            }
         });
 
         clearBtn.setOnClickListener((v) -> {

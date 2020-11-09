@@ -76,7 +76,6 @@ public class GetSlate {
 
         stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
             Log.i(TAG, "Response: " + response);
-            System.out.println(response);
             if(response.contains( "slates not available, nba out of season"))
             {
                 Toast.makeText(m_context,"This sport is out of season", Toast.LENGTH_SHORT).show();

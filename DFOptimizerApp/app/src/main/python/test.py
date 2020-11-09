@@ -22,7 +22,7 @@ def nfloptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -63,7 +63,7 @@ def nfloptimizeDK(num):
 def nflrun_draftkings(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -106,7 +106,7 @@ def nfloptimizeFD(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -147,7 +147,7 @@ def nfloptimizeFD(num):
 def nflrun_fanduel(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -185,19 +185,4 @@ def nflrun_fanduel(*players):
 
     return result
 
-
-path = get_my_path()
-path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-const_path = os.path.join(path, "slates", "NFLslateDK.csv")
-df = pd.read_csv(const_path)
-#print(df)
-result = "["
-for index, row in df.iterrows():
-    result += '{"player":"' + str(row['playerName']) +'","Salary":"' + str(row['sal']) + '","Position":"' + str(row['pos']) + '","Team":"' + str(row['team']) + '","Opponent":"' + str(row['opp']) + '","Projection":"' + str(row['proj']) +'"},'
-result = result[:-1]
-result += "]"
-print(result)
-#return result
-# result += '{"player":"' + player['playerName'] + '","Salary":"' + player['sal'] + '","Position":"' + player[
-#     'pos'] + '","Team":"' + player['team'] + '","Opponent":"' + player['opp'] + '","Projection":"' + player[
-#               'proj'] + '"}'
+nflrun_draftkings()

@@ -67,6 +67,8 @@ public class ListPlayers extends AppCompatActivity {
         List<String> teams = new ArrayList<String>();
         List<String> opponents = new ArrayList<String>();
         List<String> projections = new ArrayList<String>();
+
+        ArrayAdapter<String> playerListAdapter = null;
         try {
             slate = getResources().openRawResource(getResources().getIdentifier("slate", "raw", getPackageName()));
 
@@ -108,7 +110,7 @@ public class ListPlayers extends AppCompatActivity {
                 //populate list view
                 playerListView.setSaveEnabled(false);
                 playerListView.setMinimumWidth(50);
-                ArrayAdapter<String> playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
+                playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
                 playerListView.setAdapter(playerListAdapter);
 
 
@@ -120,11 +122,13 @@ public class ListPlayers extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /*positionFilter.setOnItemClickListener((adapterView, view, i, l) -> {
-            filterText[0] = (String) positionFilter.getItemAtPosition(i);
+        /*ArrayAdapter<String>[] finalPlayerListAdapter = playerListAdapter;
+        positionFilter.setOnItemSelectedListener((adapterView, view, i, l) -> {
+
+            filterText[0] = (String) positionFilter.getItemAtPosition();
             if(filterText[0] == "All Positions")
             {
-                playerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
+                finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
             }
             else {
                 List<String> filteredPlayers = new ArrayList<String>();
@@ -136,8 +140,8 @@ public class ListPlayers extends AppCompatActivity {
                         filteredPlayers.add(temp);
                     }
                 }
-                playerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
-            } playerListView.setAdapter(playerListAdapter[0]);
+                finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
+            } playerListView.setAdapter(finalPlayerListAdapter[0]);
         });*/
         
         final int[] id = {0};
@@ -163,7 +167,10 @@ public class ListPlayers extends AppCompatActivity {
                 //playerListView.clearChoices();
                 v.setChecked(false);
                 Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
-                return;
+//                for(int j = 0; j < players.size();j++) {
+//                    if()
+//
+//                }
 
             }
             else if ((remainingSalary[0] - salary) < 0)

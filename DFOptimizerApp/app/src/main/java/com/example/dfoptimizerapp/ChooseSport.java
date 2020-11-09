@@ -36,7 +36,7 @@ public class ChooseSport extends AppCompatActivity {
                 startActivity(listPlayers);
             }
             else if(nflSwitch.isChecked()){
-                new GetSlate(v,site,2);
+                new GetSlate(v,site,2, this);
             }
 
         });

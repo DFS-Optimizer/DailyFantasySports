@@ -1,5 +1,7 @@
 package com.example.dfoptimizerapp;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -23,7 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetSlate extends AppCompatActivity {
+public class GetSlate {
 
 
     private static final String TAG = HttpConnect.class.getName();
@@ -33,13 +36,15 @@ public class GetSlate extends AppCompatActivity {
     private int m_siteChoice;
     private int m_sportChoice;
     private View m_view;
+    private Context m_context;
 
 //Add overrides
 
-    public GetSlate(View v, int siteChoice, int sportChoice) {
+    public GetSlate(View v, int siteChoice, int sportChoice, Context context) {
         m_siteChoice = siteChoice;
         m_sportChoice = sportChoice;
         m_view = v;
+        m_context = context;
         System.out.println(m_siteChoice);
         System.out.println(m_sportChoice);
         System.out.println(m_view);
@@ -66,13 +71,13 @@ public class GetSlate extends AppCompatActivity {
 
 
 
-        mRequestQueue = Volley.newRequestQueue(this);
+        mRequestQueue = Volley.newRequestQueue(m_context);
 
         stringRequest = new StringRequest(Request.Method.GET, slateURL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.i(TAG, "Response: " + response.toString());
-                Toast.makeText(getApplicationContext(), "Generating New Slate... ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
                 /*List<String> data = ParseReceive(response.toString());
 
                 Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);

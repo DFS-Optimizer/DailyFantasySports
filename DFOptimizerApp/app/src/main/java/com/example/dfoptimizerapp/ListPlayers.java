@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
@@ -86,6 +88,34 @@ public class ListPlayers extends AppCompatActivity {
 
 
 
+/*positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if(filterText[0] == "All Positions")
+        {
+            playerListAdapter[0].getFilter().filter("");
+            playerListAdapter[0].notifyDataSetChanged();
+        }
+        else {
+            List<String> filteredPlayers = new ArrayList<String>();
+            for (int j = 0; j < players.size(); j++) {
+                String temp = players.get(j);
+                temp = temp.substring(temp.indexOf("(") + 1, temp.indexOf(","));
+                if(temp.contains(filterText[0]))
+                {
+                    filteredPlayers.add(temp);
+                }
+            }
+    }
+
+}
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+    }
+    }
+
+    });*/
 
         /*ArrayAdapter<String>[] finalPlayerListAdapter = playerListAdapter;
         positionFilter.setOnItemSelectedListener((adapterView, view, i, l) -> {

@@ -37,18 +37,41 @@ public class HttpConnect extends AppCompatActivity {
     private StringRequest stringRequest;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_http_connect);
+        final int site = getIntent().getIntExtra("siteChoice",1);
+        final int sport = getIntent().getIntExtra("sportChoice", 1);
 
+        String url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/";
+
+        if(site == 1)
+        {
+            url = url.concat("fd/");
+        }
+        else
+        {
+            url = url.concat("dk/");
+        }
+
+        if(sport == 1)
+        {
+            url = url.concat("nba/");
+        }
+        else
+        {
+            url=url.concat("nfl/");
+        }
 
         //Connect button
         Button btn = (Button) findViewById(R.id.httpBut);
+        String finalUrl = url;
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendRequestAndPrintResponse();
+                SendRequestAndPrintResponse(finalUrl);
             }
         });
 
@@ -58,7 +81,7 @@ public class HttpConnect extends AppCompatActivity {
 
 
     }
-    private void SendRequestAndPrintResponse() {
+    private void SendRequestAndPrintResponse(String url) {
 
         int i;
         int j;
@@ -85,12 +108,11 @@ public class HttpConnect extends AppCompatActivity {
             newWord = "";
         }
         System.out.println(newList);
-        String url;
         if(myList.size() != 0) {
-             url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/selectplayer/";
+             url = url.concat("selectplayer/");
         }
         else{
-             url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/selectplayer";
+             url = url.concat("selectplayer");
         }
         int k;
         String finalURL = url;

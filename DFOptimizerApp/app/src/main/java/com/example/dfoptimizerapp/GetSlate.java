@@ -3,6 +3,7 @@ package com.example.dfoptimizerapp;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -73,36 +74,27 @@ public class GetSlate {
 
         mRequestQueue = Volley.newRequestQueue(m_context);
 
-        stringRequest = new StringRequest(Request.Method.GET, slateURL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.i(TAG, "Response: " + response.toString());
-                Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
-                /*List<String> data = ParseReceive(response.toString());
+        stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
+            Log.i(TAG, "Response: " + response);
+            Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
+            ArrayList<String> data = ParseReceive(response);
 
-                Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
-                listPlayers.putExtra("siteChoice", m_siteChoice);
-                listPlayers.putExtra("sportChoice", m_sportChoice);
-                startActivity(listPlayers);
+            Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
+            listPlayers.putExtra("siteChoice", m_siteChoice);
+            listPlayers.putExtra("sportChoice", m_sportChoice);
+            listPlayers.putExtra("playerList", data);
+            m_context.startActivity(listPlayers);
 
-*/
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i(TAG, "Response: " + error.toString());
-            }
-
-        });
+        }, error -> Log.i(TAG, "Response: " + error.toString()));
         mRequestQueue.add(stringRequest);
     }
 
 
-    public List<String> ParseReceive(String jsonStr) {
+    public ArrayList<String> ParseReceive(String jsonStr) {
         //Write line to display in list view
 
-        List<String> data = new ArrayList<>();
+        ArrayList<String> data = new ArrayList<>();
         String formattedLine;
         List<String> players = new ArrayList<String>();
 
@@ -118,8 +110,6 @@ public class GetSlate {
             jsonarray = new JSONArray(jsonStr);
 
             for (int i = 0; i < jsonarray.length(); i++) {
-                System.out.println(jsonarray.length());
-                System.out.println("Current:" + i);
                 JSONObject jsonobject = jsonarray.getJSONObject(i);
                 players.add(jsonobject.getString("player"));
                 salaries.add(jsonobject.getString("Salary"));
@@ -133,7 +123,6 @@ public class GetSlate {
                         ", Opponent: " + opponents.get(i);
                 data.add(formattedLine);
             }
-            System.out.println(players);
 
 
         } catch (JSONException e) {

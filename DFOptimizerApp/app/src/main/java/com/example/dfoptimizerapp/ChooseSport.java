@@ -29,11 +29,11 @@ public class ChooseSport extends AppCompatActivity {
         });
         continueBtn.setOnClickListener((v) -> {
             if(nbaSwitch.isChecked()) {
-                //new GetSlate(v,site,1);
-                Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
-                listPlayers.putExtra("siteChoice", site);
-                listPlayers.putExtra("sportChoice", 1);
-                startActivity(listPlayers);
+                new GetSlate(v,site,1,this);
+                //Intent listPlayers = new Intent(v.getContext(), ListPlayers.class);
+//                listPlayers.putExtra("siteChoice", site);
+//                listPlayers.putExtra("sportChoice", 1);
+//                startActivity(listPlayers);
             }
             else if(nflSwitch.isChecked()){
                 new GetSlate(v,site,2, this);

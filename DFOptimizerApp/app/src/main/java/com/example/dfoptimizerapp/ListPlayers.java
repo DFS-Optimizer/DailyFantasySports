@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
@@ -39,6 +40,7 @@ public class ListPlayers extends AppCompatActivity {
         final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
+        final ArrayList<String> players = getIntent().getStringArrayListExtra("playerList");
         final ListView playerListView = (ListView) findViewById(R.id.playerListView);
         TextView remainingSalaryTxt = (TextView) findViewById(R.id.remainingSalaryTxt);
         //"Rem. Salary: $"
@@ -63,7 +65,7 @@ public class ListPlayers extends AppCompatActivity {
         //Get list of players from the slate
         InputStream slate = null;
 
-        final List<String>[] players = new List[]{new ArrayList<String>()};
+        //final List<String>[] players = new List[]{new ArrayList<String>()};
         List<String> names = new ArrayList<String>();
         List<String> salaries = new ArrayList<String>();
         List<String> positions = new ArrayList<String>();
@@ -72,58 +74,18 @@ public class ListPlayers extends AppCompatActivity {
         List<String> projections = new ArrayList<String>();
 
         final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
-        try {
-            slate = getResources().openRawResource(getResources().getIdentifier("slate", "raw", getPackageName()));
-
-            BufferedReader slateReader = null;
-            if (slate != null) {
-                slateReader = new BufferedReader(new InputStreamReader(slate, "UTF8"));
-            }
-
-            //read from slate and put fields into corresponding lists
-            if(slateReader != null) {
-                String line = "";
-                line = slateReader.readLine();
-                line = slateReader.readLine();
-                while (line != null) {
-                    String[] playerInfo = line.split(",");
-                    names.add(playerInfo[0]);
-                    salaries.add(playerInfo[1]);
-                    positions.add(playerInfo[2]);
-                    teams.add(playerInfo[3]);
-                    opponents.add(playerInfo[4]);
-                    projections.add(playerInfo[5]);
-                    line = slateReader.readLine();
-
-                }
 
                 //round projection numbers
-                for(int i = 0; i < names.size();i++)
-                {
-                    DecimalFormat projFormat = new DecimalFormat("#.##");
-                    double proj  = Double.parseDouble(projections.get(i));
-
-                    String formattedLine = names.get(i) + "(" + positions.get(i) + ", " +teams.get(i) + ") -- Proj. FP: " +
-                                           projFormat.format(proj)  + "\n$" + salaries.get(i) +
-                                           ", Opponent: " + opponents.get(i);
-
-                    players[0].add(formattedLine);
-                }
 
                 //populate list view
                 playerListView.setSaveEnabled(true);
                 playerListView.setMinimumWidth(50);
-                playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players[0].toArray(new String[0]));;
+                playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
                 playerListView.setAdapter(playerListAdapter[0]);
 
 
-            }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         /*ArrayAdapter<String>[] finalPlayerListAdapter = playerListAdapter;
         positionFilter.setOnItemSelectedListener((adapterView, view, i, l) -> {

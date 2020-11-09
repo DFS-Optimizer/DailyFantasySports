@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static android.R.layout.simple_list_item_multiple_choice;
+
 public class ListPlayers extends AppCompatActivity {
 
 
@@ -36,6 +40,7 @@ public class ListPlayers extends AppCompatActivity {
         final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
+        final ArrayList<String> players = getIntent().getStringArrayListExtra("playerList");
         final ListView playerListView = (ListView) findViewById(R.id.playerListView);
         TextView remainingSalaryTxt = (TextView) findViewById(R.id.remainingSalaryTxt);
         //"Rem. Salary: $"
@@ -60,71 +65,35 @@ public class ListPlayers extends AppCompatActivity {
         //Get list of players from the slate
         InputStream slate = null;
 
-        List<String> players = new ArrayList<String>();
+        //final List<String>[] players = new List[]{new ArrayList<String>()};
         List<String> names = new ArrayList<String>();
         List<String> salaries = new ArrayList<String>();
         List<String> positions = new ArrayList<String>();
         List<String> teams = new ArrayList<String>();
         List<String> opponents = new ArrayList<String>();
         List<String> projections = new ArrayList<String>();
-        try {
-            slate = getResources().openRawResource(getResources().getIdentifier("slate", "raw", getPackageName()));
 
-            BufferedReader slateReader = null;
-            if (slate != null) {
-                slateReader = new BufferedReader(new InputStreamReader(slate, "UTF8"));
-            }
-
-            //read from slate and put fields into corresponding lists
-            if(slateReader != null) {
-                String line = "";
-                line = slateReader.readLine();
-                line = slateReader.readLine();
-                while (line != null) {
-                    String[] playerInfo = line.split(",");
-                    names.add(playerInfo[0]);
-                    salaries.add(playerInfo[1]);
-                    positions.add(playerInfo[2]);
-                    teams.add(playerInfo[3]);
-                    opponents.add(playerInfo[4]);
-                    projections.add(playerInfo[5]);
-                    line = slateReader.readLine();
-
-                }
+        final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
 
                 //round projection numbers
-                for(int i = 0; i < names.size();i++)
-                {
-                    DecimalFormat projFormat = new DecimalFormat("#.##");
-                    double proj  = Double.parseDouble(projections.get(i));
-
-                    String formattedLine = names.get(i) + "(" + positions.get(i) + ", " +teams.get(i) + ") -- Proj. FP: " +
-                                           projFormat.format(proj)  + "\n$" + salaries.get(i) +
-                                           ", Opponent: " + opponents.get(i);
-
-                    players.add(formattedLine);
-                }
 
                 //populate list view
-                playerListView.setSaveEnabled(false);
+                playerListView.setSaveEnabled(true);
                 playerListView.setMinimumWidth(50);
-                ArrayAdapter<String> playerListAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
-                playerListView.setAdapter(playerListAdapter);
+                playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
+                playerListView.setAdapter(playerListAdapter[0]);
 
 
-            }
 
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        /*positionFilter.setOnItemClickListener((adapterView, view, i, l) -> {
-            filterText[0] = (String) positionFilter.getItemAtPosition(i);
+
+        /*ArrayAdapter<String>[] finalPlayerListAdapter = playerListAdapter;
+        positionFilter.setOnItemSelectedListener((adapterView, view, i, l) -> {
+
+            filterText[0] = (String) positionFilter.getItemAtPosition();
             if(filterText[0] == "All Positions")
             {
-                playerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
+                finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
             }
             else {
                 List<String> filteredPlayers = new ArrayList<String>();
@@ -136,8 +105,8 @@ public class ListPlayers extends AppCompatActivity {
                         filteredPlayers.add(temp);
                     }
                 }
-                playerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
-            } playerListView.setAdapter(playerListAdapter[0]);
+                finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
+            } playerListView.setAdapter(finalPlayerListAdapter[0]);
         });*/
         
         final int[] id = {0};
@@ -158,12 +127,19 @@ public class ListPlayers extends AppCompatActivity {
 
             //user cannot select more than 4 players or a player whose salary is greater than the
             //remaining salary cap
+
+
             if (selectedPlayers.size() >= maxChecked && isChecked)
             {
+
                 //playerListView.clearChoices();
                 v.setChecked(false);
                 Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
-                return;
+//                for(int j = 0; j < players.size();j++) {
+//                    if(selectedPlayers.size() >= maxChecked && isChecked){
+
+//
+//                }
 
             }
             else if ((remainingSalary[0] - salary) < 0)
@@ -175,6 +151,9 @@ public class ListPlayers extends AppCompatActivity {
             else {
                 if (isChecked) {
                     selectedPlayers.add(name);
+
+                    //DEBUG CODE
+                    System.out.println(selectedPlayers.size());
                     remainingSalary[0] -= salary;
                 } else {
                     remainingSalary[0] += salary;
@@ -185,17 +164,12 @@ public class ListPlayers extends AppCompatActivity {
         });
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
-            if (site == 1) {
 
                 Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
                 httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
+                httpConnect.putExtra("siteChoice", site);
+                httpConnect.putExtra("sportChoice", sport);
                 startActivity(httpConnect);
-
-            }
-            else{
-                //Intent dk_selectNBALineup = new Intent (v.getContext(), DK_SelectLineup_NBA.class);
-                //startActivity(dk_selectNBALineup);
-            }
         });
 
         clearBtn.setOnClickListener((v) -> {
@@ -207,32 +181,33 @@ public class ListPlayers extends AppCompatActivity {
 
         });
 
-/*
+
 //Search Bar Implementation
 
             SearchView searchView = (SearchView) findViewById(R.id.searchView);
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
+
                     return false;
                 }
 
                 @Override
                 public boolean onQueryTextChange(String newText) {
                     ArrayList<String> filteredPlayers = new ArrayList<String>();
-                    for(String grabPlayer: selectedPlayers){
-                        if(grabPlayer.getItemAtPosition().toLowercase().contains(s.toLowercase())){
-                            filteredPlayers.add(grabPlayer);
-                        }
-                    }
-                    ArrayAdapter adapter2 = new ArrayAdapter(getApplicationContext(), 0, filteredPlayers);
-                    playerListView.setAdapter(adapter2);
 
-                    return false;
+
+                    playerListAdapter[0].getFilter().filter(newText);
+
+                    playerListAdapter[0].notifyDataSetChanged();
+
+                    return true;
+
+
                 }
             });
 
-*/
+
 
     }
 

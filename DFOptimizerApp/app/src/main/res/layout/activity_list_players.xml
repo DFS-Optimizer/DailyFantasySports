@@ -9,6 +9,8 @@
         android:id="@+id/instructionTxt"
         android:layout_width="382dp"
         android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="61dp"
         android:layout_marginBottom="2dp"
         android:text="Here are the players who are available today. Choose any four that you would like to include in your lineup."
@@ -33,8 +35,8 @@
 
     <ListView
         android:id="@+id/playerListView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="403dp"
+        android:layout_height="360dp"
         android:layout_marginStart="15dp"
         android:layout_marginLeft="15dp"
         android:layout_marginEnd="15dp"
@@ -89,9 +91,9 @@
 
     <Button
         android:id="@+id/clearPlayers"
-        android:layout_width="0dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="22dp"
+        android:layout_width="105dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="90dp"
         android:layout_marginRight="90dp"
         android:text="Clear All"

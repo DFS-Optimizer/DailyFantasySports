@@ -172,7 +172,7 @@ def get_slate_nfl_dk():
     else:
         path = get_my_path()
         path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-        const_path = os.path.join(path, "slates", "NFLslateDK.csv")
+        const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
         df = pd.read_csv(const_path)
         result = "["
         for index, row in df.iterrows():
@@ -472,7 +472,7 @@ def nfloptimizeFD(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -513,7 +513,7 @@ def nfloptimizeFD(num):
 def nflrun_fanduel(*players):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 

@@ -186,3 +186,4 @@ def nflrun_fanduel(*players):
     return result
 
 nflrun_draftkings()
+nflrun_fanduel()

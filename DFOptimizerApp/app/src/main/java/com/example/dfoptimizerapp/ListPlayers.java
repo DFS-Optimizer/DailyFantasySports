@@ -87,10 +87,10 @@ public class ListPlayers extends AppCompatActivity {
 
 
 
-
         positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                filterText[0] = (String) positionFilter.getItemAtPosition(i);
                 if (filterText[0] == "All Positions") {
                     playerListAdapter[0].getFilter().filter("");
                     playerListAdapter[0].notifyDataSetChanged();
@@ -103,6 +103,8 @@ public class ListPlayers extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+                playerListAdapter[0].getFilter().filter("");
+                playerListAdapter[0].notifyDataSetChanged();
             }
 
         });
@@ -208,17 +210,14 @@ public class ListPlayers extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-
+                playerListAdapter[0].getFilter().filter(query);
+                playerListAdapter[0].notifyDataSetChanged();
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                ArrayList<String> filteredPlayers = new ArrayList<String>();
-
-
                 playerListAdapter[0].getFilter().filter(newText);
-
                 playerListAdapter[0].notifyDataSetChanged();
 
                 return true;

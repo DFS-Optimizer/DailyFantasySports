@@ -62,18 +62,7 @@ public class ListPlayers extends AppCompatActivity {
         }
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
-
-
-        //Get list of players from the slate
-        InputStream slate = null;
-
-        //final List<String>[] players = new List[]{new ArrayList<String>()};
-        List<String> names = new ArrayList<String>();
-        List<String> salaries = new ArrayList<String>();
-        List<String> positions = new ArrayList<String>();
-        List<String> teams = new ArrayList<String>();
-        List<String> opponents = new ArrayList<String>();
-        List<String> projections = new ArrayList<String>();
+        
 
         final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
 

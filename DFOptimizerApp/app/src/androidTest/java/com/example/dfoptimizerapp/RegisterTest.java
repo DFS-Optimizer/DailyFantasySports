@@ -14,21 +14,21 @@ public class RegisterTest {
 
     @Test
     public void checkLengthShort() {
-       boolean check = Register.passMoreThanSix("test");
+       boolean check = Register.passMoreEqualThanSix("test");
        assertFalse(check);
 
     }
 
     @Test
     public void checkLengthLong() {
-        boolean check = Register.passMoreThanSix("testcase2");
+        boolean check = Register.passMoreEqualThanSix("testcase2");
         assertTrue(check);
 
     }
 
     @Test
     public void checkLengthEquals() {
-        boolean check = Register.passMoreThanSix("test12");
+        boolean check = Register.passMoreEqualThanSix("test12");
         assertTrue(check);
 
     }

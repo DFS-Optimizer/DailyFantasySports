@@ -79,18 +79,19 @@ public class GetSlate {
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
         if (m_sportChoice == 2) {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/";
+            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
         }
 
     //NEW SLATE URL FOR NBA DRAFT KINGS
         else {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/";
+            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/getslate";
         }
 
-        boolean checkURL = checkValidURL(slateURL);
+        System.out.println(slateURL);
+        /*boolean checkURL = checkValidURL(slateURL);
         if(checkURL == false){
             throw new IllegalArgumentException("URL for slate is invalid");
-        }
+        }*/
         //DEBUG CODE
         System.out.println(slateURL);
 

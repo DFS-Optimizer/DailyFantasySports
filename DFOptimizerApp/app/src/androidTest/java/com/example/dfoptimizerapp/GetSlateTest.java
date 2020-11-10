@@ -22,7 +22,7 @@ public class GetSlateTest {
     }
     @Test
     public void checkgoodURL(){
-        boolean check = checkValidURL("http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/");
+        boolean check = checkValidURL("http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate");
         assertTrue(check);
 
     }

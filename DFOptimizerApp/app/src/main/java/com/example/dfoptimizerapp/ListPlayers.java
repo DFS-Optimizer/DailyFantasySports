@@ -77,45 +77,35 @@ public class ListPlayers extends AppCompatActivity {
 
         final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
 
-                //round projection numbers
+        //round projection numbers
 
-                //populate list view
-                playerListView.setSaveEnabled(true);
-                playerListView.setMinimumWidth(50);
-                playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
-                playerListView.setAdapter(playerListAdapter[0]);
-
-
+        //populate list view
+        playerListView.setSaveEnabled(true);
+        playerListView.setMinimumWidth(50);
+        playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
+        playerListView.setAdapter(playerListAdapter[0]);
 
 
-/*positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        if(filterText[0] == "All Positions")
-        {
-            playerListAdapter[0].getFilter().filter("");
-            playerListAdapter[0].notifyDataSetChanged();
-        }
-        else {
-            List<String> filteredPlayers = new ArrayList<String>();
-            for (int j = 0; j < players.size(); j++) {
-                String temp = players.get(j);
-                temp = temp.substring(temp.indexOf("(") + 1, temp.indexOf(","));
-                if(temp.contains(filterText[0]))
-                {
-                    filteredPlayers.add(temp);
+
+
+        positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (filterText[0] == "All Positions") {
+                    playerListAdapter[0].getFilter().filter("");
+                    playerListAdapter[0].notifyDataSetChanged();
+                } else {
+                    playerListAdapter[0].getFilter().filter(filterText[0]);
+                    playerListAdapter[0].notifyDataSetChanged();
                 }
+
             }
-    }
 
-}
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> adapterView) {
-    }
-    }
-
-    });*/
+        });
 
         /*ArrayAdapter<String>[] finalPlayerListAdapter = playerListAdapter;
         positionFilter.setOnItemSelectedListener((adapterView, view, i, l) -> {
@@ -138,7 +128,7 @@ public class ListPlayers extends AppCompatActivity {
                 finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
             } playerListView.setAdapter(finalPlayerListAdapter[0]);
         });*/
-        
+
         final int[] id = {0};
         playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         playerListView.setSaveEnabled(false);
@@ -195,11 +185,11 @@ public class ListPlayers extends AppCompatActivity {
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
 
-                Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
-                httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
-                httpConnect.putExtra("siteChoice", site);
-                httpConnect.putExtra("sportChoice", sport);
-                startActivity(httpConnect);
+            Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
+            httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
+            httpConnect.putExtra("siteChoice", site);
+            httpConnect.putExtra("sportChoice", sport);
+            startActivity(httpConnect);
         });
 
         clearBtn.setOnClickListener((v) -> {
@@ -214,28 +204,28 @@ public class ListPlayers extends AppCompatActivity {
 
 //Search Bar Implementation
 
-            SearchView searchView = (SearchView) findViewById(R.id.searchView);
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
 
-                    return false;
-                }
+                return false;
+            }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    ArrayList<String> filteredPlayers = new ArrayList<String>();
-
-
-                    playerListAdapter[0].getFilter().filter(newText);
-
-                    playerListAdapter[0].notifyDataSetChanged();
-
-                    return true;
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<String> filteredPlayers = new ArrayList<String>();
 
 
-                }
-            });
+                playerListAdapter[0].getFilter().filter(newText);
+
+                playerListAdapter[0].notifyDataSetChanged();
+
+                return true;
+
+
+            }
+        });
 
 
 

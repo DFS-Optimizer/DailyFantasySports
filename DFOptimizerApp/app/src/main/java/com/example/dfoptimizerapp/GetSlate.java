@@ -79,7 +79,8 @@ public class GetSlate {
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
         if (m_sportChoice == 2) {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
+            slateURL = "abcdedg";
+                    //"http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
         }
 
     //NEW SLATE URL FOR NBA DRAFT KINGS

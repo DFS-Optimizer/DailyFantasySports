@@ -180,7 +180,7 @@ public class Register extends AppCompatActivity {
                 return;
             }
 
-            boolean greaterSix = passMoreThanSix(password);
+            boolean greaterSix = passMoreEqualThanSix(password);
 
             if (greaterSix == false) {
                //throw new IllegalArgumentException("Password must be greater than or equal to 6 characters");
@@ -223,7 +223,7 @@ public class Register extends AppCompatActivity {
 
         }
     //MOSTLY FOR TEST CASES
-    public static boolean passMoreThanSix(String password) {
+    public static boolean passMoreEqualThanSix(String password) {
         if (password.length() < 6) {
             // throw new IllegalArgumentException("Password must be greater than or equal to 6 characters");
 

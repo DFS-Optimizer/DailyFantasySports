@@ -109,10 +109,7 @@ public class HttpConnect extends AppCompatActivity {
         }
         System.out.println(newList);
         if(myList.size() != 0) {
-             url = url.concat("selectplayer/");
-        }
-        else{
-             url = url.concat("selectplayer");
+             url = url.concat("/");
         }
         int k;
         String finalURL = url;
@@ -150,7 +147,6 @@ public class HttpConnect extends AppCompatActivity {
         });
         mRequestQueue.add(stringRequest);
     }
-
 
     public void ParseReceive(String jsonStr) {
         TextView txtView = (TextView) findViewById(R.id.textView3);

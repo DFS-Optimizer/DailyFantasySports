@@ -1,5 +1,8 @@
 from unittest import TestCase
 import os, sys
+
+from slates.dk import changedate_nfl
+
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 sys.path.append(parentdir)

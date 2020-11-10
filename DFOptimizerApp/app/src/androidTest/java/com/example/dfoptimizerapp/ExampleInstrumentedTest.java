@@ -37,19 +37,19 @@ public class ExampleInstrumentedTest {
 
 
 
-    @Rule
+  /*  @Rule
     public ActivityScenarioRule<Register> activityRule =
             new ActivityScenarioRule<>(Register.class);
-
+*/
 
     //Password greater than or equal to 6 characters?
-@Rule
-    public ExpectedException exception = ExpectedException.none();
-
+//@Rule
+    //public ExpectedException exception = ExpectedException.none();
+/*
     @Test
     public void passwordMin() {
-        exception.expect(Exception.class);
-        exception.expectMessage("Password must be greater than or equal to 6 characters");
+        //exception.expect(Exception.class);
+        //exception.expectMessage("Password must be greater than or equal to 6 characters");
 
         onView(withId(R.id.fullName_register)).perform(typeText("test1"));
         onView(withId(R.id.email_register)).perform(typeText("test1@email.com"));
@@ -57,7 +57,7 @@ public class ExampleInstrumentedTest {
         onView(withId(R.id.confirmPass_register)).perform(typeText("test"));
         onView(withId(R.id.registerBtn)).perform(click());
     }
-
+/*
 @Test
     public void checkConfirm() {
     final EditText superpass = findViewById(R.id.password_register);
@@ -73,4 +73,6 @@ public class ExampleInstrumentedTest {
     assertEquals(pass,confirm);
 
 }
+*/
+
 }

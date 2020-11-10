@@ -98,6 +98,10 @@ public class Register extends AppCompatActivity {
             return false;
         });
 
+
+
+
+
         mPassword.setOnKeyListener((v, keyCode, event) -> {
             String name = mFullName.getText().toString();
             String email = mEmail.getText().toString();
@@ -123,6 +127,7 @@ public class Register extends AppCompatActivity {
             }
             return false;
         });
+
 
         mConfirmPassword.setOnKeyListener((v, keyCode, event) -> {
             String name = mFullName.getText().toString();
@@ -174,9 +179,12 @@ public class Register extends AppCompatActivity {
                 mPassword.setError("Password is required.");
                 return;
             }
-            if (password.length() < 6) {
-                throw new IllegalArgumentException("Password must be greater than or equal to 6 characters");
-                //mPassword.setError("Password must be greater than or equal to 6 characters");
+
+            boolean greaterSix = passMoreThanSix(password);
+
+            if (greaterSix == false) {
+               //throw new IllegalArgumentException("Password must be greater than or equal to 6 characters");
+                mPassword.setError("Password must be greater than or equal to 6 characters");
 
             }
 
@@ -206,6 +214,31 @@ public class Register extends AppCompatActivity {
         mLoginBtn.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), Login.class));
         });
+
+
+
+
+
+
+
+        }
+    //MOSTLY FOR TEST CASES
+    public static boolean passMoreThanSix(String password) {
+        if (password.length() < 6) {
+            // throw new IllegalArgumentException("Password must be greater than or equal to 6 characters");
+
+            //mPassword.setError("Password must be greater than or equal to 6 characters");
+            return false;
+        }
+        else{
+            return true;
+        }
     }
-}
+
+
+
+
+    }
+
+
 

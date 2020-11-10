@@ -26,5 +26,12 @@ public class RegisterTest {
 
     }
 
+    @Test
+    public void checkLengthEquals() {
+        boolean check = Register.passMoreThanSix("test12");
+        assertTrue(check);
+
+    }
+
 
 }

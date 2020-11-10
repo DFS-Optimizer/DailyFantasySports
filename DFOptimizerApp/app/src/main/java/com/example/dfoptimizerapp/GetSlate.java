@@ -24,6 +24,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +56,20 @@ public class GetSlate {
         SendRequestAndPrintResponse(sportChoice);
     }
 
+    public static boolean checkValidURL(String slateURL){
+        try {
+            URL url = new URL(slateURL);
+            URLConnection conn = url.openConnection();
+            conn.connect();
+        } catch (MalformedURLException e) {
+            // the URL is not in a valid form
+            return false;
+        } catch (IOException e) {
+            // the connection couldn't be established
+            return false;
+        }
+    return true;
+    }
 
     private void SendRequestAndPrintResponse(int slateChoice) {
 
@@ -61,13 +79,19 @@ public class GetSlate {
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
         if (m_sportChoice == 2) {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
+            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/";
         }
 
-//NEW SLATE URL FOR NBA DRAFT KINGS
+    //NEW SLATE URL FOR NBA DRAFT KINGS
         else {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/getslate";
+            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/";
         }
+
+        boolean checkURL = checkValidURL(slateURL);
+        if(checkURL == false){
+            throw new IllegalArgumentException("URL for slate is invalid");
+        }
+        //DEBUG CODE
         System.out.println(slateURL);
 
 

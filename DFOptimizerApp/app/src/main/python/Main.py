@@ -187,8 +187,11 @@ def get_slate_nfl_dk():
 
 @app.route("/dk/nba/getslate")
 def get_slate_nba_dk():
-    # slates.dk.update_nba_DK_slate()
-    return "slates not available, nba out of season"
+    number = slates.dk.update_nba_DK_slate()
+    if number == 0:
+        return "slates not available, nba out of season"
+    else:
+        return "slate updated"
 
 @app.route("/dk/mlb/getslate")
 def get_slate_mlb_dk():

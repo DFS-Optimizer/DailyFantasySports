@@ -1,7 +1,5 @@
 from unittest import TestCase
 import Main
-import json
-
 
 
 class MainNFLDKTest(TestCase):

@@ -76,14 +76,20 @@ public class GetSlate {
 
         stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
             Log.i(TAG, "Response: " + response);
-            Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
-            ArrayList<String> data = ParseReceive(response);
+            if(response.contains( "slates not available, nba out of season"))
+            {
+                Toast.makeText(m_context,"This sport is out of season", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
+                ArrayList<String> data = ParseReceive(response);
 
-            Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
-            listPlayers.putExtra("siteChoice", m_siteChoice);
-            listPlayers.putExtra("sportChoice", m_sportChoice);
-            listPlayers.putExtra("playerList", data);
-            m_context.startActivity(listPlayers);
+                Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
+                listPlayers.putExtra("siteChoice", m_siteChoice);
+                listPlayers.putExtra("sportChoice", m_sportChoice);
+                listPlayers.putExtra("playerList", data);
+                m_context.startActivity(listPlayers);
+            }
 
 
         }, error -> Log.i(TAG, "Response: " + error.toString()));

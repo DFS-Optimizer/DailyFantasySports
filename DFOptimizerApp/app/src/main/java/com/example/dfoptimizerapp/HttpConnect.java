@@ -58,11 +58,11 @@ public class HttpConnect extends AppCompatActivity {
 
         if(sport == 1)
         {
-            url = url.concat("nba/");
+            url = url.concat("nba");
         }
         else
         {
-            url=url.concat("nfl/");
+            url=url.concat("nfl");
         }
 
         //Connect button

@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,8 +151,11 @@ public class GetSlate {
                 opponents.add(jsonobject.getString("Opponent"));
                 projections.add(jsonobject.getString("Projection"));
 
+                    DecimalFormat projFormat = new DecimalFormat("#.##");
+                    double proj  = Double.parseDouble(projections.get(i));
+
                 formattedLine = players.get(i) + "(" + positions.get(i) + ", " + teams.get(i) + ") -- Proj. FP: " +
-                        projections.get(i) + "\n$" + salaries.get(i) +
+                        projFormat.format(proj) + "\n$" + salaries.get(i) +
                         ", Opponent: " + opponents.get(i);
                 data.add(formattedLine);
             }

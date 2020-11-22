@@ -37,6 +37,8 @@ public class ListPlayers extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_players);
+
+        //GUI components
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
         final Button clearBtn = (Button) findViewById(R.id.clearPlayers);
         final Spinner positionFilter = (Spinner) findViewById(R.id.positionFilter);
@@ -60,22 +62,20 @@ public class ListPlayers extends AppCompatActivity {
         else{
             pos = new String[]{"All Positions","QB","WR","RB","TE","DF","K"};
         }
+        //adapter to fill the dropdown menu
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
-        
 
-        final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
-
-        //round projection numbers
 
         //populate list view
+        final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
         playerListView.setSaveEnabled(true);
         playerListView.setMinimumWidth(50);
         playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
         playerListView.setAdapter(playerListAdapter[0]);
 
 
-
+        //onItemSelectedListener for the position filter
         positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -98,27 +98,6 @@ public class ListPlayers extends AppCompatActivity {
 
         });
 
-        /*ArrayAdapter<String>[] finalPlayerListAdapter = playerListAdapter;
-        positionFilter.setOnItemSelectedListener((adapterView, view, i, l) -> {
-
-            filterText[0] = (String) positionFilter.getItemAtPosition();
-            if(filterText[0] == "All Positions")
-            {
-                finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));
-            }
-            else {
-                List<String> filteredPlayers = new ArrayList<String>();
-                for (int j = 0; j < players.size(); j++) {
-                    String temp = players.get(j);
-                    temp = temp.substring(temp.indexOf("(") + 1, temp.indexOf(","));
-                    if(temp.contains(filterText[0]))
-                    {
-                        filteredPlayers.add(temp);
-                    }
-                }
-                finalPlayerListAdapter[0] = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, (String[]) filteredPlayers.toArray(new String[0]));
-            } playerListView.setAdapter(finalPlayerListAdapter[0]);
-        });*/
 
         final int[] id = {0};
         playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);

@@ -33,7 +33,7 @@ def update_nfl_DK_slate():
         return 0
     # contests = contests(sport=Sport.NFL)
     df = pd.DataFrame()
-
+    id = None
 
     for label in contests_nfl["contests"]:
         if not str(label["starts_at"]).startswith(changedate_nfl()):
@@ -42,6 +42,8 @@ def update_nfl_DK_slate():
         id = label["draft_group_id"]
         break
         
+    if id is None:
+        return 0
 
     players = draftables(id)
 

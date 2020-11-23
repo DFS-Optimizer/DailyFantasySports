@@ -60,9 +60,13 @@ public class HttpConnect extends AppCompatActivity {
         {
             url = url.concat("nba");
         }
-        else
+        else if(sport == 2)
         {
             url=url.concat("nfl");
+        }
+        else
+        {
+            url = url.concat("mlb");
         }
 
         //Connect button

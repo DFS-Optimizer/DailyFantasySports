@@ -41,27 +41,27 @@ def hello_world():
 # url routes for draftkings nfl lineups
 
 
-@app.route("/dk/nfl/num")
+@app.route("/dk/nfl/<num>")
 def nflchoice0(num):
     lineup = nflrun_draftkings(num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/num")
+@app.route("/dk/nfl/<player1>/<num>")
 def nflchoice1(player1, num):
     lineup = nflrun_draftkings(player1, num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/<player2>/num")
+@app.route("/dk/nfl/<player1>/<player2>/<num>")
 def nflchoice2(player1, player2, num):
     lineup = nflrun_draftkings(player1, player2, num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/<player2>/<player3>/num")
+@app.route("/dk/nfl/<player1>/<player2>/<player3>/<num>")
 def nflchoice3(player1, player2, player3, num):
     lineup = nflrun_draftkings(player1, player2, player3, num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>/num")
+@app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>/<num>")
 def nflchoice4(player1, player2, player3, player4,num):
     lineup = nflrun_draftkings(player1, player2, player3, player4, num)
     return lineup
@@ -70,27 +70,27 @@ def nflchoice4(player1, player2, player3, player4,num):
 # url routes for fanduel nfl lineups
 
 
-@app.route("/fd/nfl/num")
+@app.route("/fd/nfl/<num>")
 def fdnflchoice0(num):
     lineup = "run nfl fanduel function"
     return lineup
 
-@app.route("/fd/nfl/<player1>/num")
+@app.route("/fd/nfl/<player1>/<num>")
 def fdnflchoice1(player1/num):
     lineup = "run nfl fanduel function"
     return lineup
 
-@app.route("/fd/nfl/<player1>/<player2>/num")
+@app.route("/fd/nfl/<player1>/<player2>/<num>")
 def fdnflchoice2(player1, player2,num):
     lineup = "run nfl fanduel function here"
     return lineup
 
-@app.route("/fd/nfl/<player1>/<player2>/<player3>/num")
+@app.route("/fd/nfl/<player1>/<player2>/<player3>/<num>")
 def fdnflchoice3(player1, player2, player3,num):
     lineup = "run nfl fanduel function here"
     return lineup
 
-@app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>/num")
+@app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>/<num>")
 def fdnflchoice4(player1, player2, player3, player4,num):
     lineup = "run nfl fanduel function here"
     return lineup
@@ -105,25 +105,25 @@ def dkuser_choice0(num):
     return lineup
 
 
-@app.route("/dk/nba/<player1>/num")
+@app.route("/dk/nba/<player1>/<num>")
 def dkuser_choice1(player1,num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>/<player2>/num")
+@app.route("/dk/nba/<player1>/<player2>/<num>")
 def dkuser_choice2(player1, player2, num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>/<player2>/<player3>/num")
+@app.route("/dk/nba/<player1>/<player2>/<player3>/<num>")
 def dkuser_choice3(player1, player2, player3,num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>/num")
+@app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>/<num>")
 def dkuser_choice4(player1, player2, player3, player4,num):
     lineup = "nba out of season"
     return lineup
@@ -132,31 +132,31 @@ def dkuser_choice4(player1, player2, player3, player4,num):
 # url routes for fanduel nba lineups
 
 
-@app.route("/fd/nba/num")
+@app.route("/fd/nba/<num>")
 def user_choice0(num):
     lineup = nbarun_fanduel(num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/num")
+@app.route("/fd/nba/<player1>/<num>")
 def user_choice1(player1,num):
     lineup = nbarun_fanduel(player1,num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/<player2>/num")
+@app.route("/fd/nba/<player1>/<player2>/<num>")
 def user_choice2(player1, player2,num):
     lineup = nbarun_fanduel(player1, player2,num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/<player2>/<player3>/num")
+@app.route("/fd/nba/<player1>/<player2>/<player3>/<num>")
 def user_choice3(player1, player2, player3,num):
     lineup = nbarun_fanduel(player1, player2, player3,num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>/num")
+@app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>/<num>")
 def user_choice4(player1, player2, player3, player4,num):
     lineup = nbarun_fanduel(player1, player2, player3, player4,num)
     return lineup
@@ -165,8 +165,8 @@ def user_choice4(player1, player2, player3, player4,num):
 
 # url routes for grabbing updated slates when front end picks the sports
 
-@app.route("/dk/nfl/getslate/num")
-def get_slate_nfl_dk(num):
+@app.route("/dk/nfl/getslate")
+def get_slate_nfl_dk():
     if slates.dk.update_nfl_DK_slate() == 0:
         return "slate unavailable"
     else:

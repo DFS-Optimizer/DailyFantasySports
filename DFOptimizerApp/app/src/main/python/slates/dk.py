@@ -29,7 +29,7 @@ def getdate():
 
 def update_nfl_DK_slate():
 
-    if not contesets_nfl["contests"]:
+    if not contests_nfl["contests"]:
         return 0
     # contests = contests(sport=Sport.NFL)
     df = pd.DataFrame()

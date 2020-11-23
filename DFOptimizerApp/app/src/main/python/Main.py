@@ -43,12 +43,12 @@ def hello_world():
 
 @app.route("/dk/nfl/<num>")
 def nflchoice0(num):
-    lineup = nflrun_draftkings(num)
+    lineup = nflrun_draftkings(num = num)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<num>")
 def nflchoice1(player1, num):
-    lineup = nflrun_draftkings(player1, num)
+    lineup = nflrun_draftkings(player1, num = num)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<player2>/<num>")
@@ -76,7 +76,7 @@ def fdnflchoice0(num):
     return lineup
 
 @app.route("/fd/nfl/<player1>/<num>")
-def fdnflchoice1(player1/num):
+def fdnflchoice1(player1, num):
     lineup = "run nfl fanduel function"
     return lineup
 

@@ -1,22 +1,13 @@
 package com.example.dfoptimizerapp;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -69,31 +60,32 @@ public class GetSlate {
             // the connection couldn't be established
             return false;
         }
-    return true;
+        return true;
     }
 
     private void SendRequestAndPrintResponse(int slateChoice) {
 
 
-        String slateURL;
+        String slateURL = "";
 
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
-        if (m_sportChoice == 2) {
-
-                    slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
-        }
-
-    //NEW SLATE URL FOR NBA DRAFT KINGS
-        else {
+        if (m_sportChoice == 1) {
             slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/getslate";
+
         }
 
-        System.out.println(slateURL);
-        /*boolean checkURL = checkValidURL(slateURL);
-        if(checkURL == false){
-            throw new IllegalArgumentException("URL for slate is invalid");
-        }*/
+        //NEW SLATE URL FOR NBA DRAFT KINGS
+        else if(m_sportChoice == 2){
+            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
+
+        }
+
+        //NEW SLATE URL FOR MLB DRAFT KINGS
+        else
+        {
+            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/mlb/getslate";
+        }
         //DEBUG CODE
         System.out.println(slateURL);
 
@@ -111,7 +103,18 @@ public class GetSlate {
                 Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
                 ArrayList<String> data = ParseReceive(response);
 
-                Intent listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
+                Intent listPlayers;
+                if(m_sportChoice == 1) {
+                    listPlayers = new Intent(m_view.getContext(), ListPlayers_NBA.class);
+                }
+                else if(m_sportChoice == 2)
+                {
+                    listPlayers = new Intent(m_view.getContext(), ListPlayers_NFL.class);
+                }
+                else
+                {
+                    listPlayers = new Intent(m_view.getContext(), ListPlayers_MLB.class);
+                }
                 listPlayers.putExtra("siteChoice", m_siteChoice);
                 listPlayers.putExtra("sportChoice", m_sportChoice);
                 listPlayers.putExtra("playerList", data);
@@ -151,8 +154,8 @@ public class GetSlate {
                 opponents.add(jsonobject.getString("Opponent"));
                 projections.add(jsonobject.getString("Projection"));
 
-                    DecimalFormat projFormat = new DecimalFormat("#.##");
-                    double proj  = Double.parseDouble(projections.get(i));
+                DecimalFormat projFormat = new DecimalFormat("#.##");
+                double proj  = Double.parseDouble(projections.get(i));
 
                 formattedLine = players.get(i) + "(" + positions.get(i) + ", " + teams.get(i) + ") -- Proj. FP: " +
                         projFormat.format(proj) + "\n$" + salaries.get(i) +

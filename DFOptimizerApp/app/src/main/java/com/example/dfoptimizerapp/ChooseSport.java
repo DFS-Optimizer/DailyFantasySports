@@ -16,16 +16,24 @@ public class ChooseSport extends AppCompatActivity {
 
         final Switch nbaSwitch = (Switch) findViewById(R.id.nbaSwitch);
         final Switch nflSwitch = (Switch) findViewById(R.id.nflSwitch);
+        final Switch mlbSwitch = (Switch) findViewById(R.id.mlbSwitch);
         final Button continueBtn = (Button) findViewById(R.id.continueBtn);
         final int site = getIntent().getIntExtra("siteChoice",1);
 
         nbaSwitch.setOnCheckedChangeListener((v, b) ->{
             nflSwitch.setChecked(false);
+            mlbSwitch.setChecked(false);
             nbaSwitch.setChecked(b);
         });
         nflSwitch.setOnCheckedChangeListener((v, b) ->{
             nbaSwitch.setChecked(false);
+            mlbSwitch.setChecked(false);
             nflSwitch.setChecked(b);
+        });
+        mlbSwitch.setOnCheckedChangeListener((v,b) ->{
+            nbaSwitch.setChecked(false);
+            nflSwitch.setChecked(false);
+            mlbSwitch.setChecked(b);
         });
         continueBtn.setOnClickListener((v) -> {
             if(nbaSwitch.isChecked()) {
@@ -33,6 +41,10 @@ public class ChooseSport extends AppCompatActivity {
             }
             else if(nflSwitch.isChecked()){
                 new GetSlate(v,site,2, this);
+            }
+            else
+            {
+                new GetSlate(v,site,3,this);
             }
 
         });

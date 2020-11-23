@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static android.R.layout.simple_list_item_multiple_choice;
 
-public class ListPlayers extends AppCompatActivity {
+public class ListPlayers_MLB extends AppCompatActivity {
 
 
 
@@ -55,13 +55,7 @@ public class ListPlayers extends AppCompatActivity {
         final String[] filterText = {"All Positions"};
 
         //List of positions that can be used as a filter
-        String[] pos;
-        if(sport == 1) {
-            pos = new String[]{"All Positions", "PG", "SF", "SG", "PF", "C"};
-        }
-        else{
-            pos = new String[]{"All Positions","QB","WR","RB","TE","DF","K"};
-        }
+        String[] pos = new String[]{"All Positions","P","C/1B","2B","3B","SS","OF", "UTIL"};
         //adapter to fill the dropdown menu
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
@@ -99,6 +93,7 @@ public class ListPlayers extends AppCompatActivity {
         });
 
 
+        //when player is selected from list:
         final int[] id = {0};
         playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         playerListView.setSaveEnabled(false);
@@ -117,19 +112,12 @@ public class ListPlayers extends AppCompatActivity {
 
             //user cannot select more than 4 players or a player whose salary is greater than the
             //remaining salary cap
-
-
             if (selectedPlayers.size() >= maxChecked && isChecked)
             {
 
                 //playerListView.clearChoices();
                 v.setChecked(false);
                 Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
-//                for(int j = 0; j < players.size();j++) {
-//                    if(selectedPlayers.size() >= maxChecked && isChecked){
-
-//
-//                }
 
             }
             else if ((remainingSalary[0] - salary) < 0)
@@ -199,3 +187,4 @@ public class ListPlayers extends AppCompatActivity {
     }
 
 }
+

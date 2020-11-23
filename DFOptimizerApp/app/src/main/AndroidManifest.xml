@@ -22,7 +22,9 @@
         <activity android:name=".ChooseSite"/>
         <activity android:name=".Register" />
         <activity android:name=".HttpConnect" />
-        <activity android:name=".ListPlayers" />
+        <activity android:name=".ListPlayers_NBA"/>
+        <activity android:name=".ListPlayers_MLB"/>
+        <activity android:name=".ListPlayers_NFL" />
         <activity android:name=".ChooseSport" />
     </application>
 

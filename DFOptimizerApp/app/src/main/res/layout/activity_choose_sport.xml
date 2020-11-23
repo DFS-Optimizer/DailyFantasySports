@@ -7,24 +7,35 @@
     android:orientation="vertical"
     tools:context=".ChooseSport">
 
+    <Switch
+        android:id="@+id/mlbSwitch"
+        android:layout_width="104dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="137dp"
+        android:text="MLB"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nflSwitch" />
+
     <TextView
         android:id="@+id/textView2"
         android:layout_width="96dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="69dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="71dp"
         android:text="Select a Sport "
         app:layout_constraintBottom_toTopOf="@+id/nbaSwitch"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
         android:id="@+id/nbaSwitch"
-        android:layout_width="104dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
         android:text="NBA"
         app:layout_constraintBottom_toTopOf="@+id/nflSwitch"
         app:layout_constraintEnd_toEndOf="@+id/nflSwitch"
@@ -34,11 +45,11 @@
     <Switch
         android:id="@+id/nflSwitch"
         android:layout_width="104dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="81dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
         android:text="NFL"
         android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/continueBtn"
+        app:layout_constraintBottom_toTopOf="@+id/mlbSwitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nbaSwitch" />
@@ -47,12 +58,11 @@
         android:id="@+id/continueBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="326dp"
+        android:layout_marginBottom="214dp"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/nflSwitch"
-        app:layout_constraintTop_toBottomOf="@+id/nflSwitch" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mlbSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

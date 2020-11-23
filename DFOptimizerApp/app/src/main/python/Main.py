@@ -41,57 +41,57 @@ def hello_world():
 # url routes for draftkings nfl lineups
 
 
-@app.route("/dk/nfl")
-def nflchoice0():
-    lineup = nflrun_draftkings()
+@app.route("/dk/nfl/num")
+def nflchoice0(num):
+    lineup = nflrun_draftkings(num)
     return lineup
 
-@app.route("/dk/nfl/<player1>")
-def nflchoice1(player1):
-    lineup = nflrun_draftkings(player1)
+@app.route("/dk/nfl/<player1>/num")
+def nflchoice1(player1, num):
+    lineup = nflrun_draftkings(player1, num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/<player2>")
-def nflchoice2(player1, player2):
-    lineup = nflrun_draftkings(player1, player2)
+@app.route("/dk/nfl/<player1>/<player2>/num")
+def nflchoice2(player1, player2, num):
+    lineup = nflrun_draftkings(player1, player2, num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/<player2>/<player3>")
-def nflchoice3(player1, player2, player3):
-    lineup = nflrun_draftkings(player1, player2, player3)
+@app.route("/dk/nfl/<player1>/<player2>/<player3>/num")
+def nflchoice3(player1, player2, player3, num):
+    lineup = nflrun_draftkings(player1, player2, player3, num)
     return lineup
 
-@app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>")
-def nflchoice4(player1, player2, player3, player4):
-    lineup = nflrun_draftkings(player1, player2, player3, player4)
+@app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>/num")
+def nflchoice4(player1, player2, player3, player4,num):
+    lineup = nflrun_draftkings(player1, player2, player3, player4, num)
     return lineup
 
 
 # url routes for fanduel nfl lineups
 
 
-@app.route("/fd/nfl")
-def fdnflchoice0():
+@app.route("/fd/nfl/num")
+def fdnflchoice0(num):
     lineup = "run nfl fanduel function"
     return lineup
 
-@app.route("/fd/nfl/<player1>")
-def fdnflchoice1(player1):
+@app.route("/fd/nfl/<player1>/num")
+def fdnflchoice1(player1/num):
     lineup = "run nfl fanduel function"
     return lineup
 
-@app.route("/fd/nfl/<player1>/<player2>")
-def fdnflchoice2(player1, player2):
+@app.route("/fd/nfl/<player1>/<player2>/num")
+def fdnflchoice2(player1, player2,num):
     lineup = "run nfl fanduel function here"
     return lineup
 
-@app.route("/fd/nfl/<player1>/<player2>/<player3>")
-def fdnflchoice3(player1, player2, player3):
+@app.route("/fd/nfl/<player1>/<player2>/<player3>/num")
+def fdnflchoice3(player1, player2, player3,num):
     lineup = "run nfl fanduel function here"
     return lineup
 
-@app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>")
-def fdnflchoice4(player1, player2, player3, player4):
+@app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>/num")
+def fdnflchoice4(player1, player2, player3, player4,num):
     lineup = "run nfl fanduel function here"
     return lineup
 
@@ -99,32 +99,32 @@ def fdnflchoice4(player1, player2, player3, player4):
 # url routes for nba draftkings lineups
 
 
-@app.route("/dk/nba")
-def dkuser_choice0():
+@app.route("/dk/nba/num")
+def dkuser_choice0(num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>")
-def dkuser_choice1(player1):
+@app.route("/dk/nba/<player1>/num")
+def dkuser_choice1(player1,num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>/<player2>")
-def dkuser_choice2(player1, player2):
+@app.route("/dk/nba/<player1>/<player2>/num")
+def dkuser_choice2(player1, player2, num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>/<player2>/<player3>")
-def dkuser_choice3(player1, player2, player3):
+@app.route("/dk/nba/<player1>/<player2>/<player3>/num")
+def dkuser_choice3(player1, player2, player3,num):
     lineup = "nba out of season"
     return lineup
 
 
-@app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>")
-def dkuser_choice4(player1, player2, player3, player4):
+@app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>/num")
+def dkuser_choice4(player1, player2, player3, player4,num):
     lineup = "nba out of season"
     return lineup
 
@@ -132,41 +132,41 @@ def dkuser_choice4(player1, player2, player3, player4):
 # url routes for fanduel nba lineups
 
 
-@app.route("/fd/nba")
-def user_choice0():
-    lineup = nbarun_fanduel()
+@app.route("/fd/nba/num")
+def user_choice0(num):
+    lineup = nbarun_fanduel(num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>")
-def user_choice1(player1):
-    lineup = nbarun_fanduel(player1)
+@app.route("/fd/nba/<player1>/num")
+def user_choice1(player1,num):
+    lineup = nbarun_fanduel(player1,num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/<player2>")
-def user_choice2(player1, player2):
-    lineup = nbarun_fanduel(player1, player2)
+@app.route("/fd/nba/<player1>/<player2>/num")
+def user_choice2(player1, player2,num):
+    lineup = nbarun_fanduel(player1, player2,num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/<player2>/<player3>")
-def user_choice3(player1, player2, player3):
-    lineup = nbarun_fanduel(player1, player2, player3)
+@app.route("/fd/nba/<player1>/<player2>/<player3>/num")
+def user_choice3(player1, player2, player3,num):
+    lineup = nbarun_fanduel(player1, player2, player3,num)
     return lineup
 
 
-@app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>")
-def user_choice4(player1, player2, player3, player4):
-    lineup = nbarun_fanduel(player1, player2, player3, player4)
+@app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>/num")
+def user_choice4(player1, player2, player3, player4,num):
+    lineup = nbarun_fanduel(player1, player2, player3, player4,num)
     return lineup
 
 
 
 # url routes for grabbing updated slates when front end picks the sports
 
-@app.route("/dk/nfl/getslate")
-def get_slate_nfl_dk():
+@app.route("/dk/nfl/getslate/num")
+def get_slate_nfl_dk(num):
     if slates.dk.update_nfl_DK_slate() == 0:
         return "slate unavailable"
     else:
@@ -262,7 +262,7 @@ def nbaoptimizeFD(num):
     return filled_lineups
 
 
-def nbarun_fanduel(*players):
+def nbarun_fanduel(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NBAslateFD.csv")
@@ -274,7 +274,7 @@ def nbarun_fanduel(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nbaoptimizeFD(1)
+    lineup = nbaoptimizeFD(num)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -345,7 +345,7 @@ def nbaoptimizeDK(num):
     return filled_lineups
 
 
-def nbarun_draftkings(*players):
+def nbarun_draftkings(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NBAslateFD.csv")
@@ -357,7 +357,7 @@ def nbarun_draftkings(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nbaoptimizeDK(1)
+    lineup = nbaoptimizeDK(num)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -429,7 +429,7 @@ def nfloptimizeDK(num):
     return filled_lineups
 
 
-def nflrun_draftkings(*players):
+def nflrun_draftkings(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
@@ -441,7 +441,7 @@ def nflrun_draftkings(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nfloptimizeDK(1)
+    lineup = nfloptimizeDK(num)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -513,7 +513,7 @@ def nfloptimizeFD(num):
     return filled_lineups
 
 
-def nflrun_fanduel(*players):
+def nflrun_fanduel(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
@@ -525,7 +525,7 @@ def nflrun_fanduel(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nfloptimizeFD(1)
+    lineup = nfloptimizeFD(num)
 
     df = pd.read_csv(const_path)
     for player in players:

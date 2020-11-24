@@ -8,10 +8,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +40,7 @@ public class ListPlayers_MLB extends AppCompatActivity {
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
         final ArrayList<String> players = getIntent().getStringArrayListExtra("playerList");
-        final ListView playerListView = (ListView) findViewById(R.id.playerListView);
+        final TableLayout playerListView = (TableLayout) findViewById(R.id.playerListView);
         TextView remainingSalaryTxt = (TextView) findViewById(R.id.remainingSalaryTxt);
         //"Rem. Salary: $"
         String remainingSalaryString = remainingSalaryTxt.getText().toString().substring(0, 14);
@@ -52,9 +55,20 @@ public class ListPlayers_MLB extends AppCompatActivity {
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
 
-
+        for(int i = 0; i < players.size(); i++)
+        {
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            row.setLayoutParams(layoutParams);
+            CheckBox chk = new CheckBox(this);
+            TextView txt  = new TextView(this);
+            txt.setText(players.get(i));
+            row.addView(txt);
+            row.addView(chk);
+            playerListView.addView(row);
+        }
         //populate list view
-        final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
+        /*final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
         playerListView.setSaveEnabled(true);
         playerListView.setMinimumWidth(50);
         playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
@@ -173,10 +187,12 @@ public class ListPlayers_MLB extends AppCompatActivity {
 
             }
         });
-
+*/
 
 
     }
+
+
 
 }
 

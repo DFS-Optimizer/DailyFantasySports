@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -64,23 +65,18 @@ public class GetSlate {
     }
 
     private void SendRequestAndPrintResponse(int slateChoice) {
-
-
         String slateURL = "";
-
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
         if (m_sportChoice == 1) {
             slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/getslate";
 
         }
-
         //NEW SLATE URL FOR NBA DRAFT KINGS
         else if(m_sportChoice == 2){
             slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
 
         }
-
         //NEW SLATE URL FOR MLB DRAFT KINGS
         else
         {
@@ -88,8 +84,6 @@ public class GetSlate {
         }
         //DEBUG CODE
         System.out.println(slateURL);
-
-
 
         mRequestQueue = Volley.newRequestQueue(m_context);
 
@@ -100,8 +94,9 @@ public class GetSlate {
                 Toast.makeText(m_context,"This sport is out of season", Toast.LENGTH_SHORT).show();
             }
             else{
-                Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
-                ArrayList<String> data = ParseReceive(response);
+                //Toast.makeText(m_context, "Generating New Slate... ", Toast.LENGTH_SHORT).show();
+
+                ArrayList<ArrayList<String>> data = ParseReceive(response);
 
                 Intent listPlayers;
                 if(m_sportChoice == 1) {
@@ -117,7 +112,12 @@ public class GetSlate {
                 }
                 listPlayers.putExtra("siteChoice", m_siteChoice);
                 listPlayers.putExtra("sportChoice", m_sportChoice);
-                listPlayers.putExtra("playerList", data);
+                listPlayers.putExtra("playerList", data.get(0));
+                listPlayers.putExtra("positionList", data.get(1));
+                listPlayers.putExtra("teamsList", data.get(2));
+                listPlayers.putExtra("salariesList", data.get(3));
+                listPlayers.putExtra("opponentsList", data.get(4));
+                listPlayers.putExtra("projectionList", data.get(5));
                 m_context.startActivity(listPlayers);
             }
 
@@ -127,43 +127,52 @@ public class GetSlate {
     }
 
 
-    public ArrayList<String> ParseReceive(String jsonStr) {
+    public ArrayList<ArrayList<String>> ParseReceive(String jsonStr) {
         //Write line to display in list view
 
-        ArrayList<String> data = new ArrayList<>();
+        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         String formattedLine;
-        List<String> players = new ArrayList<String>();
+        ArrayList<String> players = new ArrayList<String>();
 
-        List<String> salaries = new ArrayList<String>();
-        List<String> positions = new ArrayList<String>();
-        List<String> teams = new ArrayList<String>();
-        List<String> opponents = new ArrayList<String>();
-        List<String> projections = new ArrayList<String>();
+        ArrayList<String> salaries = new ArrayList<String>();
+        ArrayList<String> positions = new ArrayList<String>();
+        ArrayList<String> teams = new ArrayList<String>();
+        ArrayList<String> opponents = new ArrayList<String>();
+        ArrayList<String> projections = new ArrayList<String>();
 
 
         JSONArray jsonarray = null;
         try {
             jsonarray = new JSONArray(jsonStr);
 
+
             for (int i = 0; i < jsonarray.length(); i++) {
-                JSONObject jsonobject = jsonarray.getJSONObject(i);
-                players.add(jsonobject.getString("player"));
-                salaries.add(jsonobject.getString("Salary"));
-                positions.add(jsonobject.getString("Position"));
-                teams.add(jsonobject.getString("Team"));
-                opponents.add(jsonobject.getString("Opponent"));
-                projections.add(jsonobject.getString("Projection"));
+                    JSONObject jsonobject = jsonarray.getJSONObject(i);
+                    players.add(jsonobject.getString("player"));
+                    String salary = jsonobject.getString("Salary");
+                    salary = "$" + salary;
+                    salaries.add(salary);
+                    positions.add(jsonobject.getString("Position"));
+                    teams.add(jsonobject.getString("Team"));
+                    opponents.add(jsonobject.getString("Opponent"));
 
-                DecimalFormat projFormat = new DecimalFormat("#.##");
-                double proj  = Double.parseDouble(projections.get(i));
+                    DecimalFormat projFormat = new DecimalFormat("#.##");
+                    double proj = Double.parseDouble(jsonobject.getString("Projection"));
 
-                formattedLine = players.get(i) + "(" + positions.get(i) + ", " + teams.get(i) + ") -- Proj. FP: " +
-                        projFormat.format(proj) + "\n$" + salaries.get(i) +
-                        ", Opponent: " + opponents.get(i);
-                data.add(formattedLine);
+                    projections.add(projFormat.format(proj));
+
+                    /*formattedLine = players.get(i) + "(" + positions.get(i) + ", " + teams.get(i) + ") -- Proj. FP: " +
+                            projFormat.format(proj) + "\n$" + salaries.get(i) +
+                            ", Opponent: " + opponents.get(i);*/
+
             }
 
-
+            data.add(players);
+            data.add(positions);
+            data.add(teams);
+            data.add(salaries);
+            data.add(opponents);
+            data.add(projections);
         } catch (JSONException e) {
             e.printStackTrace();
         }

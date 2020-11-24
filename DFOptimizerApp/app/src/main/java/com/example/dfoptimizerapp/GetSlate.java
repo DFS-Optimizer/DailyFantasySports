@@ -26,7 +26,7 @@ import java.util.List;
 public class GetSlate {
 
 
-    private static final String TAG = HttpConnect.class.getName();
+    private static final String TAG = DisplayLineups.class.getName();
     private RequestQueue mRequestQueue;
     private StringRequest stringRequest;
 

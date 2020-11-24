@@ -3,7 +3,6 @@ package com.example.dfoptimizerapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,16 +16,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static android.R.layout.simple_list_item_multiple_choice;
 
@@ -142,7 +134,7 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
 
-            Intent httpConnect = new Intent(v.getContext(), HttpConnect.class);
+            Intent httpConnect = new Intent(v.getContext(), DisplayLineups.class);
             httpConnect.putExtra("selectedPlayers", (Serializable) selectedPlayers);
             httpConnect.putExtra("siteChoice", site);
             httpConnect.putExtra("sportChoice", sport);

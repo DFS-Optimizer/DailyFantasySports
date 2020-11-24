@@ -4,15 +4,10 @@ package com.example.dfoptimizerapp;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -23,9 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
-import static android.R.layout.simple_list_item_multiple_choice;
 
 public class ListPlayers_NBA<sport> extends AppCompatActivity {
     @Override
@@ -61,7 +54,8 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
 
-        playerListView.canScrollVertically(2);
+        /****INITIALIZE THE TABLE*****/
+        //header row
         TableRow header = new TableRow(this);
         TableRow.LayoutParams p = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         header.setLayoutParams(p);
@@ -84,6 +78,8 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
         header.addView(opponentCol);
         header.addView(projCol);
         playerListView.addView(header);
+
+        //all the other rows
         for(int i = 0; i < players.size(); i++)
         {
             TableRow row = new TableRow(this);
@@ -117,30 +113,38 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
                 row.setBackgroundColor(Color.WHITE);
             }
 
+            /***CHECKED CHANGED LISTENER FOR EACH CHECKBOX***/
             chk.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton v, boolean b) {
                     boolean isChecked= b;
+                    //get the player name (column 0)
                     String player = ((TextView)row.getChildAt(0)).getText().toString();
-                    String selectedSalary = ((TextView)row.getChildAt(3)).getText().toString();
-                    selectedSalary = selectedSalary.substring(1);
-                    System.out.println(selectedSalary);
+
+                    //get the salary (column 1)
+                    String selectedSalary = ((TextView)row.getChildAt(3)).getText().toString().substring(1);
                     int salary = Integer.parseInt(selectedSalary);
+
+                    //if the size of the selected players is >= 4, and the user is trying to check a 5th checkbox,
+                    // set it to false and notify them
                     if (selectedPlayers.size() >= maxChecked && isChecked) {
 
                         v.setChecked(false);
                         Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
 
-                    } else if ((remainingSalary[0] - salary) < 0) {
+                    }
+                    //else if they are trying to check a player whose salary is greater than their remaining salary cap,
+                    //set the checkbox to false and notify them
+                    else if ((remainingSalary[0] - salary) < 0 && isChecked) {
                         v.setChecked(false);
                         Toast.makeText(getApplicationContext(), "This player's salary is more than your remaining salary", Toast.LENGTH_SHORT).show();
 
-                    } else {
+                    }
+                    //else this is a legal check/uncheck -- add/remove the player and increment/decrement
+                    else {
                         if (isChecked) {
                             selectedPlayers.add(player);
 
-                            //DEBUG CODE
-                            System.out.println(selectedPlayers.size());
                             remainingSalary[0] -= salary;
                         } else {
                             remainingSalary[0] += salary;
@@ -155,6 +159,7 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
         }
 
 
+        /***CONTINUE BUTTON ON CLICK LISTENER***/
         continueBtn.setOnClickListener((v) -> {
             //if site == 1, that means that FanDuel was chosen in the beginning, else DraftKings was chosen
 
@@ -165,6 +170,7 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
             startActivity(httpConnect);
         });
 
+        /***CLEAR BUTTON ON CLICK LISTENER***/
         clearBtn.setOnClickListener((v) -> {
             //A bit laggy, why?
             selectedPlayers.clear();

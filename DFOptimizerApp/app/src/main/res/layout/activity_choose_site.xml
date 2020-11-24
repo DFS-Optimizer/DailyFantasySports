@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".ChooseSport">
 
     <Button
@@ -11,6 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="315dp"
+        android:textColor="#333333"
+        android:backgroundTint="#4ab9f5"
         android:text="DraftKings"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,6 +23,8 @@
         android:id="@+id/fanDuelBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#333333"
+        android:backgroundTint="#4ab9f5"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
         android:layout_marginBottom="64dp"
@@ -34,6 +39,8 @@
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginBottom="152dp"
+        android:textColor="#333333"
+        android:backgroundTint="#4ab9f5"
         android:onClick="logout"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"

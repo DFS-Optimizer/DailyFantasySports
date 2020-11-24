@@ -57,6 +57,7 @@ public class ListPlayers_NFL extends AppCompatActivity {
         //List of positions that can be used as a filter
         String[] pos = new String[]{"All Positions","QB","WR","RB","TE","DF","K"};
         //adapter to fill the dropdown menu
+
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
 

@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="102dp"
         android:text="Create Customized Lineup"
+        android:textColor="#333333"
+        android:backgroundTint="#4ab9f5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

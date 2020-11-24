@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.transition.Visibility;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -69,9 +70,6 @@ public class ListPlayers_NFL extends AppCompatActivity {
         positionFilter.setAdapter(dropdownAdapter);
 
 
-
-
-        playerListView.canScrollVertically(2);
         TableRow header = new TableRow(this);
         TableRow.LayoutParams p = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
         header.setLayoutParams(p);
@@ -138,7 +136,6 @@ public class ListPlayers_NFL extends AppCompatActivity {
                     int salary = Integer.parseInt(selectedSalary);
                     if (selectedPlayers.size() >= maxChecked && isChecked) {
 
-                        //playerListView.clearChoices();
                         v.setChecked(false);
                         Toast.makeText(getApplicationContext(), "You cannot select more that 4 players", Toast.LENGTH_SHORT).show();
 
@@ -175,14 +172,54 @@ public class ListPlayers_NFL extends AppCompatActivity {
             httpConnect.putExtra("sportChoice", sport);
             startActivity(httpConnect);
         });
+
+        clearBtn.setOnClickListener((v) -> {
+            //A bit laggy, why?
+            selectedPlayers.clear();
+            //Toast.makeText(getApplicationContext(), "All selections cleared", Toast.LENGTH_SHORT).show();
+
+
+
+        });
+
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                TableRow row;
+                for(int i=0; i<players.size();i++)
+                {
+                    row = (TableRow) playerListView.getChildAt(i);
+                    if(!((TextView)row.getChildAt(0)).getText().toString().toLowerCase().contains(query.toLowerCase()))
+                    {
+                        row.setVisibility(View.GONE);
+                    }
+
+                }
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                TableRow row;
+                for(int i=0; i<players.size();i++)
+                {
+                    row = (TableRow) playerListView.getChildAt(i);
+                    if(!((TextView)row.getChildAt(0)).getText().toString().toLowerCase().contains(newText.toLowerCase()))
+                    {
+                        row.setVisibility(View.GONE);
+                    }
+
+                }
+
+                return false;
+
+
+            }
+        });
         //populate list view
-        /*final ArrayAdapter<String>[] playerListAdapter = new ArrayAdapter[]{null};
-        playerListView.setSaveEnabled(true);
-        playerListView.setMinimumWidth(50);
-        playerListAdapter[0] = new ArrayAdapter<String>(this, simple_list_item_multiple_choice, (String[]) players.toArray(new String[0]));;
-        playerListView.setAdapter(playerListAdapter[0]);
-
-
+        /*
         //onItemSelectedListener for the position filter
         positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

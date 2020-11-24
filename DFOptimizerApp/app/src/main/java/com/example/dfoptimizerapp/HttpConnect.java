@@ -44,6 +44,8 @@ public class HttpConnect extends AppCompatActivity {
         setContentView(R.layout.activity_http_connect);
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
+        final TextView numberOfLineups = findViewById(R.id.numberOfLineups);
+
 
         String url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/";
 
@@ -58,78 +60,77 @@ public class HttpConnect extends AppCompatActivity {
 
         if(sport == 1)
         {
-            url = url.concat("nba");
+            url = url.concat("nba/");
         }
         else if(sport == 2)
         {
-            url=url.concat("nfl");
+            url=url.concat("nfl/");
         }
         else
         {
-            url = url.concat("mlb");
+            url = url.concat("mlb/");
         }
 
         //Connect button
         Button btn = (Button) findViewById(R.id.httpBut);
         String finalUrl = url;
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendRequestAndPrintResponse(finalUrl);
+                try {
+                    int num = Integer.parseInt(numberOfLineups.getText().toString());
+                    if(num > 0) {
+                        SendRequestAndPrintResponse(finalUrl, num);
+                    }
+                    else
+                    {
+                        Toast.makeText(HttpConnect.this, "You must enter a number of lineups greater than 0", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                catch (NumberFormatException e){
+                    Toast.makeText(HttpConnect.this, "You must enter a number of lineups greater than 0", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-
-
-
-
-
     }
-    private void SendRequestAndPrintResponse(String url) {
+    private void SendRequestAndPrintResponse(String url, int num) {
 
         int i;
         int j;
-        ArrayList<String> myList = (ArrayList<String>) getIntent().getSerializableExtra("selectedPlayers");
-        ArrayList<String> newList = new ArrayList<String>();
-        String word;
-        String newWord = "";
+        ArrayList<String> initialPlayerList = (ArrayList<String>) getIntent().getSerializableExtra("selectedPlayers");
+        ArrayList<String> formattedPlayerList = new ArrayList<String>();
+        String name;
+        String formattedName = "";
 
-        System.out.println("Input: " + myList);
+        System.out.println("Input: " + initialPlayerList);
 
-        for(i = 0; i < myList.size(); i++){
-            word = myList.get(i);
-            for(j = 0; j < word.length(); j++){
+        for(i = 0; i < initialPlayerList.size(); i++){
+            name = initialPlayerList.get(i);
+            for(j = 0; j < name.length(); j++){
                 //append each letter until a space
-                if(word.charAt(j) == ' '){
+                if(name.charAt(j) == ' '){
                     //append %20
-                    newWord = newWord + "%20";
+                    formattedName = formattedName + "%20";
                 }
                 else{
-                    newWord = newWord + word.charAt(j);
+                    formattedName = formattedName + name.charAt(j);
                 }
             }
-            newList.add(newWord);
-            newWord = "";
+            formattedPlayerList.add(formattedName);
+            formattedName = "";
         }
-        System.out.println(newList);
-        if(myList.size() != 0) {
-             url = url.concat("/");
-        }
+        System.out.println(formattedPlayerList);
         int k;
         String finalURL = url;
-        for(k = 0; k < newList.size(); k++){
+        for(k = 0; k < formattedPlayerList.size(); k++){
 
-            finalURL = finalURL + newList.get(k);
-            if(k != newList.size()-1) {
-                finalURL = finalURL + "/";
-            }
-
+            finalURL = finalURL + formattedPlayerList.get(k);
+            finalURL = finalURL + "/";
         }
-
+        finalURL = finalURL + num;
         System.out.println(finalURL);
-
-
-
 
 
         mRequestQueue = Volley.newRequestQueue(this);

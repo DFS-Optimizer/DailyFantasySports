@@ -180,6 +180,11 @@ public class ListPlayers_NFL extends AppCompatActivity {
         clearBtn.setOnClickListener((v) -> {
             //A bit laggy, why?
             selectedPlayers.clear();
+//            for(int i=0; i<players.size(); i++){
+//                TableRow row = (TableRow)playerListView.getChildAt(i);
+//                System.out.println(i+" "+(CheckBox)row.getChildAt(6));
+//                //((CheckBox)row.getChildAt(5)).setSelected(false);
+//            }
             //Toast.makeText(getApplicationContext(), "All selections cleared", Toast.LENGTH_SHORT).show();
 
 
@@ -197,6 +202,9 @@ public class ListPlayers_NFL extends AppCompatActivity {
                     {
                         row.setVisibility(View.GONE);
                     }
+                    else{
+                        row.setVisibility(View.VISIBLE);
+                    }
 
                 }
 
@@ -212,6 +220,9 @@ public class ListPlayers_NFL extends AppCompatActivity {
                     if(!((TextView)row.getChildAt(0)).getText().toString().toLowerCase().contains(newText.toLowerCase()))
                     {
                         row.setVisibility(View.GONE);
+                    }
+                    else{
+                        row.setVisibility(View.VISIBLE);
                     }
 
                 }

@@ -3,6 +3,7 @@ package com.example.dfoptimizerapp;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,8 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class GetRequests{
 
@@ -53,6 +56,7 @@ public class GetRequests{
     }
 
     public void ParseReceive(String jsonStr,TextView txtView){
+
         //ADD IF CHECK FOR SPORT OUT OF SEASON!!
 
         //ELSE

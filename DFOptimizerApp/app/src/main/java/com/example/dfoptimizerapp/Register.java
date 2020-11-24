@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
         //final ProgressBar progressBar = findViewById(R.id.progressBar);
 
         if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), ChooseSite.class));
+            startActivity(new Intent(getApplicationContext(), HomeScreen.class));
             finish();
         }
 
@@ -203,7 +203,7 @@ public class Register extends AppCompatActivity {
             fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(), ChooseSite.class));
+                    startActivity(new Intent(getApplicationContext(), HomeScreen.class));
 
                 } else {
                     Toast.makeText(Register.this, "Error! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();

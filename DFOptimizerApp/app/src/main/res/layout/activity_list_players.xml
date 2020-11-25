@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gradient"
     android:layout_height="match_parent">
+
 
 
     <TextView
@@ -16,6 +18,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="19dp"
+        android:textColor="#ffffff"
         android:text="Here are the players who are available today. Choose any four that you would like to include in your lineup."
         app:layout_constraintBottom_toTopOf="@+id/remainingSalaryTxt"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,6 +36,9 @@
         android:layout_marginRight="30dp"
         android:layout_marginBottom="40dp"
         android:text="Continue"
+        android:backgroundTint="#4ab9f5"
+        android:background="@drawable/custom_rounded_corners"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/clearPlayers"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,6 +100,7 @@
         android:layout_marginRight="25dp"
         android:layout_marginBottom="31dp"
         android:text="Rem. Salary: $60000"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/positionFilter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/searchView"
@@ -121,6 +128,9 @@
         android:layout_marginEnd="78dp"
         android:layout_marginRight="78dp"
         android:text="Clear All"
+        android:backgroundTint="#4ab9f5"
+        android:background="@drawable/custom_rounded_corners"
+        android:textColor="#333333"
         app:layout_constraintBaseline_toBaselineOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/continueBtn" />

@@ -13,9 +13,10 @@
 
     <Button
         android:id="@+id/httpBut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="49dp"
         android:layout_marginBottom="15dp"
+        android:background="@drawable/custom_rounded_corners"
         android:backgroundTint="#4ab9f5"
         android:text="Generate Optimized Lineup"
         android:textColor="#333333"
@@ -63,6 +64,7 @@
         android:ems="10"
         android:inputType="number"
         android:text="1"
+        android:backgroundTint="#ffffff"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/httpBut"
         app:layout_constraintStart_toStartOf="@+id/httpBut"

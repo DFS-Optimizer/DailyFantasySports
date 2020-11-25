@@ -172,9 +172,12 @@ public class ListPlayers_NBA<sport> extends AppCompatActivity {
 
         /***CLEAR BUTTON ON CLICK LISTENER***/
         clearBtn.setOnClickListener((v) -> {
-            //A bit laggy, why?
             selectedPlayers.clear();
-            //Toast.makeText(getApplicationContext(), "All selections cleared", Toast.LENGTH_SHORT).show();
+            for(int i = 0; i < players.size(); i++)
+            {
+                TableRow row = (TableRow) playerListView.getChildAt(i);
+
+            }
 
 
 

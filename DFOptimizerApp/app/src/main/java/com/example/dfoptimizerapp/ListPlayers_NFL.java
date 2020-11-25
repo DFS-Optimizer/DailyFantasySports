@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -52,12 +53,12 @@ public class ListPlayers_NFL extends AppCompatActivity {
 
         //60000
         int []remainingSalary = new int[]{Integer.parseInt(remainingSalaryTxt.getText().toString().substring(14))};
-        final String[] filterText = {"All Positions"};
+
 
         //List of positions that can be used as a filter
-        String[] pos = new String[]{"All Positions","QB","WR","RB","TE","DF","K"};
+        final String[][] pos = {new String[]{"All Positions", "QB", "WR", "RB", "TE", "D", "K"}};
         //adapter to fill the dropdown menu
-        ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos);
+        ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, pos[0]);
         positionFilter.setAdapter(dropdownAdapter);
 
 
@@ -182,8 +183,9 @@ public class ListPlayers_NFL extends AppCompatActivity {
             selectedPlayers.clear();
 //            for(int i=0; i<players.size(); i++){
 //                TableRow row = (TableRow)playerListView.getChildAt(i);
-//                System.out.println(i+" "+(CheckBox)row.getChildAt(6));
-//                //((CheckBox)row.getChildAt(5)).setSelected(false);
+//                //System.out.println(i+" "+(CheckBox)row.getChildAt(6));
+//                CheckBox chk = (CheckBox)row.getChildAt(6);
+//                chk.setChecked(false);
 //            }
             //Toast.makeText(getApplicationContext(), "All selections cleared", Toast.LENGTH_SHORT).show();
 
@@ -195,7 +197,7 @@ public class ListPlayers_NFL extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 TableRow row;
-                for(int i=0; i<players.size();i++)
+                for(int i=1; i<=players.size();i++)
                 {
                     row = (TableRow) playerListView.getChildAt(i);
                     if(!((TextView)row.getChildAt(0)).getText().toString().toLowerCase().contains(query.toLowerCase()))
@@ -214,7 +216,7 @@ public class ListPlayers_NFL extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 TableRow row;
-                for(int i=0; i<players.size();i++)
+                for(int i=1; i<=players.size();i++)
                 {
                     row = (TableRow) playerListView.getChildAt(i);
                     if(!((TextView)row.getChildAt(0)).getText().toString().toLowerCase().contains(newText.toLowerCase()))
@@ -232,6 +234,44 @@ public class ListPlayers_NFL extends AppCompatActivity {
 
             }
         });
+
+        /***FILTER DROPDOWN***/
+        final String[] filterText = {"All Positions"};
+        positionFilter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                filterText[0] = (String)positionFilter.getItemAtPosition(i);
+                TableRow row;
+                for(int j=1; j<=players.size();j++)
+                {
+                    row = (TableRow) playerListView.getChildAt(j);
+                    row.setVisibility(View.VISIBLE);
+                    if(filterText[0] != "All Positions")
+                    {
+                        if(!((TextView)row.getChildAt(1)).getText().toString().toLowerCase().contains(filterText[0].toLowerCase())){
+                            row.setVisibility(View.GONE);
+                        }
+                    }
+                    else{
+                        row.setVisibility(View.VISIBLE);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                for(int i = 0;i<players.size();i++)
+                {
+                    TableRow row = (TableRow) playerListView.getChildAt(i);
+                    row.setVisibility(View.VISIBLE);
+                }
+            }
+
+        });
+
+
         //populate list view
         /*
         //onItemSelectedListener for the position filter

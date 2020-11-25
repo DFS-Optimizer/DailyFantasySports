@@ -42,7 +42,7 @@ public class ChooseSport extends AppCompatActivity {
             else if(nflSwitch.isChecked()){
                 new GetSlate(v,site,2, this);
             }
-            else
+            else if(mlbSwitch.isChecked())
             {
                 new GetSlate(v,site,3,this);
             }

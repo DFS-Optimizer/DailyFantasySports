@@ -16,13 +16,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class GetSlate {
 
@@ -89,7 +87,7 @@ public class GetSlate {
 
         stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
             Log.i(TAG, "Response: " + response);
-            if(response.contains( "slates not available, nba out of season"))
+            if(response.contains( "slates not available"))
             {
                 Toast.makeText(m_context,"This sport is out of season", Toast.LENGTH_SHORT).show();
             }
@@ -99,17 +97,8 @@ public class GetSlate {
                 ArrayList<ArrayList<String>> data = ParseReceive(response);
 
                 Intent listPlayers;
-                if(m_sportChoice == 1) {
-                    listPlayers = new Intent(m_view.getContext(), ListPlayers_NBA.class);
-                }
-                else if(m_sportChoice == 2)
-                {
-                    listPlayers = new Intent(m_view.getContext(), ListPlayers_NFL.class);
-                }
-                else
-                {
-                    listPlayers = new Intent(m_view.getContext(), ListPlayers_MLB.class);
-                }
+
+                listPlayers = new Intent(m_view.getContext(), ListPlayers.class);
                 listPlayers.putExtra("siteChoice", m_siteChoice);
                 listPlayers.putExtra("sportChoice", m_sportChoice);
                 listPlayers.putExtra("playerList", data.get(0));

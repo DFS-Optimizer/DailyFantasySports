@@ -25,7 +25,7 @@
         <activity android:name=".DisplayLineups" />
         <activity android:name=".ListPlayers_NBA"/>
         <activity android:name=".ListPlayers_MLB"/>
-        <activity android:name=".ListPlayers_NFL" />
+        <activity android:name=".ListPlayers" />
         <activity android:name=".ChooseSport" />
     </application>
 

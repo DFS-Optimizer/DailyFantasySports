@@ -25,14 +25,18 @@
 
     <Button
         android:id="@+id/customizeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_width="298dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="92dp"
+        android:background="@drawable/custom_rounded_corners"
         android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
         android:text="Create Customized Lineup"
         android:textColor="#333333"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

@@ -53,17 +53,17 @@ def nflchoice1(player1, num):
 
 @app.route("/dk/nfl/<player1>/<player2>/<num>")
 def nflchoice2(player1, player2, num):
-    lineup = nflrun_draftkings(player1, player2, num)
+    lineup = nflrun_draftkings(player1, player2, num = num)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<player2>/<player3>/<num>")
 def nflchoice3(player1, player2, player3, num):
-    lineup = nflrun_draftkings(player1, player2, player3, num)
+    lineup = nflrun_draftkings(player1, player2, player3, num = num)
     return lineup
 
 @app.route("/dk/nfl/<player1>/<player2>/<player3>/<player4>/<num>")
 def nflchoice4(player1, player2, player3, player4,num):
-    lineup = nflrun_draftkings(player1, player2, player3, player4, num)
+    lineup = nflrun_draftkings(player1, player2, player3, player4, num = num)
     return lineup
 
 
@@ -140,25 +140,25 @@ def user_choice0(num):
 
 @app.route("/fd/nba/<player1>/<num>")
 def user_choice1(player1,num):
-    lineup = nbarun_fanduel(player1,num)
+    lineup = nbarun_fanduel(player1,num = num)
     return lineup
 
 
 @app.route("/fd/nba/<player1>/<player2>/<num>")
 def user_choice2(player1, player2,num):
-    lineup = nbarun_fanduel(player1, player2,num)
+    lineup = nbarun_fanduel(player1, player2,num = num)
     return lineup
 
 
 @app.route("/fd/nba/<player1>/<player2>/<player3>/<num>")
 def user_choice3(player1, player2, player3,num):
-    lineup = nbarun_fanduel(player1, player2, player3,num)
+    lineup = nbarun_fanduel(player1, player2, player3,num = num)
     return lineup
 
 
 @app.route("/fd/nba/<player1>/<player2>/<player3>/<player4>/<num>")
 def user_choice4(player1, player2, player3, player4,num):
-    lineup = nbarun_fanduel(player1, player2, player3, player4,num)
+    lineup = nbarun_fanduel(player1, player2, player3, player4,num = num)
     return lineup
 
 

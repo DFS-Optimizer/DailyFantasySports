@@ -117,5 +117,5 @@ class Draftkings(Optimizer):
                     total_proj += self.players_df.loc[num, 'proj']
             a_lineup.append(round(total_proj, 2))
             filled_lineups.append(a_lineup)
-            print(filled_lineups)
+            # print(filled_lineups)
         return filled_lineups

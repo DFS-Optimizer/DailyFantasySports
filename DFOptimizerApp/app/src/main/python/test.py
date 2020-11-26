@@ -60,7 +60,7 @@ def nfloptimizeDK(num):
     return filled_lineups
 
 
-def nflrun_draftkings(*players):
+def nflrun_draftkings(*players, num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
@@ -72,7 +72,10 @@ def nflrun_draftkings(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nfloptimizeDK(1)
+    lineup = nfloptimizeDK(num)
+    # for line in lineup:
+    #     print(line)
+
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -83,7 +86,7 @@ def nflrun_draftkings(*players):
     for sublist in lineup:
         for item in sublist:
             final.append(item)
-    e = players.__len__() * 100
+        e = players.__len__() * 100
     total = final.pop() - e
     total = round(total, 2)
     print(final)
@@ -97,7 +100,7 @@ def nflrun_draftkings(*players):
             result += ","
         result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result += ',{"Total":"' + str(total) + '"}]'
-    print(result)
+    # print(result)
 
     return result
 
@@ -185,5 +188,5 @@ def nflrun_fanduel(*players):
 
     return result
 
-nflrun_draftkings()
-nflrun_fanduel()
+nflrun_draftkings( num = 2)
+# nflrun_fanduel()

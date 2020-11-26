@@ -165,31 +165,31 @@ def user_choice4(player1, player2, player3, player4,num):
 
 
 @app.route("/dk/mlb/num")
-def dkuser_choice0(num):
+def dkmlb_choice0(num):
     lineup = "mlb out of season"
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<num>")
-def dkuser_choice1(player1,num):
+def dkmlb_choice1(player1,num):
     lineup = "mlb out of season"
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<player2>/<num>")
-def dkuser_choice2(player1, player2, num):
+def dkmlb_choice2(player1, player2, num):
     lineup = "mlb out of season"
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<player2>/<player3>/<num>")
-def dkuser_choice3(player1, player2, player3,num):
+def dkmlb_choice3(player1, player2, player3,num):
     lineup = "nba out of season"
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<player2>/<player3>/<player4>/<num>")
-def dkuser_choice4(player1, player2, player3, player4,num):
+def dkmlb_choice4(player1, player2, player3, player4,num):
     lineup = "mlb out of season"
     return lineup
 
@@ -199,27 +199,27 @@ def dkuser_choice4(player1, player2, player3, player4,num):
 
 
 @app.route("/fd/mlb/<num>")
-def fdnflchoice0(num):
+def fdmlbchoice0(num):
     lineup = "run mlb fanduel function"
     return lineup
 
 @app.route("/fd/mlb/<player1>/<num>")
-def fdnflchoice1(player1, num):
+def fdmlbchoice1(player1, num):
     lineup = "run mlb fanduel function"
     return lineup
 
 @app.route("/fd/mlb/<player1>/<player2>/<num>")
-def fdnflchoice2(player1, player2,num):
+def fdmlbchoice2(player1, player2,num):
     lineup = "run mlb fanduel function here"
     return lineup
 
 @app.route("/fd/mlb/<player1>/<player2>/<player3>/<num>")
-def fdnflchoice3(player1, player2, player3,num):
+def fdmlbchoice3(player1, player2, player3,num):
     lineup = "run mlb fanduel function here"
     return lineup
 
 @app.route("/fd/mlb/<player1>/<player2>/<player3>/<player4>/<num>")
-def fdnflchoice4(player1, player2, player3, player4,num):
+def fdmlbchoice4(player1, player2, player3, player4,num):
     lineup = "run mlb fanduel function here"
     return lineup
 

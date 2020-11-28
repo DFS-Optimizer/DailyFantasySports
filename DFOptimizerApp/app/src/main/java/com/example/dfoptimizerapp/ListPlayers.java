@@ -1,9 +1,12 @@
 package com.example.dfoptimizerapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +29,8 @@ import java.util.Collections;
 public class ListPlayers extends AppCompatActivity {
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint({"ResourceAsColor", "ResourceType"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +72,9 @@ public class ListPlayers extends AppCompatActivity {
         //adapter to fill the dropdown menu
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pos);
         positionFilter.setAdapter(dropdownAdapter);
+        positionFilter.setBackgroundTintList(getColorStateList(R.color.white));
+        positionFilter.setForegroundTintList(getColorStateList(R.color.white));
+
 
 
         /****INITIALIZE THE TABLE*****/
@@ -76,15 +84,21 @@ public class ListPlayers extends AppCompatActivity {
         header.setLayoutParams(p);
         TextView playerCol = new TextView(this);
         playerCol.setText("Player:");
+        playerCol.setTextColor(Color.parseColor("#ffffff"));
         TextView positionCol = new TextView(this);
+        positionCol.setTextColor(Color.parseColor("#ffffff"));
         positionCol.setText("Pos.:");
         TextView teamCol = new TextView(this);
+        teamCol.setTextColor(Color.parseColor("#ffffff"));
         teamCol.setText("Team:");
         TextView salaryCol = new TextView(this);
+        salaryCol.setTextColor(Color.parseColor("#ffffff"));
         salaryCol.setText("Salary:");
         TextView opponentCol = new TextView(this);
+        opponentCol.setTextColor(Color.parseColor("#ffffff"));
         opponentCol.setText("Opp.:");
         TextView projCol = new TextView(this);
+        projCol.setTextColor(Color.parseColor("#ffffff"));
         projCol.setText("Proj.");
         header.addView(playerCol);
         header.addView(positionCol);
@@ -99,17 +113,24 @@ public class ListPlayers extends AppCompatActivity {
             TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(layoutParams);
             CheckBox chk = new CheckBox(this);
+            chk.setButtonTintList(getColorStateList(R.color.white));
             playerCol = new TextView(this);
+            playerCol.setTextColor(Color.parseColor("#ffffff"));
             playerCol.setText(players.get(i));
             positionCol = new TextView(this);
+            positionCol.setTextColor(Color.parseColor("#ffffff"));
             positionCol.setText(positions.get(i));
             teamCol = new TextView(this);
+            teamCol.setTextColor(Color.parseColor("#ffffff"));
             teamCol.setText(teams.get(i));
             salaryCol = new TextView(this);
+            salaryCol.setTextColor(Color.parseColor("#ffffff"));
             salaryCol.setText(salaries.get(i));
             opponentCol = new TextView(this);
+            opponentCol.setTextColor(Color.parseColor("#ffffff"));
             opponentCol.setText(opponents.get(i));
             projCol = new TextView(this);
+            projCol.setTextColor(Color.parseColor("#ffffff"));
             projCol.setText(projections.get(i));
             row.addView(playerCol);
             row.addView(positionCol);
@@ -121,9 +142,9 @@ public class ListPlayers extends AppCompatActivity {
             row.setId(i);
             row.addView(chk);
             if (i % 2 != 0) {
-                row.setBackgroundColor(Color.LTGRAY);
+                row.setBackgroundColor(Color.parseColor("#404040"));
             } else {
-                row.setBackgroundColor(Color.WHITE);
+                row.setBackgroundColor(Color.parseColor("#333333"));
             }
 
             /***CHECKED CHANGED LISTENER FOR EACH CHECKBOX***/

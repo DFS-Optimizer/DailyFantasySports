@@ -4,74 +4,92 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/gradient"
+    android:orientation="vertical"
     tools:context=".ChooseSport">
 
-    <Switch
-        android:id="@+id/mlbSwitch"
-        android:layout_width="104dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="137dp"
+    <Button
+        android:id="@+id/mlbButton"
+        android:layout_width="329dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/custom_rounded_corners"
+        android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
         android:text="MLB"
+        android:textColor="#333333"
+        android:textSize="32sp"
         android:visibility="visible"
-        android:textColor="#ffffff"
         app:layout_constraintBottom_toTopOf="@+id/continueBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nflSwitch" />
+        app:layout_constraintTop_toBottomOf="@+id/nflButton" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="96dp"
-        android:layout_height="0dp"
+        android:layout_width="214dp"
+        android:layout_height="44dp"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="71dp"
-        android:text="Select a Sport "
-        android:textColor="#ffffff"
         android:backgroundTint="#4ab9f5"
-        app:layout_constraintBottom_toTopOf="@+id/nbaSwitch"
+        android:fontFamily="@font/klaptbold"
+        android:text="Select a Sport"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/nbaButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/nbaSwitch"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <Button
+        android:id="@+id/nbaButton"
+        android:layout_width="329dp"
+        android:layout_height="77dp"
         android:layout_marginBottom="9dp"
+        android:background="@drawable/custom_rounded_corners"
+        android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
         android:text="NBA"
-        android:textColor="#ffffff"
-        app:layout_constraintBottom_toTopOf="@+id/nflSwitch"
-        app:layout_constraintEnd_toEndOf="@+id/nflSwitch"
-        app:layout_constraintStart_toStartOf="@+id/nflSwitch"
+        android:textColor="#333333"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toTopOf="@+id/nflButton"
+        app:layout_constraintEnd_toEndOf="@+id/nflButton"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/nflButton"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <Switch
-        android:id="@+id/nflSwitch"
-        android:layout_width="104dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="9dp"
-        android:text="NFL"
-        android:visibility="visible"
-        android:textColor="#ffffff"
-        android:backgroundTint="#4ab9f5"
-        app:layout_constraintBottom_toTopOf="@+id/mlbSwitch"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nbaSwitch" />
-
     <Button
+        android:id="@+id/nflButton"
+        android:layout_width="329dp"
+        android:layout_height="77dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="9dp"
+        android:backgroundTint="#4ab9f5"
+        android:background="@drawable/custom_rounded_corners"
+        android:text="NFL"
+        android:fontFamily="@font/klaptbold"
+        android:textSize="32sp"
+        android:textColor="#333333"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/mlbButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nbaButton" />
+
+    <!--<Button
         android:id="@+id/continueBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="214dp"
-        android:textColor="#333333"
         android:backgroundTint="#4ab9f5"
         android:text="Continue"
+        android:textColor="#333333"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mlbSwitch" />
+        app:layout_constraintTop_toBottomOf="@+id/mlbButton" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

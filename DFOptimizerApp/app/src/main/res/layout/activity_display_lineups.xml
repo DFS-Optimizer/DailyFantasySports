@@ -4,28 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     android:background="@drawable/gradient"
-    tools:context=".DisplayLineups"
-=======
-    android:background="@color/gray"
->>>>>>> Stashed changes
-=======
-    android:background="@color/gray"
->>>>>>> Stashed changes
-=======
-    android:background="@color/gray"
->>>>>>> Stashed changes
-=======
-    android:background="@color/gray"
->>>>>>> Stashed changes
-=======
-    android:background="@color/gray"
->>>>>>> Stashed changes
     android:orientation="vertical"
     tools:context=".DisplayLineups"
     tools:layout_editor_absoluteX="0dp"

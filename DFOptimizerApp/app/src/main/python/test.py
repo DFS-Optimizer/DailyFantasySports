@@ -87,20 +87,30 @@ def nflrun_draftkings(*players, num):
         for item in sublist:
             final.append(item)
         e = players.__len__() * 100
-    total = final.pop() - e
-    total = round(total, 2)
-    print(final)
+    # total = final.pop() - e
+    # total = round(total, 2)
+    # print(final)
 
     df = pd.read_csv(const_path)
+    # print(df)
+
+    count = 0
     result = "["
     for player in final:
-        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
-        if not result == "[":
-            result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result += ',{"Total":"' + str(total) + '"}]'
-    # print(result)
+        count = count +1
+        if count == 10:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
+    print(result)
 
     return result
 
@@ -147,7 +157,7 @@ def nfloptimizeFD(num):
     return filled_lineups
 
 
-def nflrun_fanduel(*players):
+def nflrun_fanduel(*players, num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
@@ -159,7 +169,7 @@ def nflrun_fanduel(*players):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nfloptimizeFD(1)
+    lineup = nfloptimizeFD(num)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -171,22 +181,27 @@ def nflrun_fanduel(*players):
         for item in sublist:
             final.append(item)
     e = players.__len__() * 100
-    total = final.pop() - e
-    total = round(total, 2)
-    print(final)
+    # print(final)
 
     df = pd.read_csv(const_path)
+    count = 0
     result = "["
     for player in final:
-        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
-        if not result == "[":
-            result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result += ',{"Total":"' + str(total) + '"}]'
+        count = count + 1
+        if count == 10:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
     print(result)
-
     return result
 
-nflrun_draftkings( num = 2)
-# nflrun_fanduel()
+nflrun_draftkings( num = 3)
+nflrun_fanduel(num = 3)

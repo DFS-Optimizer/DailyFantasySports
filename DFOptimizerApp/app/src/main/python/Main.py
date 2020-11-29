@@ -351,19 +351,25 @@ def nbarun_fanduel(*players,num):
             final.append(item)
 
     e = players.__len__() * 100
-    total = final.pop() - e
-    total = round(total, 2)
 
     df = pd.read_csv(const_path)
+    df = pd.read_csv(const_path)
+    count = 0
     result = "["
     for player in final:
-        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
-        if not result == "[":
-            result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result += ',{"Total":"' + str(total) + '"}]'
-    # print(result)
+        count = count + 1
+        if count == 10:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
     return result
 
 
@@ -433,20 +439,28 @@ def nbarun_draftkings(*players,num):
         for item in sublist:
             final.append(item)
     e = players.__len__() * 100
-    total = final.pop() - e
-    total = round(total, 2)
     print(final)
 
     df = pd.read_csv(const_path)
+    df = pd.read_csv(const_path)
+    count = 0
     result = "["
     for player in final:
-        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
-        if not result == "[":
-            result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result += ',{"Total":"' + str(total) + '"}]'
+        count = count + 1
+        if count == 9:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
     print(result)
+    return result
 
     return result
 
@@ -517,20 +531,25 @@ def nflrun_draftkings(*players,num):
         for item in sublist:
             final.append(item)
     e = players.__len__() * 100
-    total = final.pop() - e
-    total = round(total, 2)
-    print(final)
+    # print(final)
 
     df = pd.read_csv(const_path)
+    count = 0
     result = "["
     for player in final:
-        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
-        if not result == "[":
-            result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result += ',{"Total":"' + str(total) + '"}]'
-    print(result)
+        count = count + 1
+        if count == 10:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
 
     return result
 
@@ -601,20 +620,28 @@ def nflrun_fanduel(*players,num):
         for item in sublist:
             final.append(item)
     e = players.__len__() * 100
-    total = final.pop() - e
-    total = round(total, 2)
     print(final)
 
     df = pd.read_csv(const_path)
+    df = pd.read_csv(const_path)
+    count = 0
     result = "["
     for player in final:
-        temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-        temp = round(temp, 2)
-        if not result == "[":
-            result += ","
-        result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result += ',{"Total":"' + str(total) + '"}]'
+        count = count + 1
+        if count == 10:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
     print(result)
+    return result
 
     return result
 

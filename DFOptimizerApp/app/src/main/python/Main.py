@@ -404,7 +404,7 @@ def nbaoptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NBAslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "NBAslate.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -445,7 +445,7 @@ def nbaoptimizeDK(num):
 def nbarun_draftkings(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NBAslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "NBAslate.csv")
     print(const_path)
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -496,7 +496,7 @@ def nfloptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -537,7 +537,7 @@ def nfloptimizeDK(num):
 def nflrun_draftkings(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 

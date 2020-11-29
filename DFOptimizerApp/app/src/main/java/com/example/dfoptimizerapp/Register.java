@@ -5,17 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Register extends AppCompatActivity {
-
+    public final static String TAG = "TAG";
+    FirebaseFirestore fStore;
+    FirebaseAuth fAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +42,9 @@ public class Register extends AppCompatActivity {
         final TextView emailLabel = findViewById(R.id.emailAddressTextView);
         final TextView passwordLabel = findViewById(R.id.passwordTextView);
         final TextView confirmPasswordLabel = findViewById(R.id.confirmPasswordTextView);
-
-        final FirebaseAuth fAuth = FirebaseAuth.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+         fStore = FirebaseFirestore.getInstance();
+        //String userID;
         //final ProgressBar progressBar = findViewById(R.id.progressBar);
 
         if (fAuth.getCurrentUser() != null) {
@@ -203,6 +213,19 @@ public class Register extends AppCompatActivity {
             fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Toast.makeText(Register.this, "User Created", Toast.LENGTH_SHORT).show();
+                    String userID = fAuth.getCurrentUser().getUid();
+                   // userID.set(fAuth.getCurrentUser().getUid());
+                    DocumentReference documentReference = fStore.collection("users").document(userID);
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("fullname", name);
+                    user.put("email", email);
+                    user.put("password", password);
+                    documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(TAG, "onSuccess: User Profile created" + userID);
+                        }
+                    });
                     startActivity(new Intent(getApplicationContext(), HomeScreen.class));
 
                 } else {

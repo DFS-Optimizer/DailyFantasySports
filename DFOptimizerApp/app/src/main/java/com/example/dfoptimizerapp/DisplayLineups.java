@@ -3,6 +3,7 @@ package com.example.dfoptimizerapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,7 +32,7 @@ public class DisplayLineups extends AppCompatActivity {
 
         //Connect button
         Button btn = (Button) findViewById(R.id.httpBut);
-
+        Button save = (Button) findViewById(R.id.save);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +52,14 @@ public class DisplayLineups extends AppCompatActivity {
             }
         });
 
+     save.setOnClickListener(v -> {
+         Intent saveLineup = new Intent(v.getContext(), SavedLineups.class);
+         saveLineup.putExtra("generatedLineup", lineupTxtView.getText().toString());
+         startActivity(saveLineup);
+     });
+
     }
+
 
     private String formatURL(int site, int sport) {
         String url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/";

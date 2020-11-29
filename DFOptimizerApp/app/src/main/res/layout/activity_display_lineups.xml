@@ -6,8 +6,12 @@
     android:layout_height="match_parent"
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     android:background="@drawable/gradient"
     tools:context=".DisplayLineups"
+=======
+    android:background="@color/gray"
+>>>>>>> Stashed changes
 =======
     android:background="@color/gray"
 >>>>>>> Stashed changes

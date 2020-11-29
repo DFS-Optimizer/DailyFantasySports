@@ -239,7 +239,7 @@ def get_slate_nfl_dk():
         slates.dk.update_nfl_DK_slate()
         path = get_my_path()
         path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-        const_path = os.path.join(path, "slates", "NFLslateDK.csv")
+        const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
         df = pd.read_csv(const_path)
         result = "["
         for index, row in df.iterrows():

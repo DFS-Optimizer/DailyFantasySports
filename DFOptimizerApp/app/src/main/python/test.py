@@ -5,8 +5,8 @@ import functools
 import pandas as pd
 import sys
 import csv
-from Optimization.NFLFanduel import Fanduel as NFLFanduel
-from Optimization.NFLDraftKings import Draftkings as NFLDraftKings
+from Optimization.MLBFanduel import Fanduel as MLBFanduel
+from Optimization.MLBDraftKings import Draftkings as MLBDraftKing
 from flask import Flask
 
 
@@ -18,11 +18,11 @@ def get_my_path():
     return os.path.realpath(filename)
 
 
-def nfloptimizeDK(num):
+def mlboptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "MLBslateDK.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -42,11 +42,11 @@ def nfloptimizeDK(num):
 
     # set the optimizer based on the user input for the site
     # enter the parameters
-    optimizer = NFLDraftKings(num_lineups=int(num),
-                              overlap=4,
-                              solver=pulp.CPLEX_PY(msg=0),
-                              players_filepath=const_path,
-                              output_filepath=out_path)
+    optimizer = MLBDraftKing(num_lineups=int(num),
+                             overlap=4,
+                             solver=pulp.CPLEX_PY(msg=0),
+                             players_filepath=const_path,
+                             output_filepath=out_path)
 
     # create the indicators used to set the constraints to be used by the formula
     optimizer.create_indicators()
@@ -60,10 +60,10 @@ def nfloptimizeDK(num):
     return filled_lineups
 
 
-def nflrun_draftkings(*players, num):
+def mlbrun_draftkings(*players, num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "MLBslateDK.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -72,7 +72,7 @@ def nflrun_draftkings(*players, num):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nfloptimizeDK(num)
+    lineup = mlboptimizeDK(num)
     # for line in lineup:
     #     print(line)
 
@@ -98,7 +98,7 @@ def nflrun_draftkings(*players, num):
     result = "["
     for player in final:
         count = count +1
-        if count == 10:
+        if count == 11:
             total = player
             count = 0
             result += ',{"Total":"' + str(total) + '"}],['
@@ -115,11 +115,11 @@ def nflrun_draftkings(*players, num):
     return result
 
 
-def nfloptimizeFD(num):
+def mlboptimizeFD(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "MLBslateFD.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -139,11 +139,11 @@ def nfloptimizeFD(num):
 
     # set the optimizer based on the user input for the site
     # enter the parameters
-    optimizer = NFLFanduel(num_lineups=int(num),
-                              overlap=4,
-                              solver=pulp.CPLEX_PY(msg=0),
-                              players_filepath=const_path,
-                              output_filepath=out_path)
+    optimizer = MLBFanduel(num_lineups=int(num),
+                           overlap=4,
+                           solver=pulp.CPLEX_PY(msg=0),
+                           players_filepath=const_path,
+                           output_filepath=out_path)
 
     # create the indicators used to set the constraints to be used by the formula
     optimizer.create_indicators()
@@ -157,10 +157,10 @@ def nfloptimizeFD(num):
     return filled_lineups
 
 
-def nflrun_fanduel(*players, num):
+def mlbrun_fanduel(*players, num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "MLBslateFD.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -169,7 +169,7 @@ def nflrun_fanduel(*players, num):
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
     df.to_csv(const_path, index=False)
 
-    lineup = nfloptimizeFD(num)
+    lineup = mlboptimizeFD(num)
 
     df = pd.read_csv(const_path)
     for player in players:
@@ -203,5 +203,5 @@ def nflrun_fanduel(*players, num):
     print(result)
     return result
 
-nflrun_draftkings( num = 3)
-nflrun_fanduel(num = 3)
+mlbrun_draftkings(num = 3)
+mlbrun_fanduel(num = 3)

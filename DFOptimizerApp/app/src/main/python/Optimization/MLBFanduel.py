@@ -2,7 +2,7 @@ import pulp
 from Optimization.MLBOptimizer import Optimizer
 
 
-class Draftkings(Optimizer):
+class Fanduel(Optimizer):
     """
     DK Optimizer Settings
     DK will inherit from the super class Optimizer

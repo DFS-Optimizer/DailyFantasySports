@@ -11,6 +11,8 @@ from Optimization.NBAFanduel import Fanduel as NBAFanduel
 from Optimization.NBADraftKings import Draftkings as NBADraftKings
 from Optimization.NFLFanduel import Fanduel as NFLFanduel
 from Optimization.NFLDraftKings import Draftkings as NFLDraftKings
+from Optimization.MLBFanduel import Fanduel as MLBFanduel
+from Optimization.MLBDraftKings import Draftkings as MLBDraftKings
 from flask import Flask
 from flask_apscheduler import APScheduler
 
@@ -101,31 +103,31 @@ def fdnflchoice4(player1, player2, player3, player4,num):
 
 @app.route("/dk/nba/num")
 def dkuser_choice0(num):
-    lineup = "nba out of season"
+    lineup = nbarun_draftkings(num = num)
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<num>")
 def dkuser_choice1(player1,num):
-    lineup = "nba out of season"
+    lineup = nbarun_draftkings(player1, num = num)
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<player2>/<num>")
 def dkuser_choice2(player1, player2, num):
-    lineup = "nba out of season"
+    lineup = nbarun_draftkings(player1, player2, num = num)
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<player2>/<player3>/<num>")
 def dkuser_choice3(player1, player2, player3,num):
-    lineup = "nba out of season"
+    lineup = nbarun_draftkings(player1, player2, player3, num = num)
     return lineup
 
 
 @app.route("/dk/nba/<player1>/<player2>/<player3>/<player4>/<num>")
 def dkuser_choice4(player1, player2, player3, player4,num):
-    lineup = "nba out of season"
+    lineup = nbarun_draftkings(player1, player2, player3, player4, num = num)
     return lineup
 
 
@@ -134,7 +136,7 @@ def dkuser_choice4(player1, player2, player3, player4,num):
 
 @app.route("/fd/nba/<num>")
 def user_choice0(num):
-    lineup = nbarun_fanduel(num)
+    lineup = nbarun_fanduel(num = num)
     return lineup
 
 
@@ -166,31 +168,31 @@ def user_choice4(player1, player2, player3, player4,num):
 
 @app.route("/dk/mlb/num")
 def dkmlb_choice0(num):
-    lineup = "mlb out of season"
+    lineup = mlbrun_draftkings(num = num)
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<num>")
 def dkmlb_choice1(player1,num):
-    lineup = "mlb out of season"
+    lineup = mlbrun_draftkings(player1, num = num)
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<player2>/<num>")
 def dkmlb_choice2(player1, player2, num):
-    lineup = "mlb out of season"
+    lineup = mlbrun_draftkings(player1, player2, num = num)
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<player2>/<player3>/<num>")
 def dkmlb_choice3(player1, player2, player3,num):
-    lineup = "nba out of season"
+    lineup = mlbrun_draftkings(player1, player2, player3, num = num)
     return lineup
 
 
 @app.route("/dk/mlb/<player1>/<player2>/<player3>/<player4>/<num>")
 def dkmlb_choice4(player1, player2, player3, player4,num):
-    lineup = "mlb out of season"
+    lineup = mlbrun_draftkings(player1, player2, player3, player4, num = num)
     return lineup
 
 
@@ -200,27 +202,27 @@ def dkmlb_choice4(player1, player2, player3, player4,num):
 
 @app.route("/fd/mlb/<num>")
 def fdmlbchoice0(num):
-    lineup = "run mlb fanduel function"
+    lineup = mlbrun_fanduel( num = num)
     return lineup
 
 @app.route("/fd/mlb/<player1>/<num>")
 def fdmlbchoice1(player1, num):
-    lineup = "run mlb fanduel function"
+    lineup = mlbrun_fanduel(player1, num = num)
     return lineup
 
 @app.route("/fd/mlb/<player1>/<player2>/<num>")
 def fdmlbchoice2(player1, player2,num):
-    lineup = "run mlb fanduel function here"
+    lineup = mlbrun_fanduel(player1, player2,  num = num)
     return lineup
 
 @app.route("/fd/mlb/<player1>/<player2>/<player3>/<num>")
 def fdmlbchoice3(player1, player2, player3,num):
-    lineup = "run mlb fanduel function here"
+    lineup = mlbrun_fanduel(player1, player2, player3, num = num)
     return lineup
 
 @app.route("/fd/mlb/<player1>/<player2>/<player3>/<player4>/<num>")
 def fdmlbchoice4(player1, player2, player3, player4,num):
-    lineup = "run mlb fanduel function here"
+    lineup = mlbrun_fanduel(player1, player2, player3, player4, num = num)
     return lineup
 
 
@@ -234,9 +236,10 @@ def get_slate_nfl_dk():
     if slates.dk.update_nfl_DK_slate() == 0:
         return "slate unavailable"
     else:
+        slates.dk.update_nfl_DK_slate()
         path = get_my_path()
         path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-        const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+        const_path = os.path.join(path, "slates", "NFLslateDK.csv")
         df = pd.read_csv(const_path)
         result = "["
         for index, row in df.iterrows():
@@ -245,22 +248,46 @@ def get_slate_nfl_dk():
                 row['team']) + '","Opponent":"' + str(row['opp']) + '","Projection":"' + str(row['proj']) + '"},'
         result = result[:-1]
         result += "]"
-        #print(result)
         return result
 
 
 @app.route("/dk/nba/getslate")
 def get_slate_nba_dk():
-    number = slates.dk.update_nba_DK_slate()
-    if number == 0:
-        return "slates not available, nba out of season"
+    if slates.dk.update_nba_DK_slate() == 0:
+        return "slate unavailable"
     else:
-        return "slate updated"
+        slates.dk.update_nba_DK_slate()
+        path = get_my_path()
+        path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+        const_path = os.path.join(path, "slates", "NBAslateDK.csv")
+        df = pd.read_csv(const_path)
+        result = "["
+        for index, row in df.iterrows():
+            result += '{"player":"' + str(row['playerName']) + '","Salary":"' + str(
+                row['sal']) + '","Position":"' + str(row['pos']) + '","Team":"' + str(
+                row['team']) + '","Opponent":"' + str(row['opp']) + '","Projection":"' + str(row['proj']) + '"},'
+        result = result[:-1]
+        result += "]"
+        return result
 
 @app.route("/dk/mlb/getslate")
 def get_slate_mlb_dk():
-    #slates.dk.update_mlb_DK_slate()
-    return "slates not available, mlb out of season"
+    if slates.dk.update_mlb_DK_slate() == 0:
+        return "slate unavailable"
+    else:
+        slates.dk.update_mlb_DK_slate()
+        path = get_my_path()
+        path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+        const_path = os.path.join(path, "slates", "MLBslateDK.csv")
+        df = pd.read_csv(const_path)
+        result = "["
+        for index, row in df.iterrows():
+            result += '{"player":"' + str(row['playerName']) + '","Salary":"' + str(
+                row['sal']) + '","Position":"' + str(row['pos']) + '","Team":"' + str(
+                row['team']) + '","Opponent":"' + str(row['opp']) + '","Projection":"' + str(row['proj']) + '"},'
+        result = result[:-1]
+        result += "]"
+        return result
 
 @app.route("/fd/nfl/getslate")
 def get_slate_nfl_fd():
@@ -377,7 +404,7 @@ def nbaoptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NBAslateFD.csv")
+    const_path = os.path.join(path, "slates", "NBAslateDK.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -418,7 +445,7 @@ def nbaoptimizeDK(num):
 def nbarun_draftkings(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NBAslateFD.csv")
+    const_path = os.path.join(path, "slates", "NBAslateDK.csv")
     print(const_path)
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -469,7 +496,7 @@ def nfloptimizeDK(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -510,7 +537,7 @@ def nfloptimizeDK(num):
 def nflrun_draftkings(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -558,7 +585,7 @@ def nfloptimizeFD(num):
     # get the path to the slate
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
     out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     # while True:
@@ -599,7 +626,7 @@ def nfloptimizeFD(num):
 def nflrun_fanduel(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDKTest.csv")
+    const_path = os.path.join(path, "slates", "NFLslateFD.csv")
     print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -645,7 +672,190 @@ def nflrun_fanduel(*players,num):
 
     return result
 
+def mlboptimizeDK(num):
+    # get the path to the slate
+    path = get_my_path()
+    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    const_path = os.path.join(path, "slates", "MLBslateDK.csv")
+    out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
+    # while True:
+    #     num = input("How many lineups do you want to generate?")
+    #     try:
+    #         val = int(num)
+    #         break;
+    #     except ValueError:
+    #         try:
+    #             float(num)
+    #             print("Input is an float number.")
+    #             print("Input number is: ", val)
+    #             break;
+    #         except ValueError:
+    #             print("This is not a number. Please enter a valid number")
+    # print()
+
+    # set the optimizer based on the user input for the site
+    # enter the parameters
+    optimizer = MLBDraftKings(num_lineups=int(num),
+                             overlap=4,
+                             solver=pulp.CPLEX_PY(msg=0),
+                             players_filepath=const_path,
+                             output_filepath=out_path)
+
+    # create the indicators used to set the constraints to be used by the formula
+    optimizer.create_indicators()
+    # generate the lineups with the formula and the indicators
+    lineups = optimizer.generate_lineups(formula=optimizer.type_1)
+    # fill the lineups with player names - send in the positions indicator
+    filled_lineups = optimizer.fill_lineups(lineups)
+    # save the lineups
+    # optimizer.save_file(optimizer.header, filled_lineups)
+    # optimizer.save_file(optimizer.header, filled_lineups, show_proj=True)
+    return filled_lineups
+
+
+def mlbrun_draftkings(*players, num):
+    path = get_my_path()
+    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    const_path = os.path.join(path, "slates", "MLBslateDK.csv")
+    print(const_path)
+    # out_path = os.path.join(path, "slates", "output_fanduel.csv")
+
+    df = pd.read_csv(const_path)
+    for player in players:
+        df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
+    df.to_csv(const_path, index=False)
+
+    lineup = mlboptimizeDK(num)
+    # for line in lineup:
+    #     print(line)
+
+
+    df = pd.read_csv(const_path)
+    for player in players:
+        df.loc[df['playerName'] == player, 'proj'] = df['proj'] - 100
+    df.to_csv(const_path, index=False)
+
+    final = []
+    for sublist in lineup:
+        for item in sublist:
+            final.append(item)
+        e = players.__len__() * 100
+    # total = final.pop() - e
+    # total = round(total, 2)
+    # print(final)
+
+    df = pd.read_csv(const_path)
+    # print(df)
+
+    count = 0
+    result = "["
+    for player in final:
+        count = count +1
+        if count == 11:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
+    print(result)
+
+    return result
+
+
+def mlboptimizeFD(num):
+    # get the path to the slate
+    path = get_my_path()
+    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    const_path = os.path.join(path, "slates", "MLBslateFD.csv")
+    out_path = os.path.join(path, "slates", "output_fanduel.csv")
+
+    # while True:
+    #     num = input("How many lineups do you want to generate?")
+    #     try:
+    #         val = int(num)
+    #         break;
+    #     except ValueError:
+    #         try:
+    #             float(num)
+    #             print("Input is an float number.")
+    #             print("Input number is: ", val)
+    #             break;
+    #         except ValueError:
+    #             print("This is not a number. Please enter a valid number")
+    # print()
+
+    # set the optimizer based on the user input for the site
+    # enter the parameters
+    optimizer = MLBFanduel(num_lineups=int(num),
+                           overlap=4,
+                           solver=pulp.CPLEX_PY(msg=0),
+                           players_filepath=const_path,
+                           output_filepath=out_path)
+
+    # create the indicators used to set the constraints to be used by the formula
+    optimizer.create_indicators()
+    # generate the lineups with the formula and the indicators
+    lineups = optimizer.generate_lineups(formula=optimizer.type_1)
+    # fill the lineups with player names - send in the positions indicator
+    filled_lineups = optimizer.fill_lineups(lineups)
+    # save the lineups
+    # optimizer.save_file(optimizer.header, filled_lineups)
+    # optimizer.save_file(optimizer.header, filled_lineups, show_proj=True)
+    return filled_lineups
+
+
+def mlbrun_fanduel(*players, num):
+    path = get_my_path()
+    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    const_path = os.path.join(path, "slates", "MLBslateFD.csv")
+    print(const_path)
+    # out_path = os.path.join(path, "slates", "output_fanduel.csv")
+
+    df = pd.read_csv(const_path)
+    for player in players:
+        df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
+    df.to_csv(const_path, index=False)
+
+    lineup = mlboptimizeFD(num)
+
+    df = pd.read_csv(const_path)
+    for player in players:
+        df.loc[df['playerName'] == player, 'proj'] = df['proj'] - 100
+    df.to_csv(const_path, index=False)
+
+    final = []
+    for sublist in lineup:
+        for item in sublist:
+            final.append(item)
+    e = players.__len__() * 100
+    # print(final)
+
+    df = pd.read_csv(const_path)
+    count = 0
+    result = "["
+    for player in final:
+        count = count + 1
+        if count == 10:
+            total = player
+            count = 0
+            result += ',{"Total":"' + str(total) + '"}],['
+        else:
+            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
+            temp = round(temp, 2)
+            last = result[-1]
+            if not last == "[":
+                result += ","
+            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
+    result = result[:-2]
+    print(result)
+    return result
 
 
 

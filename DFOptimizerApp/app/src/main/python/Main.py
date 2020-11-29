@@ -291,15 +291,15 @@ def get_slate_mlb_dk():
 
 @app.route("/fd/nfl/getslate")
 def get_slate_nfl_fd():
-    return "fanduel data not yet available"
+    return "slate unavailable"
 
 @app.route("/fd/nba/getslate")
 def get_slate_nba_fd():
-    return "fanduel data not yet available"
+    return "slate unavailable"
 
 @app.route("/fd/mlb/getslate")
 def get_slate_mlb_fd():
-    return "fanduel data not yet available"
+    return "slate unavailable"
 
 
 

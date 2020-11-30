@@ -1,109 +1,44 @@
-import pulp
-import inspect
-import os
-import functools
-import pandas as pd
 import sys
-import csv
-from Optimization.NFLFanduel import Fanduel as NFLFanduel
-from Optimization.NFLDraftKings import Draftkings as NFLDraftKings
-from flask import Flask
+import requests
+from bs4 import BeautifulSoup
+from mappings import COLUMN_MAPPINGS
+import pandas as pd
+
+# set up some parameters for scrape
+base_url = 'http://www.fantasypros.com/nfl/projections'
+current_week = 12
+week_list = range(1, current_week )
+position_list = ['qb', 'rb', 'wr', 'te', 'k', 'dst']
+
+frames = []
+for position in position_list:
+    temp = position + '.php?scoring=PPR'
+    url = '%s/%s' % (base_url,temp)
+    params = {
+        'week': current_week,
+    }
+
+    response = requests.get(url, params=params)
+
+    msg = 'getting projections for week {}, postition {}'
+    print(msg.format(current_week, position))
+
+    # use expert:expert in request to get only one expert at a time
+    # use pandas to parse the HTML table for us
+    df = pd.io.html.read_html(
+        response.text,
+        attrs={'id': 'data'}
+    )[0]
+    df['WEEK'] = current_week
+    df['POSITION'] = position.upper()
+    df.rename(columns=COLUMN_MAPPINGS[position.upper()], inplace=True)
+    frames.append(df)
+
+    msg = 'getting projections for {}, week {}, postition {}'
 
 
-def get_my_path():
-    try:
-        filename = __file__  # where we were when the module was loaded
-    except NameError:  # fallback
-        filename = inspect.getsourcefile(get_my_path)
-    return os.path.realpath(filename)
-
-def nfloptimizeDK(num):
-    # get the path to the slate
-    path = get_my_path()
-    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
-    out_path = os.path.join(path, "slates", "output_fanduel.csv")
-
-    # while True:
-    #     num = input("How many lineups do you want to generate?")
-    #     try:
-    #         val = int(num)
-    #         break;
-    #     except ValueError:
-    #         try:
-    #             float(num)
-    #             print("Input is an float number.")
-    #             print("Input number is: ", val)
-    #             break;
-    #         except ValueError:
-    #             print("This is not a number. Please enter a valid number")
-    # print()
-
-    # set the optimizer based on the user input for the site
-    # enter the parameters
-    optimizer = NFLDraftKings(num_lineups=int(num),
-                              overlap=4,
-                              solver=pulp.CPLEX_PY(msg=0),
-                              players_filepath=const_path,
-                              output_filepath=out_path)
-
-    # create the indicators used to set the constraints to be used by the formula
-    optimizer.create_indicators()
-    # generate the lineups with the formula and the indicators
-    lineups = optimizer.generate_lineups(formula=optimizer.type_1)
-    # fill the lineups with player names - send in the positions indicator
-    filled_lineups = optimizer.fill_lineups(lineups)
-    # save the lineups
-    # optimizer.save_file(optimizer.header, filled_lineups)
-    # optimizer.save_file(optimizer.header, filled_lineups, show_proj=True)
-    return filled_lineups
-
-
-def nflrun_draftkings(*players,num):
-    path = get_my_path()
-    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "slates", "NFLslateDK.csv")
-    print(const_path)
-    # out_path = os.path.join(path, "slates", "output_fanduel.csv")
-
-    df = pd.read_csv(const_path)
-    for player in players:
-        df.loc[df['playerName'] == player, 'proj'] = df['proj'] + 100
-    df.to_csv(const_path, index=False)
-
-    lineup = nfloptimizeDK(num)
-
-    df = pd.read_csv(const_path)
-    for player in players:
-        df.loc[df['playerName'] == player, 'proj'] = df['proj'] - 100
-    df.to_csv(const_path, index=False)
-
-    final = []
-    for sublist in lineup:
-        for item in sublist:
-            final.append(item)
-    e = players.__len__() * 100
-    # print(final)
-
-    df = pd.read_csv(const_path)
-    count = 0
-    result = "["
-    for player in final:
-        count = count + 1
-        if count == 10:
-            total = player
-            count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
-        else:
-            temp = df.loc[df['playerName'] == player, 'proj'].values[0]
-            temp = round(temp, 2)
-            last = result[-1]
-            if not last == "[":
-                result += ","
-            result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
-    print(result)
-
-    return result
-
-nflrun_draftkings(num = 3)
+# final = pd.concat(frames, ignore_index=True)
+for frame in frames:
+    print(frame)
+# filename = 'fantasypros-projections-{}.csv'
+# frames.to_csv(filename, index=False)

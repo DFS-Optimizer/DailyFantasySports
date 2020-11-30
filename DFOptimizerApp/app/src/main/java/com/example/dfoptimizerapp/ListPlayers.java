@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -70,10 +72,21 @@ public class ListPlayers extends AppCompatActivity {
 
 
         //adapter to fill the dropdown menu
-        ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pos);
+        ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pos) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+                //((TextView) v).setTypeface(vrFont);
+                return v;
+            }
+        };
         positionFilter.setAdapter(dropdownAdapter);
         positionFilter.setBackgroundTintList(getColorStateList(R.color.white));
         positionFilter.setForegroundTintList(getColorStateList(R.color.white));
+        //positionFilter.setBackgroundColor(Color.WHITE);
+
+
 
 
 

@@ -47,10 +47,6 @@ public class Register extends AppCompatActivity {
         //String userID;
         //final ProgressBar progressBar = findViewById(R.id.progressBar);
 
-        if (fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), HomeScreen.class));
-            finish();
-        }
 
         //OnKeyListeners for fields. if a field is not empty, its label is set to invisible
         mFullName.setOnKeyListener((v, keyCode, event) -> {

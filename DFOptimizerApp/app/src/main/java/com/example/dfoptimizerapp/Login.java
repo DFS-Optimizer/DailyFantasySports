@@ -29,6 +29,10 @@ public class Login extends AppCompatActivity {
         final Button mLoginBtn = findViewById(R.id.login);
         final TextView mCreateBtn = findViewById(R.id.newUser);
 
+        if (fAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), HomeScreen.class));
+            finish();
+        }
         //Labels for fields
         final TextView emailLabel = findViewById(R.id.loginEmailLabel);
         final TextView passwordLabel = findViewById(R.id.loginPasswordLabel);

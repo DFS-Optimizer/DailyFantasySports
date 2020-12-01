@@ -57,19 +57,41 @@ public class ListPlayers extends AppCompatActivity {
         ArrayList<String> selectedPlayers = new ArrayList<String>();
         int maxChecked = 4;
 
-        //60000
-        int[] remainingSalary = new int[]{Integer.parseInt(remainingSalaryTxt.getText().toString().substring(14))};
 
         final String[] pos;
-        //List of positions that can be used as a filter
+        //List of positions that can be used as a filter and determining the salary cap
         if (sport == 1) {
             pos = new String[]{"All Positions", "PG", "SF", "SG", "PF", "C"};
+            if(site == 1)
+            {
+                remainingSalaryTxt.setText("Rem. Salary: $60000");
+            }
+            else
+            {
+                remainingSalaryTxt.setText("Rem. Salary: $55000");
+            }
         } else if (sport == 2) {
             pos = new String[]{"All Positions", "QB", "WR", "RB", "TE", "D", "K"};
+            if(site == 1)
+            {
+                remainingSalaryTxt.setText("Rem. Salary: $60000");
+            }
+            else
+            {
+                remainingSalaryTxt.setText("Rem. Salary: $50000");
+            }
         } else {
             pos = new String[]{"All Positions", "P", "C/1B", "2B", "3B", "SS", "OF", "UTIL"};
+            if(site == 1)
+            {
+                   remainingSalaryTxt.setText("Rem. Salary: $35000");
+            }
+            else
+            {
+                remainingSalaryTxt.setText("Rem. Salary: $50000");
+            }
         }
-
+        int[] remainingSalary = new int[]{Integer.parseInt(remainingSalaryTxt.getText().toString().substring(14))};
 
         //adapter to fill the dropdown menu
         ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pos) {
@@ -219,7 +241,6 @@ public class ListPlayers extends AppCompatActivity {
 
         /***CLEAR BUTTON ON CLICK LISTENER***/
         clearBtn.setOnClickListener((v) -> {
-            //A bit laggy, why?
             selectedPlayers.clear();
 //            for(int i=0; i<players.size(); i++){
 //                TableRow row = (TableRow)playerListView.getChildAt(i);

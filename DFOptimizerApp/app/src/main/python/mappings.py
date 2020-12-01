@@ -148,23 +148,8 @@ COLUMN_MAPPINGS = {
     },
 'DST': {
         'Player': 'PLAYER',
-        'ATT': 'RUSH_ATT',
-        'TDS': 'REC_TD',
-        'YDS': 'REC_YDS',
-        'ATT.1': 'PASS_ATT',
-        'TDS.1': 'RUSH_TD',
-        'YDS.1': 'RUSH_YDS',
-        'CMP': 'CMP',
-        'FG': 'FG',
-        'FGA': 'FGA',
-        'FL': 'FL',
         'FPTS': 'FPTS',
-        'INTS': 'INTS',
         'Player': 'Player',
-        'REC': 'REC',
-        'XPT': 'XPT',
         'position': 'POSITION',
-        'week': 'WEEK',
-        'expert': 'EXPERT'
     }
 }

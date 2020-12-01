@@ -6,4 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".SavedLineups">
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="218dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="33dp"
+        android:text="My Lineups "
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/spinnerSavedLineups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerSavedLineups"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toTopOf="@+id/displaySavedSport"
+        app:layout_constraintEnd_toStartOf="@+id/btnToSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/displaySavedSport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="82dp"
+        android:layout_marginRight="82dp"
+        android:layout_marginBottom="28dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerSavedLineups"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSavedLineups" />
+
+    <Button
+        android:id="@+id/btnToSave"
+        android:layout_width="96dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginBottom="84dp"
+        android:text="Display"
+        app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinnerSavedLineups"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/displaySavedLineups"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="124dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnToSave" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

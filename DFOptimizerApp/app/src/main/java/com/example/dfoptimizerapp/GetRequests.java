@@ -40,14 +40,13 @@ public class GetRequests{
 
         String TAG=DisplayLineups.class.getName();
         RequestQueue mRequestQueue;
-        StringRequest stringRequest;
         url=url+num;
         lineups = new ArrayList<>(num);
         mRequestQueue= Volley.newRequestQueue(m_context);
 
-        stringRequest=new StringRequest(Request.Method.GET,url, response -> {
-            Log.i(TAG,"Response: "+ response);
-            Toast.makeText(m_context,"Generating Optimized Lineup... ",Toast.LENGTH_SHORT).show();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
+            Log.i(TAG, "Response: " + response);
+            Toast.makeText(m_context, "Generating Optimized Lineup... ", Toast.LENGTH_SHORT).show();
             lineups = ParseReceive(response, num);
             String[] lineupArray = lineups.get(0).toArray(new String[lineups.size()]);
             ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(m_context, android.R.layout.simple_spinner_dropdown_item, lineupArray) {
@@ -61,8 +60,40 @@ public class GetRequests{
             spinner.setAdapter(dropdownAdapter);
 
 
+        }, error -> Log.i(TAG, "Response: " + error.toString()));
+        mRequestQueue.add(stringRequest);
+        return lineups;
 
-        }, error -> Log.i(TAG,"Response: "+error.toString()));
+    }
+
+    public ArrayList<ArrayList<String>> SendRequestAndPrintResponse(String url, int num, Spinner[] spinners){
+
+        String TAG=DisplayLineups.class.getName();
+        RequestQueue mRequestQueue;
+        url=url+num;
+        lineups = new ArrayList<>(num);
+        mRequestQueue= Volley.newRequestQueue(m_context);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, response -> {
+            Log.i(TAG, "Response: " + response);
+            Toast.makeText(m_context, "Generating Optimized Lineup... ", Toast.LENGTH_SHORT).show();
+            lineups = ParseReceive(response, num);
+            for(int i = 0; i < num; i++) {
+                String[] lineupArray = lineups.get(i).toArray(new String[lineups.size()]);
+                ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(m_context, android.R.layout.simple_spinner_dropdown_item, lineupArray) {
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View v = super.getView(position, convertView, parent);
+                        ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                        ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+                        return v;
+                    }
+                };
+                spinners[i].setAdapter(dropdownAdapter);
+                spinners[i].setVisibility(View.VISIBLE);
+            }
+
+
+        }, error -> Log.i(TAG, "Response: " + error.toString()));
         mRequestQueue.add(stringRequest);
         return lineups;
 

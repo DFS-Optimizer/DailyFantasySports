@@ -32,7 +32,18 @@ public class DisplayLineups extends AppCompatActivity {
         final int sport = getIntent().getIntExtra("sportChoice", 1);
         final Spinner numberOfLineups = findViewById(R.id.numberOfLineups);
         final Button saveButton = (Button) findViewById(R.id.save);
+        final Spinner lineup1 = findViewById(R.id.lineup1);
+        final Spinner lineup2 = findViewById(R.id.lineup2);
+        final Spinner lineup3 = findViewById(R.id.lineup3);
+        final Spinner lineup4 = findViewById(R.id.lineup4);
+        final Spinner lineup5 = findViewById(R.id.lineup5);
+        final Spinner lineup6 = findViewById(R.id.lineup6);
+        final Spinner lineup7 = findViewById(R.id.lineup7);
+        final Spinner lineup8 = findViewById(R.id.lineup8);
+        final Spinner lineup9 = findViewById(R.id.lineup9);
+        final Spinner lineup10 = findViewById(R.id.lineup10);
 
+        Spinner[] spinners = new Spinner[]{lineup1,lineup2,lineup3, lineup4,lineup5,lineup6,lineup7,lineup8, lineup9, lineup10};
 
         final String [] pos = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
@@ -41,7 +52,6 @@ public class DisplayLineups extends AppCompatActivity {
                 View v = super.getView(position, convertView, parent);
                 ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
                 ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
-                //((TextView) v).setTypeface(vrFont);
                 return v;
             }
         };
@@ -62,7 +72,7 @@ public class DisplayLineups extends AppCompatActivity {
                 try {
                     int num = Integer.parseInt(numberOfLineups.getSelectedItem().toString());
                     if(num > 0) {
-                        //lineups = getRequests.SendRequestAndPrintResponse(url, num);
+                        lineups = getRequests.SendRequestAndPrintResponse(url, num, spinners);
                     }
                     else
                     {

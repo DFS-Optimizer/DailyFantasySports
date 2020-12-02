@@ -682,7 +682,7 @@ def nflrun_fanduel(*players,num):
             if not last == "[":
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
+    # result = result[:-2]
     result += "]"
 
     return result

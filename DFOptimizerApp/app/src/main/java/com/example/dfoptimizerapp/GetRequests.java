@@ -42,7 +42,7 @@ public class GetRequests{
             public void onResponse(String response){
                 Log.i(TAG,"Response: "+response.toString());
                 Toast.makeText(m_context,"Generating Optimized Lineup... ",Toast.LENGTH_SHORT).show();
-                ParseReceive(response.toString(),txtView);
+                ParseReceive(response.toString(),txtView, num);
 
             }
         },new Response.ErrorListener(){
@@ -55,9 +55,9 @@ public class GetRequests{
         mRequestQueue.add(stringRequest);
     }
 
-    public void ParseReceive(String jsonStr,TextView txtView){
+    public void ParseReceive(String jsonStr,TextView txtView, int num){
 
-        if(jsonStr.contains( "slates not available, nba out of season"))
+        if(jsonStr.contains( "slate unavailable"))
         {
             txtView.append("This sport is out of season");
         }
@@ -67,25 +67,27 @@ public class GetRequests{
             JSONArray jsonarray = null;
             try {
                 jsonarray = new JSONArray(jsonStr);
+                for(int j = 1; j <= num; j++) {
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        System.out.println(jsonarray.length());
+                        System.out.println("Current:" + i);
+                        if (i == jsonarray.length() - 1) {
+                            JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
+                            String total = jsonObjectTotal.getString("Total");
+                            System.out.println("Total: " + total);
+                            txtView.append("Total: " + total);
+                        } else {
+                            JSONObject jsonobject = jsonarray.getJSONObject(i);
+                            String player = jsonobject.getString("player");
+                            String score = jsonobject.getString("score");
+                            System.out.println(player + " " + score);
+                            txtView.append(player + " " + score);
+                            txtView.append("\n");
+                        }
 
-                for (int i = 0; i < jsonarray.length(); i++) {
-                    System.out.println(jsonarray.length());
-                    System.out.println("Current:" + i);
-                    if (i == jsonarray.length() - 1) {
-                        JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
-                        String total = jsonObjectTotal.getString("Total");
-                        System.out.println("Total: " + total);
-                        txtView.append("Total: " + total);
-                    } else {
-                        JSONObject jsonobject = jsonarray.getJSONObject(i);
-                        String player = jsonobject.getString("player");
-                        String score = jsonobject.getString("score");
-                        System.out.println(player + " " + score);
-                        txtView.append(player + " " + score);
-                        txtView.append("\n");
+
                     }
-
-
+                    txtView.append("\n\n");
                 }
 
             } catch (JSONException e) {

@@ -79,7 +79,7 @@ public class GetRequests{
             Toast.makeText(m_context, "Generating Optimized Lineup... ", Toast.LENGTH_SHORT).show();
             lineups = ParseReceive(response, num);
             for(int i = 0; i < num; i++) {
-                String[] lineupArray = lineups.get(i).toArray(new String[lineups.size()]);
+                String[] lineupArray = lineups.get(i).toArray(new String[lineups.get(i).size()]);
                 ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(m_context, android.R.layout.simple_spinner_dropdown_item, lineupArray) {
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View v = super.getView(position, convertView, parent);
@@ -100,7 +100,7 @@ public class GetRequests{
     }
 
     public ArrayList<ArrayList<String>> ParseReceive(String jsonStr, int num){
-         ArrayList<ArrayList<String>> allLineups  = new ArrayList<>(num);
+        ArrayList<ArrayList<String>> allLineups  = new ArrayList<>(num);
         ArrayList<String> singleLineup;
 
         if(jsonStr.contains( "slate unavailable"))
@@ -113,10 +113,11 @@ public class GetRequests{
             JSONArray jsonarray;
             try {
                 jsonarray = new JSONArray(jsonStr);
-                for(int j = 0; j < num; j++) {
+                int temp = 0;
+                for(int j = 1; j <= num; j++) {
                     singleLineup = new ArrayList<>();
-                    singleLineup.add("Lineup " + (j+1));
-                    for (int i = 0; i < jsonarray.length(); i++) {
+                    singleLineup.add("Lineup " + j);
+                    for (int i = temp; i < jsonarray.length(); i++) {
                         if (i == jsonarray.length() - 1) {
                             JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
                             String total = jsonObjectTotal.getString("Total");
@@ -129,7 +130,9 @@ public class GetRequests{
                             System.out.println(player + " " + score);
                             singleLineup.add(player + " " + score);
                         }
+                        temp++;
                     }
+
                     allLineups.add(singleLineup);
                 }
 

@@ -16,9 +16,6 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         final Button customizeBtn = findViewById(R.id.customizeBtn);
-        final TextView nbaTextView = findViewById(R.id.nbaLineupTxtView);
-        final TextView nflTextView = findViewById(R.id.nflLineupTxtView);
-        final TextView mlbTextView = findViewById(R.id.mlbLineupTxtView);
         ArrayList<ArrayList<String>> nbaLineup;
         ArrayList<ArrayList<String>> nflLineup;
         ArrayList<ArrayList<String>> mlbLineup;
@@ -29,9 +26,7 @@ public class HomeScreen extends AppCompatActivity {
         nflLineup = getRequests.SendRequestAndPrintResponse(url + "nfl/", 1);
         mlbLineup = getRequests.SendRequestAndPrintResponse(url + "mlb/", 1);
 
-        getRequests.Display(nbaLineup, nbaTextView);
-        getRequests.Display(nflLineup, nflTextView);
-        getRequests.Display(mlbLineup, mlbTextView);
+
 
         customizeBtn.setOnClickListener((v) ->{
             startActivity(new Intent(getApplicationContext(), ChooseSite.class));

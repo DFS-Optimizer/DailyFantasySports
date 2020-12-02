@@ -17,12 +17,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 
 public class DisplayLineups extends AppCompatActivity {
-
+    static ArrayList<ArrayList<String>> lineups = new ArrayList<>();
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,8 @@ public class DisplayLineups extends AppCompatActivity {
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
         final Spinner numberOfLineups = findViewById(R.id.numberOfLineups);
-        final TextView lineupTxtView = (TextView) findViewById(R.id.textView3);
         final Button saveButton = (Button) findViewById(R.id.save);
+
 
         final String [] pos = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
 
@@ -62,8 +63,7 @@ public class DisplayLineups extends AppCompatActivity {
                 try {
                     int num = Integer.parseInt(numberOfLineups.getSelectedItem().toString());
                     if(num > 0) {
-                        ArrayList<ArrayList<String>> lineups = getRequests.SendRequestAndPrintResponse(url, num);
-                        getRequests.Display(lineups, lineupTxtView);
+                        lineups = getRequests.SendRequestAndPrintResponse(url, num);
                     }
                     else
                     {
@@ -80,7 +80,7 @@ public class DisplayLineups extends AppCompatActivity {
          @Override
          public void onClick(View view) {
              Intent saveLineup = new Intent(view.getContext(), SavedLineups.class);
-             saveLineup.putExtra("generatedLineup", lineupTxtView.getText().toString());
+             saveLineup.putExtra("generatedLineup", lineups.toString());
              System.out.println(site + " " + sport);
              saveLineup.putExtra("siteChoice", site);
              saveLineup.putExtra("sportChoice", sport);

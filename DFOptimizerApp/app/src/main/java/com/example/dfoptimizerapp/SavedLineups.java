@@ -51,12 +51,15 @@ public class SavedLineups extends AppCompatActivity {
                 try {
                     System.out.println("here");
                     final TextView savedDisplay = (TextView) findViewById(R.id.displaySavedLineups);
+                    final TextView displaySavedSport = (TextView) findViewById(R.id.displaySavedSport);
 
 
                     if (savedSport.getSelectedItem().toString() == "NFL Draftkings") {
 
                         System.out.println("NFL DRAFT KINGS DISPLAY"); //Test Code
-                        /*String userID = fAuth.getCurrentUser().getUid();
+
+                        displaySavedSport.setText("NFL Draftkings");
+                        String userID = fAuth.getCurrentUser().getUid();
 
                         DocumentReference documentReference = fStore.collection("users").document(userID);
                         documentReference.addSnapshotListener(SavedLineups.this, new EventListener<DocumentSnapshot>() {
@@ -66,7 +69,7 @@ public class SavedLineups extends AppCompatActivity {
 
                             }
                         });
-*/                    }
+                    }
 
                 } catch (NumberFormatException error) {
                     Toast.makeText(SavedLineups.this, "Error grabbing data from Firestore", Toast.LENGTH_SHORT).show();

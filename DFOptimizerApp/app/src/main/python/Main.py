@@ -237,7 +237,7 @@ def get_slate_nfl_dk():
     if slates.dk.update_nfl_DK_slate() == 0:
         return "slate unavailable"
     else:
-        slates.dk.update_nfl_DK_slate()
+        # slates.dk.update_nfl_DK_slate()
         path = get_my_path()
         path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
         const_path = os.path.join(path, "slates", "NFLslateDK.csv")

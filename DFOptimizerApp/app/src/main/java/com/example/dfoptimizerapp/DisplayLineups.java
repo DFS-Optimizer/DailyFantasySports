@@ -75,12 +75,15 @@ public class DisplayLineups extends AppCompatActivity {
                 }
             }
         });
-
+/**SAVE BUTTON**/
      saveButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
              Intent saveLineup = new Intent(view.getContext(), SavedLineups.class);
              saveLineup.putExtra("generatedLineup", lineupTxtView.getText().toString());
+             System.out.println(site + " " + sport);
+             saveLineup.putExtra("siteChoice", site);
+             saveLineup.putExtra("sportChoice", sport);
              startActivity(saveLineup);
          }
 

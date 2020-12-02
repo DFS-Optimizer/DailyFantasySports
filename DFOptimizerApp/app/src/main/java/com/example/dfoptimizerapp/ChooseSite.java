@@ -27,7 +27,7 @@ public class ChooseSite extends AppCompatActivity {
 
         draftKingsBtn.setOnClickListener((v) -> {
             Intent chooseSport = new Intent(v.getContext(), ChooseSport.class);
-            chooseSport.putExtra("siteChoice", 2); //value 2 to indicate fanduel site choice
+            chooseSport.putExtra("siteChoice", 2); //value 2 to indicate draftkings site choice
             startActivity(chooseSport);
         });
 

@@ -102,7 +102,7 @@ def fdnflchoice4(player1, player2, player3, player4,num):
 # url routes for nba draftkings lineups
 
 
-@app.route("/dk/nba/num")
+@app.route("/dk/nba/<num>")
 def dkuser_choice0(num):
     lineup = nbarun_draftkings(num = num)
     return lineup
@@ -167,7 +167,7 @@ def user_choice4(player1, player2, player3, player4,num):
 
 
 
-@app.route("/dk/mlb/num")
+@app.route("/dk/mlb/<num>")
 def dkmlb_choice0(num):
     lineup = mlbrun_draftkings(num = num)
     return lineup

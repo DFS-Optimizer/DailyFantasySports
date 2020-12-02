@@ -1,25 +1,32 @@
 package com.example.dfoptimizerapp;
 
-        import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.os.Bundle;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.ArrayAdapter;
-        import android.widget.Button;
-        import android.widget.Spinner;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.google.android.gms.tasks.OnSuccessListener;
-        import com.google.firebase.auth.FirebaseAuth;
-        import com.google.firebase.firestore.DocumentReference;
-        import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SavedLineups extends AppCompatActivity {
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
@@ -27,6 +34,7 @@ public class SavedLineups extends AppCompatActivity {
     Spinner savedSport;
     Button btnSubmit;
     public final static String TAG = "TAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +42,10 @@ public class SavedLineups extends AppCompatActivity {
         saveLineup();
         addItemsOnSpinner();
         addListenerOnButton();
+
+
+
     }
-
-
-
 
     public void saveLineup() {
         fAuth = FirebaseAuth.getInstance();
@@ -62,7 +70,8 @@ public class SavedLineups extends AppCompatActivity {
 
         });
     }
-    public void addItemsOnSpinner(){
+
+    public void addItemsOnSpinner() {
         savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
         List<String> list = new ArrayList<String>();
         list.add("NBA Fanduel");
@@ -78,19 +87,38 @@ public class SavedLineups extends AppCompatActivity {
     }
 
     public void addListenerOnButton() {
+     btnSubmit.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                final TextView savedDisplay = (TextView) findViewById(R.id.displaySavedLineups);
+                savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
+                btnSubmit = (Button) findViewById(R.id.btnToSave);
 
-        savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
-        btnSubmit = (Button) findViewById(R.id.btnToSave);
+                if (savedSport.toString() == "NFL Draftkings") {
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+                    System.out.println("NFL DRAFT KINGS DISPLAY"); //Test Code
+                        /*String userID = fAuth.getCurrentUser().getUid();
 
-            @Override
-            public void onClick(View v) {
+                        DocumentReference documentReference = fStore.collection("users").document(userID);
+                        documentReference.addSnapshotListener(SavedLineups.this, new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                                savedDisplay.setText(documentSnapshot.getString("NFL lineup"));
 
+                            }
+                        });
+*/                    }
 
+            } catch (NumberFormatException error) {
+                Toast.makeText(SavedLineups.this, "Error grabbing data from Firestore", Toast.LENGTH_SHORT).show();
             }
-        });
-    }
+
+        }
+    });
+
+
+   }
 
 
 }

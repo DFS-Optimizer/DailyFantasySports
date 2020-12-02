@@ -1,10 +1,15 @@
 package com.example.dfoptimizerapp;
 
+        import androidx.annotation.RequiresApi;
         import androidx.appcompat.app.AppCompatActivity;
 
+        import android.graphics.Color;
+        import android.os.Build;
         import android.os.Bundle;
         import android.util.Log;
+        import android.util.TypedValue;
         import android.view.View;
+        import android.view.ViewGroup;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.Spinner;
@@ -15,6 +20,8 @@ package com.example.dfoptimizerapp;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.firestore.DocumentReference;
         import com.google.firebase.firestore.FirebaseFirestore;
+
+        import org.w3c.dom.Text;
 
         import java.util.ArrayList;
         import java.util.HashMap;
@@ -27,6 +34,7 @@ public class SavedLineups extends AppCompatActivity {
     Spinner savedSport;
     Button btnSubmit;
     public final static String TAG = "TAG";
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +70,7 @@ public class SavedLineups extends AppCompatActivity {
 
         });
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void addItemsOnSpinner(){
         savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
         List<String> list = new ArrayList<String>();
@@ -72,9 +81,18 @@ public class SavedLineups extends AppCompatActivity {
         list.add("NFL Draftkings");
         list.add("MLB Draftkings");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
+                android.R.layout.simple_spinner_item, list){
+          public View getView(int position, View convertView, ViewGroup parent) {
+              View v = super.getView(position, convertView, parent);
+              ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+              ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+              return v;
+          }
+        };
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         savedSport.setAdapter(dataAdapter);
+        savedSport.setForegroundTintList(getColorStateList(R.color.white));
+        savedSport.setBackgroundTintList(getColorStateList(R.color.white));
     }
 
     public void addListenerOnButton() {

@@ -41,7 +41,31 @@ public class SavedLineups extends AppCompatActivity {
         setContentView(R.layout.activity_saved_lineups);
         saveLineup();
         addItemsOnSpinner();
-        addListenerOnButton();
+        try {
+
+            final TextView savedDisplay = (TextView) findViewById(R.id.displaySavedLineups);
+            savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
+            btnSubmit = (Button) findViewById(R.id.btnToSave);
+
+            if (savedSport.toString() == "NFL Draftkings") {
+
+                System.out.println("NFL DRAFT KINGS DISPLAY"); //Test Code
+                        /*String userID = fAuth.getCurrentUser().getUid();
+
+                        DocumentReference documentReference = fStore.collection("users").document(userID);
+                        documentReference.addSnapshotListener(SavedLineups.this, new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                                savedDisplay.setText(documentSnapshot.getString("NFL lineup"));
+
+                            }
+                        });
+*/                    }
+
+        } catch (NumberFormatException error) {
+            Toast.makeText(SavedLineups.this, "Error grabbing data from Firestore", Toast.LENGTH_SHORT).show();
+        }
+
 
 
 
@@ -87,38 +111,8 @@ public class SavedLineups extends AppCompatActivity {
     }
 
     public void addListenerOnButton() {
-     btnSubmit.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            try {
-                final TextView savedDisplay = (TextView) findViewById(R.id.displaySavedLineups);
-                savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
-                btnSubmit = (Button) findViewById(R.id.btnToSave);
 
-                if (savedSport.toString() == "NFL Draftkings") {
-
-                    System.out.println("NFL DRAFT KINGS DISPLAY"); //Test Code
-                        /*String userID = fAuth.getCurrentUser().getUid();
-
-                        DocumentReference documentReference = fStore.collection("users").document(userID);
-                        documentReference.addSnapshotListener(SavedLineups.this, new EventListener<DocumentSnapshot>() {
-                            @Override
-                            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                                savedDisplay.setText(documentSnapshot.getString("NFL lineup"));
-
-                            }
-                        });
-*/                    }
-
-            } catch (NumberFormatException error) {
-                Toast.makeText(SavedLineups.this, "Error grabbing data from Firestore", Toast.LENGTH_SHORT).show();
-            }
-
-        }
-    });
-
-
-   }
+    }
 
 
 }

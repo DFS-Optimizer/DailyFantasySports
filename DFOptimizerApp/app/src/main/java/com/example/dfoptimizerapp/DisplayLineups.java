@@ -25,15 +25,15 @@ public class DisplayLineups extends AppCompatActivity {
         final int sport = getIntent().getIntExtra("sportChoice", 1);
         final TextView numberOfLineups = findViewById(R.id.numberOfLineups);
         final TextView lineupTxtView = (TextView) findViewById(R.id.textView3);
+        final Button saveButton = (Button) findViewById(R.id.save);
 
         final String url = formatURL(site, sport);
         GetRequests getRequests = new GetRequests(getApplicationContext());
 
 
         //Connect button
-        Button btn = (Button) findViewById(R.id.httpBut);
-        Button save = (Button) findViewById(R.id.save);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button httpButton = (Button) findViewById(R.id.httpBut);
+        httpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
@@ -52,10 +52,14 @@ public class DisplayLineups extends AppCompatActivity {
             }
         });
 
-     save.setOnClickListener(v -> {
-         Intent saveLineup = new Intent(v.getContext(), SavedLineups.class);
-         saveLineup.putExtra("generatedLineup", lineupTxtView.getText().toString());
-         startActivity(saveLineup);
+     saveButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             Intent saveLineup = new Intent(view.getContext(), SavedLineups.class);
+             saveLineup.putExtra("generatedLineup", lineupTxtView.getText().toString());
+             startActivity(saveLineup);
+         }
+
      });
 
     }

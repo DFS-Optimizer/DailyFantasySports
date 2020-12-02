@@ -1,13 +1,20 @@
 package com.example.dfoptimizerapp;
 
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,27 +24,44 @@ import java.util.ArrayList;
 
 public class DisplayLineups extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_lineups);
         final int site = getIntent().getIntExtra("siteChoice",1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
-        final TextView numberOfLineups = findViewById(R.id.numberOfLineups);
+        final Spinner numberOfLineups = findViewById(R.id.numberOfLineups);
         final TextView lineupTxtView = (TextView) findViewById(R.id.textView3);
         final Button saveButton = (Button) findViewById(R.id.save);
 
+        final String [] pos = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+
+        ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, pos) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+                //((TextView) v).setTypeface(vrFont);
+                return v;
+            }
+        };
+        numberOfLineups.setAdapter(dropdownAdapter);
+        numberOfLineups.setBackgroundTintList(getColorStateList(R.color.white));
+        numberOfLineups.setForegroundTintList(getColorStateList(R.color.white));
         final String url = formatURL(site, sport);
         GetRequests getRequests = new GetRequests(getApplicationContext());
 
-
+        saveButton.setClickable(false);
         //Connect button
         Button httpButton = (Button) findViewById(R.id.httpBut);
+
         httpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveButton.setClickable(true);
                 try {
-                    int num = Integer.parseInt(numberOfLineups.getText().toString());
+                    int num = Integer.parseInt(numberOfLineups.getSelectedItem().toString());
                     if(num > 0) {
                         getRequests.SendRequestAndPrintResponse(url, num, lineupTxtView);
                     }

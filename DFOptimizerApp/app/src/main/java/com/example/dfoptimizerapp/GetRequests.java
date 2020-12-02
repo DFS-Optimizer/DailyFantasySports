@@ -59,7 +59,6 @@ public class GetRequests{
                 }
             };
             spinner.setAdapter(dropdownAdapter);
-            spinner.set
 
 
 

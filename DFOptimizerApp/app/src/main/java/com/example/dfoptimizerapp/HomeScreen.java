@@ -72,7 +72,7 @@ public class HomeScreen extends AppCompatActivity {
     {
         mRequestQueue = Volley.newRequestQueue(this);
         GetRequests getRequests = new GetRequests(getApplicationContext());
-        String slateURL = url + "/" + sport + "/getslate";
+        String slateURL = url + sport + "getslate";
         stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
             Log.i(TAG, "Response: " + response);
             if(!response.contains( "slate unavailable")) {

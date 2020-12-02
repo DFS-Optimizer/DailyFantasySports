@@ -75,27 +75,27 @@ def nflchoice4(player1, player2, player3, player4,num):
 
 @app.route("/fd/nfl/<num>")
 def fdnflchoice0(num):
-    lineup = "run nfl fanduel function"
+    lineup =  nflrun_fanduel(num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<num>")
 def fdnflchoice1(player1, num):
-    lineup = "run nfl fanduel function"
+    lineup =  nflrun_fanduel(player1, num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<num>")
 def fdnflchoice2(player1, player2,num):
-    lineup = "run nfl fanduel function here"
+    lineup =  nflrun_fanduel(player1, player2, num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<player3>/<num>")
 def fdnflchoice3(player1, player2, player3,num):
-    lineup = "run nfl fanduel function here"
+    lineup =  nflrun_fanduel(player1, player2, player3, num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>/<num>")
 def fdnflchoice4(player1, player2, player3, player4,num):
-    lineup = "run nfl fanduel function here"
+    lineup = nflrun_fanduel(player1, player2, player3, player4, num = num)
     return lineup
 
 

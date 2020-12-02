@@ -584,7 +584,7 @@ def nflrun_draftkings(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
+            result += ',{"Total":"' + str(total) + '"},'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -593,6 +593,7 @@ def nflrun_draftkings(*players,num):
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result = result[:-2]
+    result+="]"
 
     return result
 
@@ -666,7 +667,6 @@ def nflrun_fanduel(*players,num):
     print(final)
 
     df = pd.read_csv(const_path)
-    df = pd.read_csv(const_path)
     count = 0
     result = "["
     for player in final:
@@ -674,7 +674,7 @@ def nflrun_fanduel(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
+            result += ',{"Total":"' + str(total) + '"},'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -683,8 +683,7 @@ def nflrun_fanduel(*players,num):
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result = result[:-2]
-    print(result)
-    return result
+    result += "]"
 
     return result
 

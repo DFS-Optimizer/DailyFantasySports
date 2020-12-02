@@ -63,7 +63,7 @@ public class GetRequests{
         }
         else {
             //ELSE
-            txtView.setText(" ");
+            txtView.setText("");
             JSONArray jsonarray = null;
             try {
                 jsonarray = new JSONArray(jsonStr);

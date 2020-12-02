@@ -43,19 +43,18 @@
 
     <TextView
         android:id="@+id/displaySavedSport"
-        android:layout_width="127dp"
-        android:layout_height="23dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
+        android:layout_width="220dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginBottom="28dp"
         android:fontFamily="@font/klaptbold"
-        android:text="TextView"
         android:textColor="#ffffff"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
         app:layout_constraintEnd_toEndOf="@+id/spinnerSavedLineups"
         app:layout_constraintTop_toBottomOf="@+id/spinnerSavedLineups"
-        app:layout_constraintVertical_bias="0.75" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/btnToSave"
@@ -84,7 +83,7 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="21dp"
         android:layout_marginBottom="124dp"
-        android:text="TextView"
+        android:text='Choose a sport in the drop down tab and select "Display" to show your saved lineup.'
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

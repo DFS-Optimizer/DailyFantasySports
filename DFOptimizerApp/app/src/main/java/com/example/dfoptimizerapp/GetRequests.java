@@ -8,6 +8,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -58,6 +59,17 @@ public class GetRequests{
                 }
             };
             spinner.setAdapter(dropdownAdapter);
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    spinner.setSelection(0);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
 
 
         }, error -> Log.i(TAG, "Response: " + error.toString()));
@@ -90,6 +102,17 @@ public class GetRequests{
                 };
                 spinners[i].setAdapter(dropdownAdapter);
                 spinners[i].setVisibility(View.VISIBLE);
+                spinners[i].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        spinners[i].setSelection(0);
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
             }
 
 

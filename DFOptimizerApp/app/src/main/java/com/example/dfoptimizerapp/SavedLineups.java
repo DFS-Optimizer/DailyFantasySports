@@ -31,25 +31,31 @@ import java.util.Map;
 public class SavedLineups extends AppCompatActivity {
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
-    Spinner savedSport;
     Button btnSubmit;
+    Spinner savedSport;
+
     public final static String TAG = "TAG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_lineups);
+
+        savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
+        btnSubmit = (Button) findViewById(R.id.btnToSave);
         saveLineup();
         addItemsOnSpinner();
-        try {
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    System.out.println("here");
+                    final TextView savedDisplay = (TextView) findViewById(R.id.displaySavedLineups);
 
-            final TextView savedDisplay = (TextView) findViewById(R.id.displaySavedLineups);
-            savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
-            btnSubmit = (Button) findViewById(R.id.btnToSave);
 
-            if (savedSport.toString() == "NFL Draftkings") {
+                    if (savedSport.getSelectedItem().toString() == "NFL Draftkings") {
 
-                System.out.println("NFL DRAFT KINGS DISPLAY"); //Test Code
+                        System.out.println("NFL DRAFT KINGS DISPLAY"); //Test Code
                         /*String userID = fAuth.getCurrentUser().getUid();
 
                         DocumentReference documentReference = fStore.collection("users").document(userID);
@@ -62,9 +68,12 @@ public class SavedLineups extends AppCompatActivity {
                         });
 */                    }
 
-        } catch (NumberFormatException error) {
-            Toast.makeText(SavedLineups.this, "Error grabbing data from Firestore", Toast.LENGTH_SHORT).show();
-        }
+                } catch (NumberFormatException error) {
+                    Toast.makeText(SavedLineups.this, "Error grabbing data from Firestore", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
 
 
@@ -96,7 +105,6 @@ public class SavedLineups extends AppCompatActivity {
     }
 
     public void addItemsOnSpinner() {
-        savedSport = (Spinner) findViewById(R.id.spinnerSavedLineups);
         List<String> list = new ArrayList<String>();
         list.add("NBA Fanduel");
         list.add("NFL Fanduel");

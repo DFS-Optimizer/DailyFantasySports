@@ -37,21 +37,12 @@ public class GetRequests{
 
         mRequestQueue= Volley.newRequestQueue(m_context);
 
-        stringRequest=new StringRequest(Request.Method.GET,url,new Response.Listener<String>(){
-            @Override
-            public void onResponse(String response){
-                Log.i(TAG,"Response: "+response.toString());
-                Toast.makeText(m_context,"Generating Optimized Lineup... ",Toast.LENGTH_SHORT).show();
-                ParseReceive(response.toString(),txtView, num);
+        stringRequest=new StringRequest(Request.Method.GET,url, response -> {
+            Log.i(TAG,"Response: "+ response);
+            Toast.makeText(m_context,"Generating Optimized Lineup... ",Toast.LENGTH_SHORT).show();
+            ParseReceive(response,txtView, num);
 
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError error){
-                Log.i(TAG,"Response: "+error.toString());
-            }
-
-        });
+        }, error -> Log.i(TAG,"Response: "+error.toString()));
         mRequestQueue.add(stringRequest);
     }
 

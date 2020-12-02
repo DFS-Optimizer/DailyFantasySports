@@ -90,9 +90,7 @@ def update_nfl_FD_slate():
     df['opp'] = opp
     df['proj'] = [0 for _ in range(len(playerName))]
 
-    df.to_csv(
-        '/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLtemp.csv',
-        index=False)
+    sl = df
 
     # set up some parameters for scrape
     base_url = 'http://www.fantasypros.com/nfl/projections'
@@ -129,7 +127,6 @@ def update_nfl_FD_slate():
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "NFLtemp.csv")
 
-    sl = pd.read_csv(const_path)
     check = len(frames)
     count = 0
     for frame in frames:
@@ -156,11 +153,9 @@ def update_nfl_FD_slate():
                 proj = str(proj)
                 # print(name, proj)
                 sl.loc[sl['playerName'] == name, 'proj'] = proj
-    sl.to_csv(
-        '/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLtemp.csv',
-        index=False)
 
-    sl = pd.read_csv(const_path)
+
+    # sl = pd.read_csv(const_path)
 
 
     # set up some parameters for scrape

@@ -584,7 +584,7 @@ def nflrun_draftkings(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"},'
+            result += ',{"Total":"' + str(total) + '"}'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -674,7 +674,7 @@ def nflrun_fanduel(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"},'
+            result += ',{"Total":"' + str(total) + '"}'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)

@@ -115,21 +115,25 @@ public class GetRequests{
             try {
                 jsonarray = new JSONArray(jsonStr);
 
-                int temp = 0;
-                for(int j = 1; j <= num; j++) {
-                    singleLineup = new ArrayList<>();
-                    singleLineup.add("Lineup " + j);
-                    System.out.println("Lineup" + j);
-                    System.out.println("JSON Length " + jsonarray.length());
-                    //temp = 0;
-                    for (int i = temp; i < jsonarray.length() * num; i++) {
+                //for(int j = 1; j <= num; j++) {
+               int temp = 0;
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        singleLineup = new ArrayList<>();
+                        singleLineup.add("Lineup " + temp);
+
+                        //System.out.println("JSON Length " + jsonarray.length());
+
                         JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
                             //System.out.println("RIGHT HERE");
-                        if (jsonObjectTotal.isNull("total")) {
+                        if (!jsonObjectTotal.isNull("total")) {
 
                             String total = jsonObjectTotal.getString("Total");
                             singleLineup.add("Total: " + total);
                             System.out.println("Total: " + total);
+                            allLineups.add(singleLineup);
+                            singleLineup.clear();
+                            temp++;
+
                         } else {
                             JSONObject jsonobject = jsonarray.getJSONObject(i);
                             String player = jsonobject.getString("player");
@@ -137,49 +141,10 @@ public class GetRequests{
                             System.out.println(player + " " + score);
                             singleLineup.add(player + " " + score);
                         }
-                        temp++;
+
+
                     }
-                         allLineups.add(singleLineup);
-                }
-
-
-
-
-
-/*
-
-                    int i = 0;
-
-                   int j = 0;
-                   for(i = 0; i <= num; i++){
-                    while(jsonobject.isNull("total")) {
-
-                            JSONObject jsonobject = jsonarray.getJSONObject(j);
-                            String player = jsonobject.getString("player");
-                            String score = jsonobject.getString("score");
-                            System.out.println(player + " " + score);
-                            singleLineup.add(player + " " + score);
-                        j++;
-
-                       }
-                                JSONObject jsonObjectTotal = jsonarray.getJSONObject(j);
-                                String total = jsonObjectTotal.getString("Total");
-                                singleLineup.add("Total: " + total);
-                                System.out.println("Total: " + total);
-                       }
-
-
-
-                        allLineups.add(singleLineup);
-                        i++;
-                    }
-
-*/
-
-
-
-
-
+               // }
 
 
 

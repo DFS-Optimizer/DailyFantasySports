@@ -99,22 +99,16 @@ def update_nfl_DK_slate():
 
     # set up some parameters for scrape
     base_url = 'http://www.fantasypros.com/nfl/projections'
-    current_week = 12
-    week_list = range(1, current_week)
     position_list = ['qb', 'rb', 'wr', 'te', 'k', 'dst']
 
     frames = []
     for position in position_list:
         temp = position + '.php?scoring=PPR'
         url = '%s/%s' % (base_url, temp)
-        params = {
-            'week': current_week,
-        }
 
-        response = requests.get(url, params=params)
 
-        msg = 'getting projections for week {}, postition {}'
-        print(msg.format(current_week, position))
+        response = requests.get(url)
+
 
         # use expert:expert in request to get only one expert at a time
         # use pandas to parse the HTML table for us
@@ -152,18 +146,31 @@ def update_nfl_DK_slate():
                 print(name, proj)
                 name = str(name)
                 proj = str(proj)
+                if (name == 'D.K. Metcalf'):
+                    name = 'DK Metcalf'
+                if (name == 'Duke Johnson Jr.'):
+                    name = 'Duke Johnson'
+                if (name == 'Wayne Gallman'):
+                    name = 'Wayne Gallman Jr.'
+                if (name == 'D.J. Chark Jr.'):
+                    name = 'DJ Chark Jr.'
+                if (name == 'Dwayne Haskins'):
+                    name = 'Dwayne Haskins Jr.'
+                if (name == 'Darrell Henderson'):
+                    name = 'Darrell Henderson Jr.'
                 sl.loc[sl['playerName'] == name, 'proj'] = proj
             else:
                 name = frame.loc[i, "Player"]
                 words = name.split()
                 name = words[-1]
-                if name == 'Team':
-                    name = 'Washington'
+                if (name == 'Team'):
+                    name = 'WAS Football Team'
                 proj = frame.loc[i, "FPTS"]
                 name = name + ' '
                 name = str(name)
                 proj = str(proj)
                 print(name, proj)
+
                 sl.loc[sl['playerName'] == name, 'proj'] = proj
     sl.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
 

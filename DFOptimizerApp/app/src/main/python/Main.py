@@ -7,6 +7,7 @@ import pandas as pd
 import sys
 import csv
 import slates.dk
+import slates.fd
 from Optimization.NBAFanduel import Fanduel as NBAFanduel
 from Optimization.NBADraftKings import Draftkings as NBADraftKings
 from Optimization.NFLFanduel import Fanduel as NFLFanduel
@@ -74,34 +75,34 @@ def nflchoice4(player1, player2, player3, player4,num):
 
 @app.route("/fd/nfl/<num>")
 def fdnflchoice0(num):
-    lineup = "run nfl fanduel function"
+    lineup =  nflrun_fanduel(num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<num>")
 def fdnflchoice1(player1, num):
-    lineup = "run nfl fanduel function"
+    lineup =  nflrun_fanduel(player1, num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<num>")
 def fdnflchoice2(player1, player2,num):
-    lineup = "run nfl fanduel function here"
+    lineup =  nflrun_fanduel(player1, player2, num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<player3>/<num>")
 def fdnflchoice3(player1, player2, player3,num):
-    lineup = "run nfl fanduel function here"
+    lineup =  nflrun_fanduel(player1, player2, player3, num = num)
     return lineup
 
 @app.route("/fd/nfl/<player1>/<player2>/<player3>/<player4>/<num>")
 def fdnflchoice4(player1, player2, player3, player4,num):
-    lineup = "run nfl fanduel function here"
+    lineup = nflrun_fanduel(player1, player2, player3, player4, num = num)
     return lineup
 
 
 # url routes for nba draftkings lineups
 
 
-@app.route("/dk/nba/num")
+@app.route("/dk/nba/<num>")
 def dkuser_choice0(num):
     lineup = nbarun_draftkings(num = num)
     return lineup
@@ -166,7 +167,7 @@ def user_choice4(player1, player2, player3, player4,num):
 
 
 
-@app.route("/dk/mlb/num")
+@app.route("/dk/mlb/<num>")
 def dkmlb_choice0(num):
     lineup = mlbrun_draftkings(num = num)
     return lineup
@@ -236,7 +237,7 @@ def get_slate_nfl_dk():
     if slates.dk.update_nfl_DK_slate() == 0:
         return "slate unavailable"
     else:
-        slates.dk.update_nfl_DK_slate()
+        # slates.dk.update_nfl_DK_slate()
         path = get_my_path()
         path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
         const_path = os.path.join(path, "slates", "NFLslateDK.csv")
@@ -291,7 +292,22 @@ def get_slate_mlb_dk():
 
 @app.route("/fd/nfl/getslate")
 def get_slate_nfl_fd():
-    return "slate unavailable"
+    if slates.fd.update_nfl_FD_slate() == 0:
+        return "slate unavailable"
+    else:
+        # slates.dk.update_nfl_DK_slate()
+        path = get_my_path()
+        path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+        const_path = os.path.join(path, "slates", "NFLslateFD.csv")
+        df = pd.read_csv(const_path)
+        result = "["
+        for index, row in df.iterrows():
+            result += '{"player":"' + str(row['playerName']) + '","Salary":"' + str(
+                row['sal']) + '","Position":"' + str(row['pos']) + '","Team":"' + str(
+                row['team']) + '","Opponent":"' + str(row['opp']) + '","Projection":"' + str(row['proj']) + '"},'
+        result = result[:-1]
+        result += "]"
+        return result
 
 @app.route("/fd/nba/getslate")
 def get_slate_nba_fd():
@@ -568,7 +584,7 @@ def nflrun_draftkings(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
+            result += ',{"Total":"' + str(total) + '"}'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -577,6 +593,7 @@ def nflrun_draftkings(*players,num):
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result = result[:-2]
+    result+="]"
 
     return result
 
@@ -650,7 +667,6 @@ def nflrun_fanduel(*players,num):
     print(final)
 
     df = pd.read_csv(const_path)
-    df = pd.read_csv(const_path)
     count = 0
     result = "["
     for player in final:
@@ -658,7 +674,7 @@ def nflrun_fanduel(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
+            result += ',{"Total":"' + str(total) + '"}'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -667,8 +683,7 @@ def nflrun_fanduel(*players,num):
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     result = result[:-2]
-    print(result)
-    return result
+    result += "]"
 
     return result
 

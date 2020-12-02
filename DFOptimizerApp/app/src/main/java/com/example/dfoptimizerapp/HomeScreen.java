@@ -44,9 +44,9 @@ public class HomeScreen extends AppCompatActivity {
         nflDKLineup = getRequests.SendRequestAndPrintResponse(url_DK + "nfl/", 1, nflDK);
         mlbDKLineup = getRequests.SendRequestAndPrintResponse(url_DK + "mlb/", 1,mlbDK);
 
-        nbaFDLineup = getRequests.SendRequestAndPrintResponse(url_DK + "nba/", 1, nbaFD);
-        nflFDLineup = getRequests.SendRequestAndPrintResponse(url_DK + "nfl/", 1, nflFD);
-        mlbFDLineup = getRequests.SendRequestAndPrintResponse(url_DK + "mlb/", 1,mlbFD);
+        nbaFDLineup = getRequests.SendRequestAndPrintResponse(url_FD + "nba/", 1, nbaFD);
+        nflFDLineup = getRequests.SendRequestAndPrintResponse(url_FD + "nfl/", 1, nflFD);
+        mlbFDLineup = getRequests.SendRequestAndPrintResponse(url_FD + "mlb/", 1,mlbFD);
 
 
 

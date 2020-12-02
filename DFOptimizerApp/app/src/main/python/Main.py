@@ -102,7 +102,7 @@ def fdnflchoice4(player1, player2, player3, player4,num):
 # url routes for nba draftkings lineups
 
 
-@app.route("/dk/nba/num")
+@app.route("/dk/nba/<num>")
 def dkuser_choice0(num):
     lineup = nbarun_draftkings(num = num)
     return lineup
@@ -167,7 +167,7 @@ def user_choice4(player1, player2, player3, player4,num):
 
 
 
-@app.route("/dk/mlb/num")
+@app.route("/dk/mlb/<num>")
 def dkmlb_choice0(num):
     lineup = mlbrun_draftkings(num = num)
     return lineup
@@ -584,7 +584,7 @@ def nflrun_draftkings(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
+            result += ',{"Total":"' + str(total) + '"}'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -592,7 +592,8 @@ def nflrun_draftkings(*players,num):
             if not last == "[":
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
+    # result = result[:-1]
+    result+="]"
 
     return result
 
@@ -666,7 +667,6 @@ def nflrun_fanduel(*players,num):
     print(final)
 
     df = pd.read_csv(const_path)
-    df = pd.read_csv(const_path)
     count = 0
     result = "["
     for player in final:
@@ -674,7 +674,7 @@ def nflrun_fanduel(*players,num):
         if count == 10:
             total = player
             count = 0
-            result += ',{"Total":"' + str(total) + '"}],['
+            result += ',{"Total":"' + str(total) + '"}'
         else:
             temp = df.loc[df['playerName'] == player, 'proj'].values[0]
             temp = round(temp, 2)
@@ -682,9 +682,8 @@ def nflrun_fanduel(*players,num):
             if not last == "[":
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
-    print(result)
-    return result
+    # result = result[:-2]
+    result += "]"
 
     return result
 
@@ -779,7 +778,7 @@ def mlbrun_draftkings(*players, num):
             if not last == "[":
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
+    # result = result[:-2]
     print(result)
 
     return result

@@ -114,16 +114,27 @@ public class GetRequests{
             JSONArray jsonarray;
             try {
                 jsonarray = new JSONArray(jsonStr);
-                int temp = 0;
-                for(int j = 1; j <= num; j++) {
-                    singleLineup = new ArrayList<>();
-                    singleLineup.add("Lineup " + j);
-                    for (int i = temp; i < jsonarray.length(); i++) {
-                        if (i == jsonarray.length() - 1) {
-                            JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
+
+
+               int temp = 1;
+                singleLineup = new ArrayList<>();
+                    for (int i = 0; i < jsonarray.length(); i++) {
+                        if(i == 0) {
+                            singleLineup.add("Lineup " + temp);
+                        }
+
+                        JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);
+                            //System.out.println("RIGHT HERE");
+                        if (!jsonObjectTotal.isNull("Total")) {
+
                             String total = jsonObjectTotal.getString("Total");
                             singleLineup.add("Total: " + total);
                             System.out.println("Total: " + total);
+                            allLineups.add(singleLineup);
+                            singleLineup = new ArrayList<>();
+                            temp++;
+                            singleLineup.add("Lineup " + temp);
+
                         } else {
                             JSONObject jsonobject = jsonarray.getJSONObject(i);
                             String player = jsonobject.getString("player");
@@ -131,11 +142,9 @@ public class GetRequests{
                             System.out.println(player + " " + score);
                             singleLineup.add(player + " " + score);
                         }
-                        temp++;
-                    }
 
-                    allLineups.add(singleLineup);
-                }
+
+                    }
 
             } catch (JSONException e) {
                 e.printStackTrace();

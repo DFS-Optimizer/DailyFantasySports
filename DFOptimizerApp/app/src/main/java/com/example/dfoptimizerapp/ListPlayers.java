@@ -242,12 +242,12 @@ public class ListPlayers extends AppCompatActivity {
         /***CLEAR BUTTON ON CLICK LISTENER***/
         clearBtn.setOnClickListener((v) -> {
             selectedPlayers.clear();
-//            for(int i=0; i<players.size(); i++){
-//                TableRow row = (TableRow)playerListView.getChildAt(i);
-//                //System.out.println(i+" "+(CheckBox)row.getChildAt(6));
-//                CheckBox chk = (CheckBox)row.getChildAt(6);
-//                chk.setChecked(false);
-//            }
+            for(int i=1; i<players.size(); i++){
+                TableRow row = (TableRow)playerListView.getChildAt(i);
+                //System.out.println(i+" "+(CheckBox)row.getChildAt(6));
+                CheckBox chk = (CheckBox)row.getChildAt(6);
+                chk.setChecked(false);
+            }
             //Toast.makeText(getApplicationContext(), "All selections cleared", Toast.LENGTH_SHORT).show();
 
 

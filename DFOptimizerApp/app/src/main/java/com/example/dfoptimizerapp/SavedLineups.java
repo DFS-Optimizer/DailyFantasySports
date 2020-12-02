@@ -4,9 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -148,9 +151,15 @@ System.out.println("SITE FIELD: " + siteField);
         list.add("NBA Draftkings");
         list.add("NFL Draftkings");
         list.add("MLB Draftkings");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, list) {
+            public View getView(int position, View convertView, ViewGroup parent) {
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+                //((TextView) v).setTypeface(vrFont);
+                return v;
+            }
+        };
         savedSport.setAdapter(dataAdapter);
     }
 

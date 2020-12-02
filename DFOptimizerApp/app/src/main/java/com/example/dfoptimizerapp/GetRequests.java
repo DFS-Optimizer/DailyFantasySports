@@ -133,6 +133,7 @@ public class GetRequests{
                             allLineups.add(singleLineup);
                             singleLineup = new ArrayList<>();
                             temp++;
+                            singleLineup.add("Lineup " + temp);
 
                         } else {
                             JSONObject jsonobject = jsonarray.getJSONObject(i);

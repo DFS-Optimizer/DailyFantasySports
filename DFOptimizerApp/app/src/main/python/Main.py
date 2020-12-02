@@ -592,7 +592,7 @@ def nflrun_draftkings(*players,num):
             if not last == "[":
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
+    # result = result[:-1]
     result+="]"
 
     return result
@@ -778,7 +778,7 @@ def mlbrun_draftkings(*players, num):
             if not last == "[":
                 result += ","
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
-    result = result[:-2]
+    # result = result[:-2]
     print(result)
 
     return result

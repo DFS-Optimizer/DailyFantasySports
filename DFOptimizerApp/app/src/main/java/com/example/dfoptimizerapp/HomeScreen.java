@@ -2,14 +2,12 @@ package com.example.dfoptimizerapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.webkit.WebSettings;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -21,15 +19,24 @@ public class HomeScreen extends AppCompatActivity {
         final TextView nbaTextView = findViewById(R.id.nbaLineupTxtView);
         final TextView nflTextView = findViewById(R.id.nflLineupTxtView);
         final TextView mlbTextView = findViewById(R.id.mlbLineupTxtView);
+        ArrayList<ArrayList<String>> nbaLineup;
+        ArrayList<ArrayList<String>> nflLineup;
+        ArrayList<ArrayList<String>> mlbLineup;
         String url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/";
 
         GetRequests getRequests = new GetRequests(getApplicationContext());
-        getRequests.SendRequestAndPrintResponse(url + "nba/", 1, nbaTextView);
-        getRequests.SendRequestAndPrintResponse(url + "nfl/", 1, nflTextView);
-        getRequests.SendRequestAndPrintResponse(url + "mlb/", 1, mlbTextView);
+        nbaLineup = getRequests.SendRequestAndPrintResponse(url + "nba/", 1);
+        nflLineup = getRequests.SendRequestAndPrintResponse(url + "nfl/", 1);
+        mlbLineup = getRequests.SendRequestAndPrintResponse(url + "mlb/", 1);
+
+        getRequests.Display(nbaLineup, nbaTextView);
+        getRequests.Display(nflLineup, nflTextView);
+        getRequests.Display(mlbLineup, mlbTextView);
 
         customizeBtn.setOnClickListener((v) ->{
             startActivity(new Intent(getApplicationContext(), ChooseSite.class));
         });
     }
+
 }
+

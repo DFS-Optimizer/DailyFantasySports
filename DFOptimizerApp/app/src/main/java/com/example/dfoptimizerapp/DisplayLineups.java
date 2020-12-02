@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,7 +62,8 @@ public class DisplayLineups extends AppCompatActivity {
                 try {
                     int num = Integer.parseInt(numberOfLineups.getSelectedItem().toString());
                     if(num > 0) {
-                        getRequests.SendRequestAndPrintResponse(url, num, lineupTxtView);
+                        ArrayList<ArrayList<String>> lineups = getRequests.SendRequestAndPrintResponse(url, num);
+                        getRequests.Display(lineups, lineupTxtView);
                     }
                     else
                     {

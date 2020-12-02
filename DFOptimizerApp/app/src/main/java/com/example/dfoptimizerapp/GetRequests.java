@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,18 +59,7 @@ public class GetRequests{
                     return v;
                 }
             };
-            spinner.setAdapter(dropdownAdapter);
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    spinner.setSelection(0);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
+            AdjustSpinners(spinner, dropdownAdapter);
 
 
         }, error -> Log.i(TAG, "Response: " + error.toString()));
@@ -100,19 +90,7 @@ public class GetRequests{
                         return v;
                     }
                 };
-                spinners[i].setAdapter(dropdownAdapter);
-                spinners[i].setVisibility(View.VISIBLE);
-                spinners[i].setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        spinners[i].setSelection(0);
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
+                AdjustSpinners(spinners[i], dropdownAdapter);
             }
 
 
@@ -177,6 +155,22 @@ public class GetRequests{
             }
             txtView.append("\n\n");
         }
+    }
+    public void AdjustSpinners(Spinner spinner, SpinnerAdapter dropdownAdapter)
+    {
+        spinner.setVisibility(View.VISIBLE);
+        spinner.setAdapter(dropdownAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                spinner.setSelection(0);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
 }

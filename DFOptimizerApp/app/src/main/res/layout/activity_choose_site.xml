@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient"
+    android:background="@color/colorPrimary"
     tools:context=".ChooseSport">
 
 
@@ -41,19 +41,30 @@
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="128dp"
-        android:layout_height="74dp"
+        android:layout_width="130dp"
+        android:layout_height="55dp"
         android:layout_marginStart="96dp"
         android:layout_marginLeft="96dp"
         android:layout_marginBottom="132dp"
-        android:backgroundTint="#4ab9f5"
-        android:textSize="16sp"
-        android:fontFamily="@font/klaptbold"
         android:background="@drawable/custom_rounded_corners"
+        android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
         android:onClick="logout"
         android:text="Logout"
         android:textColor="#333333"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/draftKingsBtn" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="189dp"
+        android:layout_height="43dp"
+        android:fontFamily="@font/klaptbold"
+        android:text="Select a Site"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
+        tools:layout_editor_absoluteX="111dp"
+        tools:layout_editor_absoluteY="70dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

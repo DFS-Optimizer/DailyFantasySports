@@ -4,46 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#333333"
     tools:context=".SavedLineups">
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="218dp"
-        android:layout_height="0dp"
+        android:layout_width="175dp"
+        android:layout_height="45dp"
         android:layout_marginTop="48dp"
         android:layout_marginBottom="33dp"
+        android:fontFamily="@font/klaptbold"
         android:text="My Lineups "
-        android:textSize="30sp"
+        android:textColor="#ffffff"
+        android:textSize="32sp"
         app:layout_constraintBottom_toTopOf="@+id/spinnerSavedLineups"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerSavedLineups"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/displaySavedSport"
-        app:layout_constraintEnd_toStartOf="@+id/btnToSave"
+        android:layout_width="241dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="137dp"
+        android:layout_marginEnd="131dp"
+        android:layout_marginRight="131dp"
+        android:layout_marginBottom="547dp"
+        android:backgroundTint="#ffffff"
+        android:textColor="@color/white"
+        android:theme="@style/spinnerTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/displaySavedSport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="82dp"
-        android:layout_marginRight="82dp"
+        android:layout_width="127dp"
+        android:layout_height="23dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
         android:layout_marginBottom="28dp"
+        android:fontFamily="@font/klaptbold"
         android:text="TextView"
+        android:textColor="#ffffff"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
         app:layout_constraintEnd_toEndOf="@+id/spinnerSavedLineups"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSavedLineups" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerSavedLineups"
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/btnToSave"
@@ -53,9 +65,13 @@
         android:layout_marginEnd="9dp"
         android:layout_marginRight="9dp"
         android:layout_marginBottom="84dp"
+        android:background="@drawable/custom_rounded_corners"
+        android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
         android:text="Display"
         app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.73"
         app:layout_constraintStart_toEndOf="@+id/spinnerSavedLineups"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,6 +85,7 @@
         android:layout_marginRight="21dp"
         android:layout_marginBottom="124dp"
         android:text="TextView"
+        android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,10 +93,21 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="149dp"
+        android:layout_marginLeft="149dp"
+        android:layout_marginTop="632dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginRight="142dp"
+        android:layout_marginBottom="49dp"
+        android:background="@drawable/custom_rounded_corners"
+        android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
         android:text="Home"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="645dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

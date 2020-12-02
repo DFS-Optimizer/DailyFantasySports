@@ -1,27 +1,3 @@
-ESPN_SCORING = {
-    'pass_yards': .04,
-    'pass_TD': 4.,
-    'interceptions': -2.,
-    'rush_yards': .1,
-    'rush_TD': 6.,
-    'receptions': 0., # standard ESPN is not PPR
-    'receiving_yards': .1,
-    'receiving_TD': 6.,
-    'misc_TD': 6., # punt/kick returns
-    'two_pt_conversions': 2.,
-    'fumbles_lost': -2.
-}
-
-# Top N players relevant to each position
-FANTASY_RELEVANT = {
-    'QB': 20,
-    'RB': 60,
-    'WR': 60,
-    'TE': 20,
-    'K': 15,
-    'D/ST': 15
-}
-
 # FantasyPros name : ESPN name
 NAME_CORRECTIONS = {
     'Benny Cunningham': 'Benjamin Cunningham',
@@ -38,6 +14,7 @@ NAME_CORRECTIONS = {
     'Taylor Yates': 'T.J. Yates',
     'Timothy Wright': 'Tim Wright',
     'Will Tukuafu': "Will Ta'ufo'ou",
+    'D.K. Metcalf':'DK Metcalf'
 }
 
 COLUMN_MAPPINGS = {

@@ -1,9 +1,19 @@
 package com.example.dfoptimizerapp;
+import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,7 +35,8 @@ public class GetRequests{
         m_context = context;
     }
 
-    public ArrayList<ArrayList<String>> SendRequestAndPrintResponse(String url, int num){
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public ArrayList<ArrayList<String>> SendRequestAndPrintResponse(String url, int num, Spinner spinner){
 
         String TAG=DisplayLineups.class.getName();
         RequestQueue mRequestQueue;
@@ -38,6 +49,18 @@ public class GetRequests{
             Log.i(TAG,"Response: "+ response);
             Toast.makeText(m_context,"Generating Optimized Lineup... ",Toast.LENGTH_SHORT).show();
             lineups = ParseReceive(response, num);
+            String[] lineupArray = lineups.get(0).toArray(new String[lineups.size()]);
+            ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(m_context, android.R.layout.simple_spinner_dropdown_item, lineupArray) {
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View v = super.getView(position, convertView, parent);
+                    ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                    ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+                    return v;
+                }
+            };
+            spinner.setAdapter(dropdownAdapter);
+            spinner.set
+
 
 
         }, error -> Log.i(TAG,"Response: "+error.toString()));
@@ -62,6 +85,7 @@ public class GetRequests{
                 jsonarray = new JSONArray(jsonStr);
                 for(int j = 0; j < num; j++) {
                     singleLineup = new ArrayList<>();
+                    singleLineup.add("Lineup " + (j+1));
                     for (int i = 0; i < jsonarray.length(); i++) {
                         if (i == jsonarray.length() - 1) {
                             JSONObject jsonObjectTotal = jsonarray.getJSONObject(i);

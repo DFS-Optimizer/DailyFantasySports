@@ -17,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -63,7 +62,7 @@ public class DisplayLineups extends AppCompatActivity {
                 try {
                     int num = Integer.parseInt(numberOfLineups.getSelectedItem().toString());
                     if(num > 0) {
-                        lineups = getRequests.SendRequestAndPrintResponse(url, num);
+                        //lineups = getRequests.SendRequestAndPrintResponse(url, num);
                     }
                     else
                     {

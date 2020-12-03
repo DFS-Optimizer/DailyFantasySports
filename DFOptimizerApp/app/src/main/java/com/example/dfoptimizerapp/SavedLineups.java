@@ -92,7 +92,7 @@ public class SavedLineups extends AppCompatActivity {
                             @Override
                             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                                 savedDisplay.setText(documentSnapshot.getString(savedSport.getSelectedItem().toString()+ " "+ "lineup"));
-
+                                System.out.println("TEST" + savedDisplay.getText().toString());
                             }
                         });
 

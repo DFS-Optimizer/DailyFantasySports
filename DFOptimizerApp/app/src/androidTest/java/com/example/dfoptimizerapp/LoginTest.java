@@ -22,7 +22,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static org.junit.Assert.*;
 
 public class LoginTest {
-
+/***NOTE: THESE TESTS WILL FAIL IF YOU ARE A CURRENT USER OF THE APPLICATION. LOGOUT OF THE APP FIRST AND THEN RUN THE TEST***/
     @Rule
     public ActivityScenarioRule<Login> activityRule =
             new ActivityScenarioRule<Login>(Login.class);

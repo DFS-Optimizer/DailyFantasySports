@@ -18,9 +18,10 @@
         android:layout_marginRight="54dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.047"
         app:srcCompat="@drawable/logo" />
 
     <Button
@@ -47,14 +48,14 @@
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="410dp"
-        android:layout_height="401dp"
-        android:layout_marginBottom="7dp"
+        android:layout_height="0dp"
         android:layout_marginTop="40dp"
-        app:layout_constraintBottom_toTopOf="@+id/customizeBtn"
+        android:layout_marginBottom="128dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/myLineups">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,10 +66,10 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" NBA Lineup - DraftKings:"
-                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
+                android:text=" NBA Lineup - DraftKings:"
                 android:textColor="#4ab9f5"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="161dp" />
 
@@ -76,10 +77,10 @@
                 android:id="@+id/nba_dk_lineup"
                 android:layout_width="match_parent"
                 android:layout_height="91dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:backgroundTint="#ffffff"
                 android:foregroundTint="#ffffff"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
                 android:textColor="@color/white"
                 android:theme="@style/spinnerTheme" />
 
@@ -87,10 +88,10 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" NBA Lineup - FanDuel:"
-                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
+                android:text=" NBA Lineup - FanDuel:"
                 android:textColor="#4ab9f5"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="309dp" />
 
@@ -99,9 +100,9 @@
                 android:layout_width="370dp"
                 android:layout_height="85dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:backgroundTint="#ffffff"
                 android:foregroundTint="#ffffff"
-                android:layout_marginRight="20dp"
                 android:textColor="@color/white"
                 android:theme="@style/spinnerTheme" />
 
@@ -109,10 +110,10 @@
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" NFL Lineup - DraftKings:"
-                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
+                android:text=" NFL Lineup - DraftKings:"
                 android:textColor="#4ab9f5"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="227dp" />
 
@@ -131,10 +132,10 @@
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" NFL Lineup - FanDuel:"
-                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
+                android:text=" NFL Lineup - FanDuel:"
                 android:textColor="#4ab9f5"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="309dp" />
 
@@ -153,10 +154,10 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" MLB Lineup - DraftKings:"
-                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
+                android:text=" MLB Lineup - DraftKings:"
                 android:textColor="#4ab9f5"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="309dp" />
 
@@ -175,10 +176,10 @@
                 android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" MLB Lineup - FanDuel:"
-                android:textSize="20sp"
                 android:layout_marginLeft="10dp"
+                android:text=" MLB Lineup - FanDuel:"
                 android:textColor="#4ab9f5"
+                android:textSize="20sp"
                 tools:layout_editor_absoluteX="40dp"
                 tools:layout_editor_absoluteY="309dp" />
 
@@ -194,5 +195,22 @@
                 android:theme="@style/spinnerTheme" />
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/myLineups"
+        android:layout_width="160dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="101dp"
+        android:layout_marginLeft="101dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
+        android:layout_marginBottom="5dp"
+        android:text="My Lineups"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView3"
+        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

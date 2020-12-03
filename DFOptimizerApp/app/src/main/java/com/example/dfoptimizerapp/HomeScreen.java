@@ -35,6 +35,7 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         final Button customizeBtn = findViewById(R.id.customizeBtn);
+        final Button myLineups = findViewById(R.id.myLineups);
         ArrayList<ArrayList<String>> nbaDKLineup;
         ArrayList<ArrayList<String>> nflDKLineup;
         ArrayList<ArrayList<String>> mlbDKLineup;
@@ -67,7 +68,16 @@ public class HomeScreen extends AppCompatActivity {
         customizeBtn.setOnClickListener((v) ->{
             startActivity(new Intent(getApplicationContext(), ChooseSite.class));
         });
+
+        myLineups.setOnClickListener((v) -> {
+            Intent saveLineup = new Intent(v.getContext(), SavedLineups.class);
+            saveLineup.putExtra("fromHome", 1);
+            startActivity(saveLineup);
+        });
     }
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     void CheckGetState(String url, String sport, Spinner spinner)
     {

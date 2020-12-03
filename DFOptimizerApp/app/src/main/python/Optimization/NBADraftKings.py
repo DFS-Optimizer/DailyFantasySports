@@ -122,7 +122,10 @@ class Draftkings(Optimizer):
                             a_lineup[4] = self.players_df.loc[num, 'playerName']
                         elif a_lineup[7] == "":
                             a_lineup[7] = self.players_df.loc[num, 'playerName']
-                    total_proj += self.players_df.loc[num, 'proj']
+                    if self.players_df.loc[num, 'proj'] > 90:
+                        total_proj += self.players_df.loc[num, 'proj'] - 100
+                    else:
+                        total_proj += self.players_df.loc[num, 'proj']
             a_lineup.append(round(total_proj, 2))
             print(a_lineup)
             filled_lineups.append(a_lineup)

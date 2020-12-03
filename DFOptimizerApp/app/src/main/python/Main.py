@@ -505,7 +505,6 @@ def nbarun_draftkings(*players,num):
     print(result)
     return result
 
-    return result
 
 
 def nfloptimizeDK(num):

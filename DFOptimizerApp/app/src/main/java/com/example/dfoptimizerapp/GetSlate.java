@@ -65,20 +65,39 @@ public class GetSlate {
     private void SendRequestAndPrintResponse(int slateChoice) {
         String slateURL = "";
 
-        /* NEW SLATE URL FOR NFL DRAFT KINGS*/
+        //NEW SLATE URL FOR NBA DRAFT KINGS
+
         if (m_sportChoice == 1) {
-            slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nba/getslate";
+            if(m_siteChoice == 2) {
+                slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nba/getslate";
+            }
+            else
+            {
+                slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/fd/nba/getslate";
+            }
 
         }
-        //NEW SLATE URL FOR NBA DRAFT KINGS
+        /* NEW SLATE URL FOR NFL DRAFT KINGS*/
         else if(m_sportChoice == 2){
-            slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
+            if(m_siteChoice == 2) {
+                slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
+            }
+            else
+            {
+                slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/fd/nfl/getslate";
+            }
 
         }
         //NEW SLATE URL FOR MLB DRAFT KINGS
         else
         {
-            slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/mlb/getslate";
+            if(m_siteChoice == 2) {
+                slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/mlb/getslate";
+            }
+            else
+            {
+                slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nba/getslate";
+            }
         }
         //DEBUG CODE
         System.out.println(slateURL);

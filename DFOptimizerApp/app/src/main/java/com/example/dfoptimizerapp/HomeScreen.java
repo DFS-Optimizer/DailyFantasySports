@@ -1,19 +1,34 @@
 package com.example.dfoptimizerapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
+    private static final String TAG = DisplayLineups.class.getName();
+    private RequestQueue mRequestQueue;
+    private StringRequest stringRequest;
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +53,48 @@ public class HomeScreen extends AppCompatActivity {
         String url_FD = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/fd/";
 
 
-        GetRequests getRequests = new GetRequests(getApplicationContext());
-
-        nbaDKLineup = getRequests.SendRequestAndPrintResponse(url_DK + "nba/", 1, nbaDK);
-        nflDKLineup = getRequests.SendRequestAndPrintResponse(url_DK + "nfl/", 1, nflDK);
-        mlbDKLineup = getRequests.SendRequestAndPrintResponse(url_DK + "mlb/", 1,mlbDK);
-
-        nbaFDLineup = getRequests.SendRequestAndPrintResponse(url_FD + "nba/", 1, nbaFD);
-        nflFDLineup = getRequests.SendRequestAndPrintResponse(url_FD + "nfl/", 1, nflFD);
-        mlbFDLineup = getRequests.SendRequestAndPrintResponse(url_FD + "mlb/", 1,mlbFD);
 
 
+        CheckGetState(url_DK, "nba/", nbaDK);
+        CheckGetState(url_DK, "nfl/", nflDK);
+        CheckGetState(url_DK, "mlb/", mlbDK);
+
+        CheckGetState(url_FD, "nba/", nbaFD);
+        CheckGetState(url_FD, "nfl/", nflFD);
+        CheckGetState(url_FD, "mlb/", mlbFD);
 
         customizeBtn.setOnClickListener((v) ->{
             startActivity(new Intent(getApplicationContext(), ChooseSite.class));
         });
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    void CheckGetState(String url, String sport, Spinner spinner)
+    {
+        mRequestQueue = Volley.newRequestQueue(this);
+        GetRequests getRequests = new GetRequests(getApplicationContext());
+        String slateURL = url + sport + "getslate";
+        stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
+            Log.i(TAG, "Response: " + response);
+            if(!response.contains( "slate unavailable")) {
+                getRequests.SendRequestAndPrintResponse(url + sport, 1, spinner);
+            }
+            else
+            {
+                String[] sportUnavailable = new String[] {"This sport is out of season"};
+                ArrayAdapter<String> dropdownAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sportUnavailable) {
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View v = super.getView(position, convertView, parent);
+                        ((TextView) v).setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
+                        ((TextView) v).setTextColor(Color.parseColor("#ffffff"));
+                        return v;
+                    }
+                };
+                spinner.setAdapter(dropdownAdapter);
+            }
+        }, error -> Log.i(TAG, "Response: " + error.toString()));
+        mRequestQueue.add(stringRequest);
+    }
+
 
 }
 

@@ -62,6 +62,7 @@
         android:layout_marginEnd="51dp"
         android:layout_marginRight="51dp"
         android:spinnerMode="dropdown"
+        android:theme="@style/spinnerTheme"
         app:layout_constraintBottom_toTopOf="@+id/httpBut"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,60 +90,100 @@
             <Spinner
                 android:id="@+id/lineup1"
                 android:layout_width="410dp"
+                android:theme="@style/spinnerTheme"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup2"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
                 android:layout_height="100dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup3"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup4"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone"/>
 
             <Spinner
                 android:id="@+id/lineup5"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone"/>
 
             <Spinner
                 android:id="@+id/lineup6"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup7"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup8"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup9"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 
             <Spinner
                 android:id="@+id/lineup10"
                 android:layout_width="410dp"
+                android:layout_marginLeft="10dp"
+                android:theme="@style/spinnerTheme"
+                android:backgroundTint="#ffffff"
+                android:foregroundTint="#ffffff"
                 android:layout_height="100dp"
                 android:visibility="gone" />
 

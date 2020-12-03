@@ -114,7 +114,10 @@ class Fanduel(Optimizer):
                     elif self.positions['D'][num] == 1:
                         if a_lineup[8] == "":
                             a_lineup[8] = self.players_df.loc[num, 'playerName']
-                    total_proj += self.players_df.loc[num, 'proj']
+                    if self.players_df.loc[num, 'proj'] > 90:
+                        total_proj += self.players_df.loc[num, 'proj'] - 100
+                    else:
+                        total_proj += self.players_df.loc[num, 'proj']
             a_lineup.append(round(total_proj, 2))
             filled_lineups.append(a_lineup)
         return filled_lineups

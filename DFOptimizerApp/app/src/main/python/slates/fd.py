@@ -198,6 +198,10 @@ def update_nfl_FD_slate():
         # print(name, sal, pos)
         sl.loc[sl['playerName'] == name, 'sal'] = sal
     # print(sl.loc[sl['sal']==0])
-    sl.to_csv(
-        '/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateFD.csv',
-        index=False)
+    path = get_my_path()
+    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    const_path = os.path.join(path, "NFLslateFD.csv")
+    sl.to_csv(const_path)
+    # sl.to_csv(
+    #     '/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateFD.csv',
+    #     index=False)

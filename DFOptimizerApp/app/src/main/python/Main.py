@@ -505,7 +505,6 @@ def nbarun_draftkings(*players,num):
     print(result)
     return result
 
-    return result
 
 
 def nfloptimizeDK(num):
@@ -644,7 +643,7 @@ def nflrun_fanduel(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NFLslateFD.csv")
-    print(const_path)
+    # print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
     df = pd.read_csv(const_path)

@@ -44,6 +44,7 @@ public class DisplayLineups extends AppCompatActivity {
         final Spinner lineup9 = findViewById(R.id.lineup9);
         final Spinner lineup10 = findViewById(R.id.lineup10);
 
+
         saveButton.setClickable(false);
 
         Spinner[] spinners = new Spinner[]{lineup1,lineup2,lineup3, lineup4,lineup5,lineup6,lineup7,lineup8, lineup9, lineup10};
@@ -73,17 +74,21 @@ public class DisplayLineups extends AppCompatActivity {
                 saveButton.setClickable(true);
                 try {
                     int num = Integer.parseInt(numberOfLineups.getSelectedItem().toString());
-                    if(num > 0) {
+
                         lineups = getRequests.SendRequestAndPrintResponse(url, num, spinners);
-                        for(int i = 0; i < num; i++)
+
+                        for(int i = 0; i < 10; i++)
                         {
-                            spinners[i].setVisibility(View.VISIBLE);
+
+                            if(i < num) {
+                                spinners[i].setVisibility(View.VISIBLE);
+                            }
+                            else
+                            {
+                                spinners[i].setVisibility(View.GONE);
+                            }
                         }
-                    }
-                    else
-                    {
-                        Toast.makeText(DisplayLineups.this, "You must enter a number of lineups greater than 0", Toast.LENGTH_SHORT).show();
-                    }
+
                 }
                 catch (NumberFormatException e){
                     Toast.makeText(DisplayLineups.this, "You must enter a number of lineups greater than 0", Toast.LENGTH_SHORT).show();
@@ -94,8 +99,19 @@ public class DisplayLineups extends AppCompatActivity {
      saveButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View view) {
+             String lineupString = "";
+             for(int i = 0; i < 10; i++) {
+                 if (i < Integer.parseInt((String) numberOfLineups.getSelectedItem())) {
+                     int j = 0;
+                     while ( j < spinners[i].getAdapter().getCount()) {
+                         lineupString += spinners[i].getItemAtPosition(j);
+                         lineupString += "\n";
+                         j++;
+                     }
+                 }
+             }
              Intent saveLineup = new Intent(view.getContext(), SavedLineups.class);
-             saveLineup.putExtra("generatedLineup", lineups.toString());
+             saveLineup.putExtra("generatedLineup", lineupString);
              System.out.println(site + " " + sport);
              saveLineup.putExtra("siteChoice", site);
              saveLineup.putExtra("sportChoice", sport);

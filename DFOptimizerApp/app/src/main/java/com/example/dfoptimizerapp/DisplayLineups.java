@@ -100,15 +100,21 @@ public class DisplayLineups extends AppCompatActivity {
          @Override
          public void onClick(View view) {
              String lineupString = "";
-             for(int i = 0; i < 10; i++) {
-                 if (i < Integer.parseInt((String) numberOfLineups.getSelectedItem())) {
-                     int j = 0;
-                     while ( j < spinners[i].getAdapter().getCount()) {
-                         lineupString += spinners[i].getItemAtPosition(j);
-                         lineupString += "\n";
-                         j++;
+             if(lineup1.getVisibility() == View.VISIBLE) {
+                 for (int i = 0; i < 10; i++) {
+                     if (i < Integer.parseInt((String) numberOfLineups.getSelectedItem())) {
+                         int j = 0;
+                         while (j < spinners[i].getAdapter().getCount()) {
+                             lineupString += spinners[i].getItemAtPosition(j);
+                             lineupString += "\n";
+                             j++;
+                         }
                      }
                  }
+             }
+             else
+             {
+                 Toast.makeText(DisplayLineups.this, "Waiting on Lineups to Generate...", Toast.LENGTH_SHORT).show();
              }
              Intent saveLineup = new Intent(view.getContext(), SavedLineups.class);
              saveLineup.putExtra("generatedLineup", lineupString);

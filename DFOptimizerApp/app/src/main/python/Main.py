@@ -645,7 +645,6 @@ def nflrun_fanduel(*players,num):
     path = get_my_path()
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "slates", "NFLslateFD.csv")
-    # temp_path = os.path.join(path, "slates", "NFLslateFDtemp.csv")
     # print(const_path)
     # out_path = os.path.join(path, "slates", "output_fanduel.csv")
 
@@ -659,7 +658,7 @@ def nflrun_fanduel(*players,num):
     df = pd.read_csv(const_path)
     for player in players:
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] - 100
-    # df.to_csv(const_path, index=False)
+    df.to_csv(const_path, index=False)
 
     final = []
     for sublist in lineup:
@@ -668,7 +667,7 @@ def nflrun_fanduel(*players,num):
     e = players.__len__() * 100
     print(final)
 
-    # df = pd.read_csv(const_path)
+    df = pd.read_csv(const_path)
     count = 0
     result = "["
     for player in final:

@@ -19,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -84,6 +86,7 @@ public class HomeScreen extends AppCompatActivity {
         mRequestQueue = Volley.newRequestQueue(this);
         GetRequests getRequests = new GetRequests(getApplicationContext());
         String slateURL = url + sport + "getslate";
+        System.out.println(slateURL);
         stringRequest = new StringRequest(Request.Method.GET, slateURL, response -> {
             Log.i(TAG, "Response: " + response);
             if(!response.contains( "slate unavailable")) {
@@ -109,6 +112,23 @@ public class HomeScreen extends AppCompatActivity {
                 }
             }
         }, error -> Log.i(TAG, "Response: " + error.toString()));
+        stringRequest.setRetryPolicy(new RetryPolicy() {
+            @Override
+            public int getCurrentTimeout() {
+                return 30000;
+            }
+
+            @Override
+            public int getCurrentRetryCount() {
+                return 30000;
+            }
+
+            @Override
+            public void retry(
+                    VolleyError error) throws VolleyError {
+
+            }
+        });
         mRequestQueue.add(stringRequest);
     }
 

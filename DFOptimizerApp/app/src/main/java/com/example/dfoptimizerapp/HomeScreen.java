@@ -90,6 +90,12 @@ public class HomeScreen extends AppCompatActivity {
                     }
                 };
                 spinner.setAdapter(dropdownAdapter);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    spinner.setBackgroundTintList(getColorStateList(R.color.white));
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    spinner.setForegroundTintList(getColorStateList(R.color.white));
+                }
             }
         }, error -> Log.i(TAG, "Response: " + error.toString()));
         mRequestQueue.add(stringRequest);

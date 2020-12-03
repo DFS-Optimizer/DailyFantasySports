@@ -127,9 +127,9 @@ def update_nfl_DK_slate():
 
         # msg = 'getting projections for {}, week {}, postition {}'
 
-    path = get_my_path()
-    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "NFLslateDK.csv")
+    # path = get_my_path()
+    # path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    # const_path = os.path.join(path, "NFLslateDK.csv")
 
     check = len(frames)
     count = 0
@@ -170,7 +170,11 @@ def update_nfl_DK_slate():
                 print(name, proj)
 
                 sl.loc[sl['playerName'] == name, 'proj'] = proj
-    sl.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
+    path = get_my_path()
+    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
+    const_path = os.path.join(path, "NFLslateDK.csv")
+    sl.to_csv(const_path)
+    # sl.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
 
 
 def update_nba_DK_slate():

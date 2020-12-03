@@ -175,26 +175,26 @@ def update_nfl_FD_slate():
             words = name.split()
             name = words[-1].strip()
             name = name +' '
+            if (name == 'Team '):
+                name = 'WAS Football Team '
         else:
             name=name.split('(',1)[0].strip()
+            # Renames
+            if (name == 'D.K. Metcalf'):
+                name = 'DK Metcalf'
+            if (name == 'Duke Johnson Jr.'):
+                name = 'Duke Johnson'
+            if (name == 'Wayne Gallman'):
+                name = 'Wayne Gallman Jr.'
+            if (name == 'D.J. Chark Jr.'):
+                name = 'DJ Chark Jr.'
+            if (name == 'Dwayne Haskins'):
+                name = 'Dwayne Haskins Jr.'
+            if (name == 'Darrell Henderson'):
+                name = 'Darrell Henderson Jr.'
         sal = df.loc[i, "This Week"]
         sal = sal[1:]
         sal = sal.replace(',', '')
-        #Renames
-        if(name =='D.K. Metcalf'):
-            name = 'DK Metcalf'
-        if (name == 'Duke Johnson Jr.'):
-            name = 'Duke Johnson'
-        if (name == 'Wayne Gallman'):
-            name = 'Wayne Gallman Jr.'
-        if (name == 'D.J. Chark Jr.'):
-            name = 'DJ Chark Jr.'
-        if (name == 'Dwayne Haskins'):
-            name = 'Dwayne Haskins Jr.'
-        if (name == 'Team '):
-            name = 'WAS Football Team '
-        if (name == 'Darrell Henderson'):
-            name = 'Darrell Henderson Jr.'
         # print(name, sal, pos)
         sl.loc[sl['playerName'] == name, 'sal'] = sal
     # print(sl.loc[sl['sal']==0])

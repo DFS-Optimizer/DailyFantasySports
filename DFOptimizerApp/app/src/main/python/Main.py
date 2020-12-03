@@ -567,7 +567,7 @@ def nflrun_draftkings(*players,num):
     df = pd.read_csv(const_path)
     for player in players:
         df.loc[df['playerName'] == player, 'proj'] = df['proj'] - 100
-    # df.to_csv(const_path, index=False)
+    df.to_csv(const_path, index=False)
 
     final = []
     for sublist in lineup:
@@ -576,7 +576,7 @@ def nflrun_draftkings(*players,num):
     e = players.__len__() * 100
     # print(final)
 
-    # df = pd.read_csv(const_path)
+    df = pd.read_csv(const_path)
     count = 0
     result = "["
     for player in final:
@@ -594,7 +594,6 @@ def nflrun_draftkings(*players,num):
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     # result = result[:-1]
     result+="]"
-    df.to_csv(const_path, index=False)
 
     return result
 
@@ -685,7 +684,7 @@ def nflrun_fanduel(*players,num):
             result += '{"player":"' + player + '","score":"' + str(temp) + '"}'
     # result = result[:-2]
     result += "]"
-    df = pd.read_csv(const_path)
+
     return result
 
 def mlboptimizeDK(num):

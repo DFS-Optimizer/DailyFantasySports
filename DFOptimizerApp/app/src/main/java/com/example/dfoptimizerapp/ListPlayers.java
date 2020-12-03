@@ -71,7 +71,7 @@ public class ListPlayers extends AppCompatActivity {
                 remainingSalaryTxt.setText("Rem. Salary: $55000");
             }
         } else if (sport == 2) {
-            pos = new String[]{"All Positions", "QB", "WR", "RB", "TE", "D", "K"};
+            pos = new String[]{"All Positions", "QB", "WR", "RB", "TE", "D"};
             if(site == 1)
             {
                 remainingSalaryTxt.setText("Rem. Salary: $60000");

@@ -67,18 +67,18 @@ public class GetSlate {
 
         /* NEW SLATE URL FOR NFL DRAFT KINGS*/
         if (m_sportChoice == 1) {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nba/getslate";
+            slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nba/getslate";
 
         }
         //NEW SLATE URL FOR NBA DRAFT KINGS
         else if(m_sportChoice == 2){
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
+            slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/nfl/getslate";
 
         }
         //NEW SLATE URL FOR MLB DRAFT KINGS
         else
         {
-            slateURL = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/mlb/getslate";
+            slateURL = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/mlb/getslate";
         }
         //DEBUG CODE
         System.out.println(slateURL);

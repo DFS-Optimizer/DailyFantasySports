@@ -49,8 +49,9 @@ public class HomeScreen extends AppCompatActivity {
         Spinner nflFD = findViewById(R.id.nfl_fd_lineup);
         Spinner mlbDK = findViewById(R.id.mlb_dk_lineup);
         Spinner mlbFD = findViewById(R.id.mlb_fd_lineup);
-        String url_DK = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/dk/";
-        String url_FD = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/fd/";
+        String url_DK = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/dk/";
+        String url_FD = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/fd/";
+
 
 
 

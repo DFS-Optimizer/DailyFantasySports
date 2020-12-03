@@ -130,7 +130,7 @@ public class DisplayLineups extends AppCompatActivity {
 
 
     private String formatURL(int site, int sport) {
-        String url = "http://ec2-3-15-46-189.us-east-2.compute.amazonaws.com/";
+        String url = "http://ec2-18-188-133-48.us-east-2.compute.amazonaws.com/";
 
         if(site == 1)
         {

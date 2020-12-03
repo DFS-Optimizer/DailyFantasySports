@@ -28,6 +28,7 @@ public class LoginTest {
             new ActivityScenarioRule<Login>(Login.class);
     @Test
     public void checkPasswordLabelVisibility_WithText() {
+
         onView(withId(R.id.password_login)).perform(typeText("test1"));
         final ViewInteraction passwordLabel = onView(withId(R.id.loginPasswordLabel));
 

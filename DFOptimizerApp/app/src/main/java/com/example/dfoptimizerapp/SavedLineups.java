@@ -53,6 +53,10 @@ public class SavedLineups extends AppCompatActivity {
         /*Passed in Parameters*/
         final int site = getIntent().getIntExtra("siteChoice", 1);
         final int sport = getIntent().getIntExtra("sportChoice", 1);
+        final int fromHome = getIntent().getIntExtra("fromHome", 0);
+
+
+
         if (site == 1) {
             siteField = "Fanduel";
         }
@@ -71,7 +75,10 @@ public class SavedLineups extends AppCompatActivity {
 
         /**/
         System.out.println(site + sport);
-        saveLineup(site, sport);
+        if(fromHome != 1) {
+            saveLineup(site, sport);
+        }
+
         addItemsOnSpinner();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

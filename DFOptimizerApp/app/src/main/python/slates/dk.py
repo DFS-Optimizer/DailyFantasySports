@@ -57,7 +57,7 @@ def update_nfl_DK_slate():
         # print(label["starts_at"])
         id = label["draft_group_id"]
         break
-        
+
     if id is None:
         return 0
 
@@ -71,7 +71,7 @@ def update_nfl_DK_slate():
 
     index = 0
     while index < len(playerName):
-        
+
         if index > 0 and playerName[index] == playerName[index-1]:
             del playerName[index]
             del sal[index]
@@ -170,11 +170,7 @@ def update_nfl_DK_slate():
                 print(name, proj)
 
                 sl.loc[sl['playerName'] == name, 'proj'] = proj
-    path = get_my_path()
-    path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
-    const_path = os.path.join(path, "NFLslateDK.csv")
-    sl.to_csv(const_path)
-    # sl.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
+    sl.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
 
 
 def update_nba_DK_slate():
@@ -191,7 +187,7 @@ def update_nba_DK_slate():
         # print(label["starts_at"])
         id = label["draft_group_id"]
         break
-        
+
 
     players = draftables(id)
 
@@ -203,7 +199,7 @@ def update_nba_DK_slate():
 
     index = 0
     while index < len(playerName):
-        
+
         if index > 0 and playerName[index] == playerName[index-1]:
             del playerName[index]
             del sal[index]
@@ -245,7 +241,7 @@ def update_mlb_DK_slate():
         # print(label["starts_at"])
         id = label["draft_group_id"]
         break
-        
+
 
     players = draftables(id)
 
@@ -257,7 +253,7 @@ def update_mlb_DK_slate():
 
     index = 0
     while index < len(playerName):
-        
+
         if index > 0 and playerName[index] == playerName[index-1]:
             del playerName[index]
             del sal[index]
@@ -280,7 +276,7 @@ def update_mlb_DK_slate():
     df['opp'] = opp
     df['proj'] = [0 for _ in range(len(playerName))]
 
-    
+
 
 
 

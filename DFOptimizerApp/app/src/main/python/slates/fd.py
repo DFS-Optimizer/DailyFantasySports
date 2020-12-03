@@ -140,6 +140,18 @@ def update_nfl_FD_slate():
                 # print(name, proj)
                 name = str(name)
                 proj = str(proj)
+                if (name == 'D.K. Metcalf'):
+                    name = 'DK Metcalf'
+                if (name == 'Duke Johnson Jr.'):
+                    name = 'Duke Johnson'
+                if (name == 'Wayne Gallman'):
+                    name = 'Wayne Gallman Jr.'
+                if (name == 'D.J. Chark Jr.'):
+                    name = 'DJ Chark Jr.'
+                if (name == 'Dwayne Haskins'):
+                    name = 'Dwayne Haskins Jr.'
+                if (name == 'Darrell Henderson'):
+                    name = 'Darrell Henderson Jr.'
                 sl.loc[sl['playerName'] == name, 'proj'] = proj
             else:
                 name = frame.loc[i, "Player"]

@@ -93,8 +93,7 @@ def update_nfl_DK_slate():
     df['team'] = team
     df['opp'] = opp
     df['proj'] = [0 for _ in range(len(playerName))]
-
-    df.to_csv('/home/ubuntu/gitrepositories/DailyFantasySports/DFOptimizerApp/app/src/main/python/slates/NFLslateDK.csv', index=False)
+    sl = df
 
 
     # set up some parameters for scrape
@@ -132,7 +131,6 @@ def update_nfl_DK_slate():
     path = functools.reduce(lambda x, f: f(x), [os.path.dirname] * 1, path)
     const_path = os.path.join(path, "NFLslateDK.csv")
 
-    sl = pd.read_csv(const_path)
     check = len(frames)
     count = 0
     for frame in frames:

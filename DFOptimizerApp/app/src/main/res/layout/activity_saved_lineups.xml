@@ -9,17 +9,16 @@
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="33dp"
+        android:layout_width="176dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="42dp"
         android:fontFamily="@font/klaptbold"
         android:text="My Lineups "
         android:textColor="#ffffff"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinnerSavedLineups"
+        app:layout_constraintBottom_toTopOf="@+id/btnToDisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,77 +26,55 @@
         android:id="@+id/spinnerSavedLineups"
         android:layout_width="241dp"
         android:layout_height="47dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginLeft="39dp"
-        android:layout_marginTop="137dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginRight="131dp"
-        android:layout_marginBottom="547dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginBottom="49dp"
         android:backgroundTint="#ffffff"
         android:textColor="@color/white"
         android:theme="@style/spinnerTheme"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/displaySavedSport"
+        app:layout_constraintEnd_toStartOf="@+id/btnToDisplay"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.333" />
 
     <TextView
         android:id="@+id/displaySavedSport"
-        android:layout_width="220dp"
-        android:layout_height="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="28dp"
+        android:layout_width="237dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginLeft="52dp"
+        android:layout_marginEnd="27dp"
+        android:layout_marginRight="27dp"
         android:fontFamily="@font/klaptbold"
         android:textColor="#ffffff"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerSavedLineups"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerSavedLineups"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
-        android:id="@+id/btnToDisplay"
-        android:layout_width="96dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginRight="9dp"
-        android:layout_marginBottom="84dp"
-        android:background="@drawable/custom_rounded_corners"
-        android:backgroundTint="#4ab9f5"
-        android:fontFamily="@font/klaptbold"
-        android:text="Display"
-        app:layout_constraintBottom_toTopOf="@+id/displaySavedLineups"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.73"
-        app:layout_constraintStart_toEndOf="@+id/spinnerSavedLineups"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/displaySavedLineups"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginEnd="21dp"
-        android:layout_marginRight="21dp"
-        android:layout_marginBottom="124dp"
-        android:text='Choose a sport in the drop down tab and select "Display" to show your saved lineup.'
-        android:textColor="#ffffff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toStartOf="@+id/btnToDisplay"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnToDisplay" />
 
     <Button
+        android:id="@+id/btnToDisplay"
+        android:layout_width="87dp"
+        android:layout_height="49dp"
+        android:background="@drawable/custom_rounded_corners"
+        android:backgroundTint="#4ab9f5"
+        android:fontFamily="@font/klaptbold"
+        android:text="Display"
+        app:layout_constraintBottom_toTopOf="@+id/displaySavedSport"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/displaySavedSport"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Button
         android:id="@+id/goToHome"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="149dp"
-        android:layout_marginLeft="149dp"
-        android:layout_marginTop="632dp"
+        android:layout_width="131dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginLeft="142dp"
         android:layout_marginEnd="142dp"
         android:layout_marginRight="142dp"
         android:layout_marginBottom="49dp"
@@ -107,7 +84,35 @@
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/scrollView4"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginEnd="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/goToHome"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/displaySavedSport">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/displaySavedLineups"
+                android:layout_width="match_parent"
+                android:layout_height="346dp"
+                android:text='Choose a sport in the drop down tab and select "Display" to show your saved lineup.'
+                android:textColor="#ffffff" />
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

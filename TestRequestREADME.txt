@@ -6,4 +6,4 @@ Source of example app Github: https://github.com/discospiff/PlantPlaces15s305/tr
 Need:
 
 -To tailor to our app UI to determine on what action(MainActivity) do these classes run.
--Replace Uri value to corresponding IP or url we will be requestion from
+-Replace Uri value to corresponding IP or url we will be requested from

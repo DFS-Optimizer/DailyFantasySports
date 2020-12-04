@@ -12,27 +12,28 @@ body {
 	<body>
 		<h2> Technical Features:</h2>
 		<blockquote>
-			<h3>Database</h3>
-			<p>We will need a database that can store all of the player and game stats
-			for each sport.This will be where we gather all of our data to train and
-			run our model. The database will have to auto-update daily in order to
-			input ant new stats. We will be using an SQL server for this.</p>
 
 			<h3>APIs and Plugins</h3>
-			<p>We will be using an API to interact with the NBA, NFL, and MLB stats.
-			Each API will give us access to all recorded stats for each respective
-			sport and this will help us in creating our database.
-
-			We will also be suing a plugin to help us with the modeling process as
-			well as the optimization. </p>
+			<p>FanAssist uses many API's to interact with the NBA, NFL, and MLB stats.
+			These include libraries that grab stats from Draftkings, the NBA, and ESPN.
+			These stats are then used to build our predictive modeling and optimization scripting.
+			NBA uses a predictive model created by the developers and MLB and NFL use ESPN projections
+			</p>
 
 			<h3>Modeling Process</h3>
-			<p>We will be running a linear regression in order to predict the fantasy
+			<p>FanAssist runs a linear regression in order to predict the fantasy
 			points for each player. We can track the accuracy by looking at the
 			P-value. We cant to get as close to 1 as possible although it would be
-			phenomenal if we can achieve a P-value of 0.6. Our initial goal will be to
+			phenomenal if we can achieve a P-value of 0.6. Our initial goal was to
 			get above 0.45. We can also check how coherent and useful our data is
 			using the Adjusted R squared value. </p>
+
+			<h3>Web Communication</h3>
+			<p>Our app relies heavily on the need for our front end interface to communicate with
+			the back end model and optimization python code. We accomplished this by launching an AWS-EC2
+			instance that runs an Apache web server that hosts a python Flask app. Communication is then
+			done by get requests from the front end to the back end.
+			</p>
 		</blockquote>
 	</body>
 	<a href="index.html">
